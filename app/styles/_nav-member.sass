@@ -1,0 +1,31 @@
+.nav-member-custom
+  display: inline-block
+  vertical-align: middle
+  margin-bottom: 0
+  padding-left: 0 // Override default ul/ol
+  padding-right: 10px
+  list-style: none
+  font-size: 0.9em
+  +clearfix()
+  > li
+    position: relative
+    display: inline-block
+    line-height: 1.7em
+    padding: 13px 10px
+    > a
+      position: relative
+      display: inline-block
+      padding: $nav-link-padding
+      &:hover,
+      &:focus
+        text-decoration: none
+        background-color: $nav-link-hover-bg
+  &.nav-lightbg
+    font-size: 0.85em
+    color: $member-link-light
+
+.nav-member-bg
+  height: 46px
+  width: 100%
+  background-color: #edf2f8
+  border-bottom: 1px solid $member-outline-color

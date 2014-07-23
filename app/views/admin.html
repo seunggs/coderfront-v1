@@ -1,0 +1,39 @@
+<div class="container-fluid admin">
+
+	<nav ng-include="'views/nav-member.html'"></nav>
+
+	<div class="row">
+
+		<!-- left side bar -->
+		<aside class="sidebar col-md-3">
+			<h3 class="dashboard"><a>DASHBOARD&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a></h3>
+			<hr>
+			<ul class="units" ng-repeat="(unitId, unit) in admin.units">
+				<h3><a>Unit {{ unitId }} : {{ unit.title }}</a>&nbsp;&nbsp;<a class="fa fa-trash-o" sc-modal sc-modal-yes="admin.example()"></a></h3>
+				<li>
+					<ul class="lessons" ng-repeat="(lessonId, lesson) in unit.lessons">
+						<li><a>{{ lessonId }}</a>&nbsp;&nbsp;<a class="fa fa-trash-o"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</aside>
+
+		<!-- main content section -->
+		<article class="admin-content col-md-8 col-lg-7">
+			<section class="edit row">
+				<div class="col-md-12">
+
+					<div ng-if="edit.dashboard" ng-include="'views/add-unit.html'"></div>
+					<div ng-if="edit.unit" ng-include="'views/edit-unit.html'"></div>
+					<div ng-if="edit.lesson" ng-include="'views/edit-lesson.html'"></div>
+
+				</div>
+			</section>
+
+			<section class="preview row" ng-if="!edit.dashboard">
+			</section>
+		</article>
+
+	</div>
+
+</div>

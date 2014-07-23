@@ -1,0 +1,27 @@
+<div class="container-fluid admin-dashboard">
+	
+	<nav ng-include="'views/nav-member.html'"></nav>
+
+	<div class="container admin-dashboard-wrapper">
+		<div class="row">
+			<div class="col-sm-2 col-md-4 col-lg-3">
+
+				<section class="add-course-box">
+					<img src="../images/course-thumb-ph.jpg">
+					<form ng-submit="addCourse.createCourse()">
+						<div class="form-group">
+							<label>Course Title</label>
+							<input class="form-control" type="text" ng-model="newCourse.title" required>
+							<button class="btn btn-primary btn-block" type="submit"><sc-btn-loading loading-toggle="btn.loading">Create Course</sc-btn-loading></button>
+						</div>
+					</form>
+				</section>
+
+			</div>
+			<div class="col-sm-2 col-md-4 col-lg-3" ng-repeat="(courseId, course) in courses">
+				<div ng-include="'views/coursebox.html'"></div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,34 @@
+.logo
+  float: left
+  .logo-img
+    margin: 12px 0 0 10px
+    height: 22px
+
+.nav-custom
+  display: inline-block
+  vertical-align: middle
+  margin-bottom: 0
+  padding-left: 0 // Override default ul/ol
+  list-style: none
+  font-size: 0.9em
+  +clearfix()
+  > li
+    position: relative
+    display: inline-block
+    line-height: 1.7em
+    padding: 12px
+    > a
+      position: relative
+      display: inline-block
+      padding: $nav-link-padding
+      &:hover,
+      &:focus
+        text-decoration: none
+        background-color: $nav-link-hover-bg
+  &.nav-darkbg
+    color: $nav-light
+
+.nav-bottom
+  height: 46px
+  width: 100%
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2)

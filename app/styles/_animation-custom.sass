@@ -1,0 +1,28 @@
+// Bouncing arrow animation
+.bouncing-arrow
+	-webkit-animation: bounce-arrow .85s linear infinite
+	animation: bounce-arrow .85s linear infinite
+
+@-webkit-keyframes bounce-arrow
+	0,100%
+		-webkit-transform: translateX(0)
+		transform: translateX(0)
+		-webkit-animation-timing-function: cubic-bezier(0.215,0.61,0.355,1)
+		animation-timing-function: cubic-bezier(0.215,0.61,0.355,1)
+	50%
+		-webkit-transform: translateX(6px)
+		transform: translateX(6px)
+		-webkit-animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)
+		animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)
+
+@keyframes bounce-arrow
+	0,100%
+		-webkit-transform: translateX(0)
+		transform: translateX(0)
+		-webkit-animation-timing-function: cubic-bezier(0.215,0.61,0.355,1)
+		animation-timing-function: cubic-bezier(0.215,0.61,0.355,1)
+	50%
+		-webkit-transform: translateX(6px)
+		transform: translateX(6px)
+		-webkit-animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)
+		animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)

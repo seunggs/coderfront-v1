@@ -1,0 +1,64 @@
+// bower:scss
+@import ../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss
+// endbower
+
+// custom variables
+$icon-font-path: '/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/'
+
+// base imports
+@import 'compass/css3'
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins'
+@import 'variables-custom'
+@import 'mixins-custom'
+@import 'styling-custom'
+@import 'animation-custom'
+
+// outside plugin imports
+@import 'animatecss'
+@import 'monokai-sublime'
+@import 'md-modal'
+
+// page styling imports
+@import 'home'
+@import 'nav'
+@import 'nav-member'
+@import 'admin'
+@import 'admin-dashboard'
+@import 'add-unit'
+@import 'coursebox'
+
+
+/* Reset empty href to make Angular UI Bootstrap work properly */
+.nav, .pagination, .carousel, .panel-title a
+  cursor: pointer
+
+/* Reset bootstrap default */
+html, body
+  width: auto
+  overflow-x: hidden
+
+body 
+  font-family: 'Whitney SSm A', 'Whitney SSm B', sans-serif
+  font-weight: 400
+  font-style: normal
+  padding: 0
+  margin: 0
+  h1, h2, h3, h4
+    font-weight: 500
+
+a
+  cursor: pointer
+  &:hover
+    text-decoration: none
+
+/* Custom container */
+.container 
+  margin: 0 auto
+  padding: 0
+
+/* Global styles */
+
+
+
+

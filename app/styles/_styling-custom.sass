@@ -1,0 +1,69 @@
+// bootstrap container styling
+.container-md
+	+container-fixed()
+	@media (min-width: $screen-md-min)
+		width: $container-md
+
+// bootstrap col styling - add it to col classes
+.col-v-center
+	float: none
+	display: inline-block
+	vertical-align: middle
+	margin-right: -4px
+.col-padding-right-30
+	padding-right: 30px
+.col-padding-left-30
+	padding-left: 30px
+.col-padding-top-40
+	padding-top: 40px
+.col-padding-bottom-40
+	padding-bottom: 40px
+.col-padding-sides-60
+	padding-left: 60px
+	padding-right: 60px
+.col-padding-sides-80
+	padding-left: 80px
+	padding-right: 80px
+.col-border-right
+	border-right: 1px solid $outline-color
+.col-border-left
+	border-left: 1px solid $outline-color
+.col-border-top
+	border-top: 1px solid $outline-color
+.col-border-bottom
+	border-bottom: 1px solid $outline-color
+
+// buttons
+.btn
+	padding: 9px 15px
+	border: 0
+	text-shadow: 0 1px 0 rgba(0,0,0,0.1)
+	box-shadow: 0 1px 0 rgba(0,0,0,0.15), 0 -1px 0 rgba(255,255,255,0.1)
+.btn-round
+	+border-radius(100px)
+.btn-outline-white
+	color: white
+	border: 1px solid #999
+	transition: border 0.5s ease
+	&:hover, &:focus, &:active
+		color: white
+		border: 1px solid white
+.btn-outline-black 
+	color: black
+	border: 1px solid #bbb
+	+transition(border, 0.5s, ease)
+	&:hover, &:focus, &:active
+		color: black
+		border: 1px solid black
+.btn-primary // overwrites Bootstrap
+	background-color: #269de0
+	+transition(background-color, 0.5s, ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: #1789c9
+.btn-red
+	background-color: $red
+	+transition(background-color, 0.5s, ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: $dark-red

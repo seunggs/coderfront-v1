@@ -1,0 +1,43 @@
+// screen mockup
+=screen-mockup-circle($size, $color)
+	display: inline-block
+	vertical-align: text-top
+	margin-right: 1px
+	margin-top: 1px
+	width: $size
+	height: $size
+	+border-radius($size)
+	background-color: $color
+
+=screen-mockup-top($width, $height)
+	display: block
+	margin: 0 auto
+	+border-top-radius(5px)
+	width: $width
+	height: $height
+	background-color: #f1f1f1
+
+=screen-mockup-main($width, $height, $color)
+	display: block
+	margin: 0 auto
+	+border-bottom-radius(5px)
+	width: $width
+	height: $height
+	background-color: $color
+
+// Misc
+=circle-outline($size, $border-color)
+	display: block
+	margin: 0 auto
+	+border-radius($size)
+	width: $size
+	height: $size
+	border: 2px solid $border-color
+
+=transition($prop, $duration, $timing)
+	transition: $prop $duration $timing
+	-webkit-transition: $prop $duration $timing
+
+=transition-2x($prop, $duration, $timing, $prop2, $duration2, $timing2)
+	transition: $prop $duration $timing, $prop $duration $timing
+	-webkit-transition: $prop $duration $timing, $prop $duration $timing
