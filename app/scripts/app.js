@@ -20,9 +20,17 @@ angular
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
-      .when('/admin/:courseId', {
-        templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl'
+      .when('/add-unit/:courseId', {
+        templateUrl: 'views/add-unit.html',
+        controller: 'AddUnitCtrl'
+      })
+      .when('/edit-unit/:unitId', {
+        templateUrl: 'views/edit-unit.html',
+        controller: 'EditUnitCtrl'
+      })
+      .when('/lesson-unit/:lessonId', {
+        templateUrl: 'views/edit-lesson.html',
+        controller: 'EditLessonCtrl'
       })
       .when('/admin-dashboard', {
         templateUrl: 'views/admin-dashboard.html',

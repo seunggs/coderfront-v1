@@ -11,7 +11,7 @@ angular.module('coderfrontApp')
       },
       restrict: 'E',
       transclude: true,
-      template: '<span ng-if="loading-toggle"><i class="fa fa-circle-o-notch fa-spin"></i>' +
-				'&nbsp;&nbsp;Loading...</span><span ng-if="!loading-toggle"><div ng-transclude></div></span>'
+      template: '<span ng-if="loadingToggle"><i class="fa fa-circle-o-notch fa-spin"></i>' +
+				'&nbsp;&nbsp;Loading...</span><span ng-if="!loadingToggle"><div ng-transclude></div></span>'
     };
   });

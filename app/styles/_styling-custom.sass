@@ -38,7 +38,7 @@
 	padding: 9px 15px
 	border: 0
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1)
-	box-shadow: 0 1px 0 rgba(0,0,0,0.15), 0 -1px 0 rgba(255,255,255,0.1)
+	+box-shadow(rgba(0,0,0,0.15) 0 1px 0, rgba(255,255,255,0.1) 0 -1px 0)
 .btn-round
 	+border-radius(100px)
 .btn-outline-white
@@ -57,13 +57,29 @@
 		border: 1px solid black
 .btn-primary // overwrites Bootstrap
 	background-color: #269de0
+	color: white
 	+transition(background-color, 0.5s, ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: #1789c9
 .btn-red
 	background-color: $red
+	color: white
 	+transition(background-color, 0.5s, ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-red
+.btn-yellow
+	background-color: $yellow
+	color: white
+	+transition(background-color, 0.5s, ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: $dark-yellow
+.btn-orange-yellow
+	background-color: $orange-yellow
+	color: white
+	+transition(background-color, 0.5s, ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: $dark-orange-yellow

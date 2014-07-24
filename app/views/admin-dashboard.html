@@ -4,7 +4,7 @@
 
 	<div class="container admin-dashboard-wrapper">
 		<div class="row">
-			<div class="col-sm-2 col-md-4 col-lg-3">
+			<div class="col-sm-6 col-md-4 col-lg-3">
 
 				<section class="add-course-box">
 					<img src="../images/course-thumb-ph.jpg">
@@ -18,7 +18,7 @@
 				</section>
 
 			</div>
-			<div class="col-sm-2 col-md-4 col-lg-3" ng-repeat="(courseId, course) in courses">
+			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(courseId, course) in courses">
 				<div ng-include="'views/coursebox.html'"></div>
 			</div>
 		</div>

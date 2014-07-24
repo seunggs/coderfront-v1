@@ -2,8 +2,9 @@
 	<div class="md-content">
 		<h4>Are you sure?</h4>
 		<div>
-			<p>Are you sure you want to delete this?</p>
+			<p>{{ scModalText }}</p>
 			<button class="btn btn-red" ng-click="closeModal(); yesAction()">Yes.</button>
+			<button ng-if="scModalType === 'overwrite'" class="btn btn-red" ng-click="closeModal(); firstNoAction()">No, insert it.</button>
 			<button class="btn btn-red" ng-click="closeModal()">No, abort!</button>
 		</div>
 	</div>
