@@ -4,6 +4,29 @@
 	@media (min-width: $screen-md-min)
 		width: $container-md
 
+// bootstrap form styling
+.form-control
+	display: block
+	width: 100%
+	height: 34px
+	padding: 6px 12px
+	font-size: 14px
+	line-height: 1.42857143
+	color: #555
+	background-color: #fff
+	background-image: none
+	border-top: 1px solid #d3d3d3
+	border-left: 1px solid #d3d3d3
+	border-right: 1px solid #f2f2f2
+	border-bottom: 1px solid #f2f2f2
+	+border-radius(0px)
+	+box-shadow(rgba(0, 0, 0, .14) 0 0 0)
+	+transition(border-color .15s ease-in-out, box-shadow .15s ease-in-out)
+	&:focus
+		border-color: #66afe9
+		outline: 0
+		+box-shadow(rgba(0,0,0,.075) 0 0 0)
+
 // bootstrap col styling - add it to col classes
 .col-v-center
 	float: none
@@ -38,48 +61,76 @@
 	padding: 9px 15px
 	border: 0
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1)
-	+box-shadow(rgba(0,0,0,0.15) 0 1px 0, rgba(255,255,255,0.1) 0 -1px 0)
+	+box-shadow(rgba(0,0,0,0.15) 0 1px 0, rgba(255,255,255,0.05) 0 -1px 0)
 .btn-round
+	font-size: 1.2em
+	font-weight: 300
+	padding: 11px 14px
 	+border-radius(100px)
 .btn-outline-white
 	color: white
 	border: 1px solid #999
-	transition: border 0.5s ease
+	transition: border 0.3s ease
 	&:hover, &:focus, &:active
 		color: white
 		border: 1px solid white
 .btn-outline-black 
 	color: black
 	border: 1px solid #bbb
-	+transition(border, 0.5s, ease)
+	+transition(border, 0.3s, ease)
 	&:hover, &:focus, &:active
 		color: black
 		border: 1px solid black
 .btn-primary // overwrites Bootstrap
 	background-color: #269de0
 	color: white
-	+transition(background-color, 0.5s, ease)
+	+transition(background-color 0.3s ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: #1789c9
 .btn-red
 	background-color: $red
 	color: white
-	+transition(background-color, 0.5s, ease)
+	+transition(background-color 0.3s ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-red
 .btn-yellow
 	background-color: $yellow
 	color: white
-	+transition(background-color, 0.5s, ease)
+	+transition(background-color 0.3s ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-yellow
 .btn-orange-yellow
 	background-color: $orange-yellow
 	color: white
-	+transition(background-color, 0.5s, ease)
+	+transition(background-color 0.3s ease)
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-orange-yellow
+.btn-teal
+	background-color: $teal
+	color: white
+	+transition(background-color 0.3s ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: $dark-teal
+.btn-dark-grey
+	background-color: $dark-grey
+	color: white
+	+transition(background-color 0.5s ease)
+	&:hover, &:focus, &:active
+		color: white
+		background-color: $darker-grey
+
+.btn-square
+	+border-radius(0)
+
+.btn-xs
+	font-size: 0.8em
+	padding: 6px 9px
+
+// custom file input button
+.file-input-custom
+	padding-bottom: 15px

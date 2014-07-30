@@ -1,6 +1,6 @@
 <div class="container-fluid admin-dashboard">
 	
-	<nav ng-include="'views/nav-member.html'"></nav>
+	<nav ng-include="'views/partials/admin-nav.html'"></nav>
 
 	<div class="container admin-dashboard-wrapper">
 		<div class="row">
@@ -19,7 +19,7 @@
 
 			</div>
 			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(courseId, course) in courses">
-				<div ng-include="'views/coursebox.html'"></div>
+				<div ng-include="'views/partials/coursebox.html'"></div>
 			</div>
 		</div>
 	</div>

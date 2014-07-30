@@ -1,0 +1,21 @@
+<div class="container-fluid admin">
+	
+	<nav ng-include="'views/partials/admin-nav.html'"></nav>
+
+	<div class="admin-row row">
+
+		<!-- left side bar -->
+		<div class="admin-sidebar-col col-sm-4 col-md-3 col-lg-3" ng-include="'views/partials/admin-sidebar.html'"></div>
+
+		<!-- main content section -->
+		<article class="admin-content col-sm-8 col-md-9 col-lg-9">
+
+			<div class="admin-view-animation-container">
+				<div ui-view class="admin-view-animation"></div>
+			</div>
+
+		</article>
+
+	</div>
+
+</div>

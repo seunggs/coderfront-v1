@@ -1,38 +1,88 @@
+.admin-sidebar-bg
+	z-index: -1000
+	position: fixed
+	top: 0
+	bottom: 0
+	width: 100%
+	background-color: #47515a
+
 .admin-sidebar
 	font-size: 0.85em
-	line-height: 1.7em
-	padding: 20px
-	height: 100vh
-	border-right: 1px solid $member-outline-color
+	padding: 20px 25px
+	margin-right: 0
+	a
+		color: #afafaf
+		&:hover, &:focus, &:active
+			color: #909090
 	h3
 		font-size: 1.2em
+	h5
+		font-size: 1em
 	ul
 		padding-left: 0
 	li
-		margin: 2px 0
 		list-style-type: none
-	hr
-		display: inline-block
-		border-color: black
-		width: 60px
-		margin: 0
-		padding: 0
 	.fa-trash-o
 		color: $red
 		&:hover, &:focus, &:active
 			color: $dark-red
+	.fa-edit
+	.fa-circle
+		float: right
+		margin-top: 3px
+		margin-right: 1px
+		color: $yellow
+		&:hover, &:focus, &:active
+			color: $dark-yellow
+	.fa-circle-o
+		@extend .fa-circle
+	.fa-minus
+		@extend .fa-circle
 	.btn-new-unit
-		margin: 10px 0 15px 0
-.dashboard
-	padding: 0 0 10px 0
-	margin: 8px 0 0 0
-.units
-	a
-		color: $member-link-light
+		color: white
+		margin: 20px 0 20px 0
 		&:hover, &:focus, &:active
-			color: $member-link-light-hover
-.lessons
-	a
-		color: $member-link
+			color: white
+	.active-unit
+		color: $yellow
 		&:hover, &:focus, &:active
-			color: $member-link-hover
+			color: $dark-yellow
+	.active-lesson
+		@extend .active-unit
+	.dashboard
+		padding: 0
+		margin: 8px 0 0 0
+	.units
+		hr
+			display: block
+			clear: both
+			margin: 4px 0
+			border: 0
+			height: 1px
+			background-color: rgba(175,175,175,0.12)
+		.unit-menu
+			text-transform: uppercase
+	.lessons
+		font-weight: 300
+		padding: 6px 0 15px 0
+		li
+			padding: 3px 0
+			padding-left: 10px
+			&:first-child
+				padding-bottom: 7px
+	.add-lesson
+		font-size: 0.9em
+		border: 1px solid $teal
+		padding: 2px 4px
+		color: $teal
+		&:hover, &:focus, &:active
+			color: $dark-teal
+			border: 1px solid $dark-teal
+	.lesson-item
+		color: #eee
+		&:hover, &:focus, &:active
+			color: white
+	.lesson-title-container
+		display: inline-block
+		width: 90%
+

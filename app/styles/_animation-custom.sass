@@ -26,3 +26,125 @@
 		transform: translateX(6px)
 		-webkit-animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)
 		animation-timing-function: cubic-bezier(0.55,0.055,0.675,0.19)
+
+// rotate for loading circle
+.rotate-circle
+	-webkit-animation: rotation 1s linear infinite
+	-moz-animation: rotation 1s linear infinite
+	-o-animation: rotation 1s linear infinite
+	animation: rotation 1s linear infinite
+
+@-webkit-keyframes rotation 
+	0% 
+		+rotate(0deg)
+	50% 
+		+rotate(180deg)
+	100% 
+		+rotate(360deg)
+
+@-moz-keyframes rotation 
+	0% 
+		+rotate(0deg)
+	50% 
+		+rotate(180deg)
+	100% 
+		+rotate(360deg)
+  
+@-o-keyframes rotation 
+	0% 
+		+rotate(0deg)
+	50% 
+		+rotate(180deg)
+	100% 
+		+rotate(360deg)
+  
+@keyframes rotation 
+	0% 
+		+rotate(0deg)
+	50% 
+		+rotate(180deg)
+	100% 
+		+rotate(360deg)
+
+// page transition animations
+.pt-moveFromRightFade
+	-webkit-animation: moveFromRightFade .7s ease both
+	animation: moveFromRightFade .7s ease both
+
+@-webkit-keyframes moveFromRightFade
+	from
+		opacity: 0.3
+		+transform(translateX(100%))
+
+@keyframes moveFromRightFade
+	from
+		opacity: 0.3
+		+transform(translateX(100%))
+
+.pt-scaleDown
+	-webkit-animation: scaleDown .7s ease both
+	animation: scaleDown .7s ease both
+
+@-webkit-keyframes scaleDown
+	to
+		opacity: 0
+		+transform(scale(.8))
+
+@keyframes scaleDown
+	to 
+		opacity: 0
+		+transform(scale(.8))
+
+.pt-moveFromRight
+	-webkit-animation: moveFromRight .6s ease both
+	animation: moveFromRight .6s ease both
+
+@-webkit-keyframes moveFromRight
+	from
+		+transform(translateX(100%))
+
+@keyframes moveFromRight
+	from
+		+transform(translateX(100%))
+
+// partial page transition animations
+.ppt-moveFromRight
+	-webkit-animation: moveFromRightShort .4s ease both
+	animation: moveFromRightShort .4s ease both
+
+@-webkit-keyframes moveFromRightShort
+	from
+		+transform(translateX(30%))
+
+@keyframes moveFromRightFadeShort
+	from
+		+transform(translateX(30%))
+
+.ppt-scaleDown
+	-webkit-animation: scaleDown .4s ease both
+	animation: scaleDown .4s ease both
+
+// animate.css customizations
+.shake-fast
+	-webkit-animation-name: shake-fast
+	animation-name: shake-fast
+	-webkit-animation-duration: .5s !important
+	animation-duration: .5s !important
+
+@-webkit-keyframes shake-fast
+	0%, 100%
+		+transform(translate3d(0, 0, 0))
+	10%, 30%, 50%, 70%, 90%
+		+transform(translate3d(-5px, 0, 0))
+	20%, 40%, 60%, 80%
+		+transform(translate3d(5px, 0, 0))
+
+@keyframes shake-fast
+	0%, 100%
+		+transform(translate3d(0, 0, 0))
+	10%, 30%, 50%, 70%, 90%
+		+transform(translate3d(-5px, 0, 0))
+	20%, 40%, 60%, 80%
+		+transform(translate3d(5px, 0, 0))
+
+

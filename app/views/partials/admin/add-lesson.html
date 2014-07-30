@@ -1,0 +1,29 @@
+<div class="add-lesson-bg row">
+	<div class="add-lesson-col col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+		<section class="add-lesson">
+			<h3>Add a New Lesson in <a ui-sref="admin.edit-unit({unitId: addLesson.unit.$id})">Unit {{ addLesson.unit.unitNum }}</a></h3>
+			<form ng-submit="addLesson.checkDuplicateLesson()">
+				<div class="form-group">
+					<label>Lesson Number*</label>
+					<input class="form-control" type="number" ng-model="formData.lesson.lessonNum" required>
+					<label>Title*</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.title" required>
+					<label>Subtext</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.subtext">
+					<label>Estimated Completion (in hours)*</label>
+					<input class="form-control" type="number" ng-model="formData.lesson.duration" required>
+					<label>Lesson Category*</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.category" required>
+					<label>Body HTML*</label>
+					<input class="file-input-custom" type="file" sc-fileread="formData.lesson.bodyHTML" required>
+					<sc-loading-btn success="btn.success" loading="btn.loading">Create Lesson</sc-loading-btn>
+				</div>
+			</form>
+
+			<!-- modal for confirming overwrite if the Lesson Id already exists -->
+			<sc-modal sc-modal-open="addLesson.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-text="This Lesson Number already exists. Are you sure you want to overwrite this Lesson?" sc-modal-yes="addLesson.overwriteLesson();" sc-modal-first-no="addLesson.insertLesson()"></sc-modal>
+		</section>
+
+	</div>
+</div>

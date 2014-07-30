@@ -8,7 +8,6 @@ $icon-font-path: '/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // base imports
 @import 'compass/css3'
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins'
 @import 'variables-custom'
 @import 'mixins-custom'
 @import 'styling-custom'
@@ -19,14 +18,26 @@ $icon-font-path: '/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 @import 'monokai-sublime'
 @import 'md-modal'
 
+// directive styling imports
+@import 'sc-modal'
+@import 'sc-loading-btn'
+
 // page styling imports
 @import 'home'
 @import 'nav'
-@import 'nav-member'
+@import 'admin'
+@import 'admin-nav'
 @import 'admin-sidebar'
 @import 'admin-dashboard'
-@import 'add-unit'
 @import 'coursebox'
+@import 'add-unit'
+@import 'edit-unit'
+@import 'add-lesson'
+@import 'edit-lesson'
+@import 'backend'
+@import 'view-unit'
+@import 'view-lesson'
+
 
 
 /* Reset empty href to make Angular UI Bootstrap work properly */
@@ -37,6 +48,12 @@ $icon-font-path: '/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 html, body
   width: auto
   overflow-x: hidden
+
+html
+  height: 100%
+
+body
+  min-height: 100%
 
 body 
   font-family: 'Whitney SSm A', 'Whitney SSm B', sans-serif

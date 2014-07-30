@@ -7,36 +7,80 @@ angular
     'ngSanitize',
     'ngRoute',
     'firebase',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.router',
+    'ngAnimate'
   ])
   .constant('FIREBASE_URL', 'https://coderfront.firebaseio.com/')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/home.html',
+  .config(function($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/home');
+
+    $stateProvider
+      // FRONTEND STATES AND NESTED VIEWS
+      .state('home', {
+        url: '/home',
+        templateUrl: 'views/partials/home.html',
         controller: 'HomeCtrl'
       })
-      .when('/home', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+
+      // ADMIN STATES AND NESTED VIEWS
+      .state('admin', {
+        url: '/admin/:courseId',
+        templateUrl: 'views/partials/admin.html',
+        controller: 'AdminCtrl'
       })
-      .when('/add-unit/:courseId', {
-        templateUrl: 'views/add-unit.html',
-        controller: 'AddUnitCtrl'
-      })
-      .when('/edit-unit/:unitId', {
-        templateUrl: 'views/edit-unit.html',
-        controller: 'EditUnitCtrl'
-      })
-      .when('/lesson-unit/:lessonId', {
-        templateUrl: 'views/edit-lesson.html',
-        controller: 'EditLessonCtrl'
-      })
-      .when('/admin-dashboard', {
-        templateUrl: 'views/admin-dashboard.html',
+      .state('admin-dashboard', {
+        url: '/admin-dashboard',
+        templateUrl: 'views/partials/admin-dashboard.html',
         controller: 'AdminDashboardCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('admin.add-unit', {
+        url: '/add-unit',
+        templateUrl: 'views/partials/admin/add-unit.html',
+        controller: 'AddUnitCtrl'
+      })
+      .state('admin.edit-unit', {
+        url: '/edit-unit/:unitId',
+        templateUrl: 'views/partials/admin/edit-unit.html',
+        controller: 'EditUnitCtrl'
+      })
+      .state('admin.view-unit', {
+        url: '/view-unit/:unitId',
+        templateUrl: 'views/partials/backend/view-unit.html',
+        controller: 'ViewUnitCtrl'
+      })
+      .state('admin.add-lesson', {
+        url: '/add-lesson/:unitId',
+        templateUrl: 'views/partials/admin/add-lesson.html',
+        controller: 'AddLessonCtrl'
+      })
+      .state('admin.edit-lesson', {
+        url: '/edit-lesson/:unitId/:lessonId',
+        templateUrl: 'views/partials/admin/edit-lesson.html',
+        controller: 'EditLessonCtrl'
+      })
+      .state('admin.view-lesson', {
+        url: '/view-lesson/:unitId/:lessonId',
+        templateUrl: 'views/partials/backend/view-lesson.html',
+        controller: 'ViewLessonCtrl'
+      })
+
+      // BACKEND STATES AND NESTED VIEWS
+      .state('backend', {
+        url: '/backend/:courseId',
+        templateUrl: 'views/partials/backend.html',
+        controller: 'BackendCtrl'
+      })
+      .state('backend.view-unit', {
+        url: '/view-unit/:unitId',
+        templateUrl: 'views/partials/backend/view-unit.html',
+        controller: 'ViewUnitCtrl'
+      })
+      .state('backend.view-lesson', {
+        url: '/view-lesson/:unitId/:lessonId',
+        templateUrl: 'views/partials/backend/view-lesson.html',
+        controller: 'ViewLessonCtrl'
       });
+
   });

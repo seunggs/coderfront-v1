@@ -1,91 +1,147 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddUnitCtrl', function ($scope, $routeParams, Course, Unit, $location) {
+  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout) {
 
-		// Controls "Loading..." button
-		$scope.btn = {
-			loading: false
+		// Wrapper objects
+		$scope.addUnit = {};
+		$scope.formData = {};
+		$scope.formData.unit = {};
+		var formReset = function() {
+			$scope.formData = {};
+			$scope.formData.unit = {};
 		};
 
-		// Wrapper object for this controller for dot notation
-		$scope.addUnit = {};
+		// Button object wrappers & functions
+		$scope.btn = {};
+		var btnReset = function(delay) {
+			$timeout(function() {
+				$scope.btn = {};
+				console.log('button variable reset ok');
+			}, delay);
+		};
 
 		// Find the right course
-		$scope.addUnit.courseId = $routeParams.courseId;
-		$scope.addUnit.course = Course.find($routeParams.courseId);
+		$scope.addUnit.courseId = $stateParams.courseId;
+		$scope.addUnit.course = Course.find($stateParams.courseId);
 
-		// Initialize variables
+		// Get all units
+		$scope.addUnit.units = Unit.all($scope.addUnit.courseId);
+
+		// Modal related variable
 		$scope.addUnit.overwriteModalOpen = false;
-
-		// Increment/decrement unit counter function
-		$scope.incrementUnitCounter = function() {
-			Unit.incrementCounter();
-		};
-
-		$scope.decrementUnitCounter = function() {
-			Unit.decrementCounter();
-		};
 
 		// Add a new unit
 		$scope.addUnit.createUnit = function() {
 			$scope.btn.loading = true;
 
-			Unit.create($scope.addUnit.courseId, $scope.addUnit.unitId, $scope.addUnit.unit)
-				.then(function() {
+			Unit.create($scope.addUnit.courseId, $scope.formData.unit)
+				.then(function(ref) {
 					// Success callback
-					$scope.btn.loading = false;
 					
-					$scope.incrementUnitCounter();
+					// Get this unit's UID
+					$scope.addUnit.unitId = ref.name();
 
-					// Relocate to edit-unit
-					$location.path('/edit-unit/' + $scope.addUnit.unitId);
+					// Add to counter
+					Unit.incrementCounter($scope.addUnit.courseId);
+
+					// Set priority
+					Unit.updatePriority($scope.addUnit.courseId);
+
+					// Button control
+					$scope.btn.loading = false;
+					$scope.btn.success = true;
+					btnReset(1000);
+
+					// Form reset
+					formReset();
+
+					// Relocate to edit-unit after 1s
+					$timeout(function() {
+						$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
+					}, 1000);
+
 				}, function() {
 					// Error callback
+					// Button control
 					$scope.btn.loading = false;
+					$scope.btn.success = false;
+					btnReset(1000);
+
+					// Form reset
+					formReset();
+
 					console.log('Error');
 				});
 		};
 
-		// Add a new unit
+		// Add a new unit and overwrite the old
 		$scope.addUnit.overwriteUnit = function() {
-			Unit.create($scope.addUnit.courseId, $scope.addUnit.unitId, $scope.addUnit.unit)
-				.then(function() {
+			Unit.overwrite($scope.addUnit.courseId, $scope.formData.unit, $scope.addUnit.unitIdToRemove)
+				.then(function(ref) {
 					// Success callback
+
+					// Get this unit's UID
+					$scope.addUnit.unitId = ref.name();
+
+					// Set priority
+					Unit.updatePriority($scope.addUnit.courseId);
+
+					// Form reset
+					formReset();
+
 					// Relocate to unit-edit
-					$location.path('/edit-unit/' + $scope.addUnit.unitId);
+					$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
 				}, function() {
 					// Error callback
+					// Form reset
+					formReset();
+
 					console.log('Error');
 				});
 		};
 
 		// Insert a new unit and push down units below
 		$scope.addUnit.insertUnit = function() {
-			Unit.insert($scope.addUnit.courseId, $scope.addUnit.unitId, $scope.addUnit.unit)
-				.then(function() {
+			Unit.insert($scope.addUnit.courseId, $scope.formData.unit)
+				.then(function(ref) {
 					// Success callback
-					console.log('insert successful');
-					$scope.incrementUnitCounter();
 
-					// Relocate to unit-edit.html
-					$scope.$parent.edit.dashboard = false;
-					$scope.$parent.edit.unit = true;
+					// Get this unit's UID
+					$scope.addUnit.unitId = ref.name();
+
+					// Add to counter
+					Unit.incrementCounter($scope.addUnit.courseId);
+
+					// Set & update priority
+					Unit.updatePriority($scope.addUnit.courseId);
+
+					// Form reset
+					formReset();
+
+					// Relocate to unit-edit
+					$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
 				}, function() {
 					//Error callback
+					// Form reset
+					formReset();
+
 					console.log('Error');
 				});
 		};
 
-		// Check existing units for duplicate upon createUnit
-		var units = Unit.all($scope.addUnit.courseId);
-		$scope.addUnit.checkDuplicateUnit = function(unitId) {
-			if( units[unitId] !== undefined) {
+		// Check existing units for duplicates
+		$scope.addUnit.checkDuplicateUnit = function() {
+			// if unit already exists
+			var unitExists = Unit.alreadyExists($scope.addUnit.courseId, $scope.formData.unit);
+
+			if (unitExists === false) {
+				$scope.addUnit.createUnit();
+			} else {
 				// open overwrite modal
 				$scope.addUnit.overwriteModalOpen = true;
-				console.log($scope.addUnit.overwriteModalOpen);
-			} else {
-				$scope.addUnit.createUnit();
+
+				$scope.addUnit.unitIdToRemove = unitExists;
 			}
 		};
 

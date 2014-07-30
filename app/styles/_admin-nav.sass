@@ -1,4 +1,4 @@
-.nav-member-custom
+.admin-nav-custom
   display: inline-block
   vertical-align: middle
   margin-bottom: 0
@@ -11,22 +11,21 @@
     position: relative
     display: inline-block
     line-height: 1.7em
-    padding: 13px 10px
+    padding: 12px 10px
     > a
       position: relative
       display: inline-block
-      padding: $nav-link-padding
-      &:hover,
-      &:focus
+      text-transform: uppercase
+      &:hover, &:focus
         text-decoration: none
-        background-color: $nav-link-hover-bg
   &.nav-lightbg
-    font-size: 0.85em
-    color: $member-link-light
+    a
+      font-size: 0.85em
+      color: $member-link-light
+      &:hover, &:focus
+        color: $member-link-light-hover
 
-.nav-member-bg
+.admin-nav-bg
   height: 46px
   width: 100%
-  background-color: #edf2f8
-  border-bottom: 1px solid $member-outline-color
-  +box-shadow(rgba(0,0,0,0.05) 0 1px 0)
+  background-color: #39434b
