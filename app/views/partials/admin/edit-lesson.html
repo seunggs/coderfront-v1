@@ -1,1 +1,24 @@
-<p>This is the edit-lesson view.</p>
+<div class="edit-lesson-bg row">
+	<div class="edit-lesson-col col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+		<section class="edit-lesson">
+			<h3>Edit Lesson {{ editLesson.lesson.lessonNum }} in <a ui-sref="admin.edit-unit({unitId: editLesson.unit.$id})">Unit {{ editLesson.unit.unitNum }}</a></h3>
+			<form ng-submit="editLesson.updateLesson()">
+				<div class="form-group">
+					<label>Title*</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.title" required>
+					<label>Subtext</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.subtext">
+					<label>Estimated Completion (in hours)*</label>
+					<input class="form-control" type="number" ng-model="formData.lesson.duration" required>
+					<label>Lesson Category*</label>
+					<input class="form-control" type="text" ng-model="formData.lesson.category" required>
+					<label>Body HTML*</label>
+					<input class="file-input-custom" type="file" sc-fileread="formData.lesson.bodyHTML" required>
+					<sc-loading-btn success="btn.success" loading="btn.loading">Save Changes</sc-loading-btn>
+				</div>
+			</form>
+		</section>
+
+	</div>
+</div>

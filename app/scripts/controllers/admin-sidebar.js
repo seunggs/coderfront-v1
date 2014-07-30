@@ -20,19 +20,23 @@ angular.module('coderfrontApp')
 			var lessonsRef = new Firebase(FIREBASE_URL + 'units/' + unitId + '/lessons');
 			var lessons = $firebase(lessonsRef);
 
-			if (lessons !== undefined) {
-				// First insert ids into each object with the key '$id'
-				var tempIds = [];
-				tempIds = lessons.$getIndex();
+			// Must wait until lesson data is loaded before assiging $ids and lessons
+			lessons.$on('loaded', function() {
+				if (lessons !== undefined) {
+					// First insert ids into each object with the key '$id'
+					var tempIds = [];
+					tempIds = lessons.$getIndex();
 
-				for (var i=0; i<tempIds.length; i++) {
-					var lessonObj = lessons[tempIds[i]];
-					lessonObj.$id = tempIds[i];
+					for (var i=0; i<tempIds.length; i++) {
+						var lessonObj = lessons[tempIds[i]];
+						lessonObj.$id = tempIds[i];
+					}
+					
+					// Create an array and save all the lessons in the order of their priorities
+					$scope.adminSidebar.lessons.push(lessons);
 				}
-				
-				// Create an array and save all the lessons in the order of their priorities
-				$scope.adminSidebar.lessons.push(lessons);
-			}
+			});
+	
 		};
 
 		// Remove unit

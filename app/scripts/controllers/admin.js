@@ -6,4 +6,6 @@ angular.module('coderfrontApp')
 		// Wrapper object
 		$scope.admin = {};
 
+		$scope.menuToggle = false;
+
   });

@@ -1,24 +1,72 @@
+$menu-panel-width: 280px
+$sidebar-bg: #47515a
+
 .admin
 	padding: 0
+	margin: 0
 	.admin-row
-	.admin-sidebar-col
-		padding-right: 0
-		height: 100%
-	.admin-content
 		padding: 0
-	.edit
-		padding: 35px 20px
-		h3
-			margin-top: 0
-	.preview
-		padding: 35px 25px
-		border-top: 1px solid $member-outline-color
-	label
-		font-weight: 400
-		color: #999
-		margin-bottom: 2px
-	.form-control
-		margin-bottom: 12px
+		margin: 0
+
+.menu-panel
+	padding-right: 0
+	background: $sidebar-bg
+	height: 100%
+	min-height: 100vh
+	width: $menu-panel-width
+	position: absolute
+	z-index: 1
+	top: 0
+	left: 0
+	+transition(left 0.3s ease-in-out)
+
+.menu-panel-bg
+	z-index: -1000
+	position: fixed
+	top: 0
+	bottom: 0
+	width: $menu-panel-width
+	background-color: $sidebar-bg
+
+.admin-content
+	padding: 0
+	margin: 0
+	min-height: 100vh
+	width: 100%
+	height: 100%
+	position: relative
+	left: 0
+	z-index: 9
+	+transition(left 0.3s ease-in-out)
+	&::after
+		content: ""
+		display: none
+		position: absolute
+		top: 0
+		left: 0
+		height: 100%
+		width: 100%
+		z-index: 10
+		background-color: black
+		opacity: 0
+		+transition(opacity 0.3s ease-in-out)
+
+.menu-toggle
+	font-size: 2em
+	color: black
+	position: absolute
+	width: 50px
+	height: 50px
+	top: 20px
+	left: 40px
+	z-index: 100
+	cursor: pointer
+
+.slide-content-right
+	left: $menu-panel-width
+	&::after
+		display: block
+		opacity: 0.2
 
 .admin-view-animation-container
 	position: relative

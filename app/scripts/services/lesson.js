@@ -148,7 +148,6 @@ angular.module('coderfrontApp')
       },
       remove: function(unitId, lessonId, lesson) {
         var lessonCounter = Counter.lessonCounter(unitId);
-        console.log(lessonCounter);
 
         var lessonsRef = new Firebase(FIREBASE_URL + 'units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
@@ -156,11 +155,9 @@ angular.module('coderfrontApp')
         // Reduce the lessonNum's of the lessons below it by 1
         for(var i=lesson.lessonNum+1; i<lessonCounter+1; i++) {
           var lessonIdBelow = (lessons.$getIndex()[parseInt(i)-1]).toString();
-          console.log(lessonIdBelow);
           lessons.$child(lessonIdBelow).$update({lessonNum: parseInt(i)-1});
         }
         // Remove the lesson in question
-        console.log(lessonId);
         return lessons.$remove(lessonId);
       }
     };
