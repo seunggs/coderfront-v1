@@ -27,6 +27,15 @@
 		outline: 0
 		+box-shadow(rgba(0,0,0,.075) 0 0 0)
 
+// custom layout
+.absolute-center
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+	margin: auto	
+
 // bootstrap col styling - add it to col classes
 .col-v-center
 	float: none
@@ -130,6 +139,93 @@
 .btn-xs
 	font-size: 0.8em
 	padding: 6px 9px
+
+.btn-sc
+	border: none
+	font-family: inherit
+	font-size: 1em
+	color: white
+	cursor: pointer
+	padding: 9px 15px
+	display: inline-block
+	margin: 5px 0
+	font-weight: 400
+	outline: none
+	position: relative
+	+border-radius(4px)
+	text-shadow: 0 1px 0 rgba(0,0,0,0.1)
+	+box-shadow(rgba(0,0,0,0.15) 0 1px 0, rgba(255,255,255,0.05) 0 -1px 0)
+	+transition(all 0.3s)
+
+.btn-loading
+	position: relative
+	overflow: hidden
+	span
+		display: inline-block
+		width: 100%
+		height: 100%
+		-webkit-transition: all 0.3s
+		-webkit-backface-visibility: hidden
+		-moz-transition: all 0.3s
+		-moz-backface-visibility: hidden
+		transition: all 0.3s
+		backface-visibility: hidden
+
+.btn-partial-loading, .btn-partial-success, .btn-partial-error
+	position: absolute
+	width: 100%
+	height: 100%
+	left: 0
+	top: -100%
+	display: block
+	margin: auto
+	background: transparent
+	+transition(all 0.3s)
+	> .fa
+		font-size: 1.2em
+
+.btn-login
+	position: relative
+	overflow: hidden
+	display: inline-block
+	vertical-align: middle
+	width: $login-button-width
+	height: $login-button-height
+	font-size: 1.5em
+	font-weight: 600
+	padding: 8px
+	margin: 0
+	margin-top: -6px
+	background-color: transparent
+	color: rgba(0,0,0,0.3)
+	border: 3px solid rgba(0,0,0,0.3)
+	+border-radius(100px)
+	+transition(all 0.3s ease)
+	+box-shadow(none)
+	&:hover, &:focus, &:active
+		color: rgba(0,0,0,0.7)
+		border: 3px solid rgba(0,0,0,0.7)
+
+.loading-btn-text
+	position: relative
+	display: block
+
+// custom icons
+.icon-loading // loading icon
+	display: block
+	height: 20px
+	width: 20px
+	border-radius: 50px
+	border: 2px solid #fff
+	border-left-color: #fff
+	border-top-color: rgba(0,0,0,0.08)
+	border-bottom-color: rgba(0,0,0,0.08)
+	border-right-color: #fff
+	@extend .rotate-circle
+
+.loading-btn-icon
+	height: 20px
+	width: 20px
 
 // custom file input button
 .file-input-custom

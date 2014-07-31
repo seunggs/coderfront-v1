@@ -102,10 +102,26 @@
 @-webkit-keyframes moveFromRight
 	from
 		+transform(translateX(100%))
+	to
+		+transform(translateX(0))
 
 @keyframes moveFromRight
 	from
 		+transform(translateX(100%))
+	to
+		+transform(translateX(0))
+
+.pt-moveToLeft
+	-webkit-animation: moveToLeft .6s ease both
+	animation: moveToLeft .6s ease both
+
+@-webkit-keyframes moveToLeft
+	to 
+		+transform(translateX(-100%))
+
+@keyframes moveToLeft
+	to
+		+transform(translateX(-100%))
 
 // partial page transition animations
 .ppt-moveFromRight

@@ -8,6 +8,7 @@ $sidebar-bg: #47515a
 		padding: 0
 		margin: 0
 
+// menu-panel animation
 .menu-panel
 	padding-right: 0
 	background: $sidebar-bg
@@ -18,7 +19,6 @@ $sidebar-bg: #47515a
 	z-index: 1
 	top: 0
 	left: 0
-	+transition(left 0.3s ease-in-out)
 
 .menu-panel-bg
 	z-index: -1000
@@ -37,19 +37,20 @@ $sidebar-bg: #47515a
 	position: relative
 	left: 0
 	z-index: 9
-	+transition(left 0.3s ease-in-out)
-	&::after
-		content: ""
-		display: none
-		position: absolute
-		top: 0
-		left: 0
-		height: 100%
-		width: 100%
-		z-index: 10
-		background-color: black
-		opacity: 0
-		+transition(opacity 0.3s ease-in-out)
+	+transition(transform 0.3s ease-in-out)
+	
+.overlay
+	content: ""
+	display: none
+	position: absolute
+	top: 0
+	left: 0
+	height: 100%
+	width: 100%
+	z-index: 10
+	background-color: black
+	opacity: 0
+	+transition(opacity 0.3s ease-in-out)
 
 .menu-toggle
 	font-size: 2em
@@ -62,12 +63,14 @@ $sidebar-bg: #47515a
 	z-index: 100
 	cursor: pointer
 
-.slide-content-right
-	left: $menu-panel-width
-	&::after
-		display: block
-		opacity: 0.2
+.slide-right
+	+transform(translateX($menu-panel-width))
 
+.slide-right-overlay
+	display: block
+	opacity: 0.2
+
+// ui-view animation
 .admin-view-animation-container
 	position: relative
 
@@ -77,8 +80,8 @@ $sidebar-bg: #47515a
 	left: 0
 	right: 0
 	&.ng-enter
-		z-index: 1 // makes sure ng-enter is on top of en-leave
+		z-index: 1 // makes sure ng-enter is on top of ng-leave
 		@extend .ppt-moveFromRight
 	&.ng-leave
-		z-index: -1 // makes sure ng-leave is below en-enter
+		z-index: -1 // makes sure ng-leave is below ng-enter
 		@extend .ppt-scaleDown

@@ -23,6 +23,11 @@ angular
         templateUrl: 'views/partials/home.html',
         controller: 'HomeCtrl'
       })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/partials/register.html',
+        controller: 'RegisterCtrl'
+      })
 
       // ADMIN STATES AND NESTED VIEWS
       .state('admin', {

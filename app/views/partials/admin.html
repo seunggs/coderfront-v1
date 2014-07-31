@@ -5,12 +5,14 @@
 	<div class="admin-row row">
 
 		<!-- left side bar -->
-		<nav class="menu-panel" ng-class="{'slide-menu-right': menuToggle}" ng-include="'views/partials/admin-sidebar.html'"></nav>
+		<nav class="menu-panel" ng-include="'views/partials/admin-sidebar.html'"></nav>
 
 		<!-- main content section -->
-		<article class="admin-content col-md-12" ng-class="{'slide-content-right': menuToggle}">
+
+		<article class="admin-content" ng-class="{'slide-right': menuToggle}">
 			
-			<div class="menu-toggle" ng-click="menuToggle = !menuToggle"><i class="fa fa-bars"></i></div>
+			<div class="overlay" ng-class="{'slide-right-overlay': menuToggle}" ng-click="menuToggle = !menuToggle"></div>
+			<div class="menu-toggle" ng-click="menuToggle = !menuToggle" ng-class="{'expand-toggle': menuToggle}"><i class="fa fa-bars"></i></div>
 
 			<div class="admin-view-animation-container">
 				<div ui-view class="admin-view-animation"></div>
