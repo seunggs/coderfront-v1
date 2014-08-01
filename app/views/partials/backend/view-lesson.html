@@ -1,11 +1,26 @@
 <div class="view-lesson-bg row">
 	<div class="view-lesson-col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
-		<section class="view-lesson">
+		<section class="lesson-title">
 			<h3>{{ viewLesson.lesson.title }}</h3>
-			<p>{{ viewLesson.lesson.subtext }}</p>
-			<p>{{ viewLesson.lesson.category }}</p>
-			<p>{{ viewLesson.lesson.duration }}</p>
+			<h4>{{ viewLesson.lesson.subtext }}</h4>
+		</section>
+
+		<section class="lesson-details-container">
+			<div class="lesson-details-item">
+				<h5>Lesson Category</h5>
+				<hr>
+				<p>{{ viewLesson.lesson.category }}</p>
+			</div>
+			<div class="lesson-details-item">
+				<h5>Est. Completion</h5>
+				<hr>
+				<p>{{ viewLesson.lesson.duration }} hours</p>
+			</div>
+		</section>
+
+		<section class="lesson-body">
+			<div ng-bind-html="viewLesson.lesson.bodyHTML[0]"></div>
 		</section>
 
 	</div>

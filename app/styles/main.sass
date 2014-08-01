@@ -8,23 +8,23 @@ $icon-font-path: '/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // base imports
 @import 'compass/css3'
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap'
-@import 'variables-custom'
-@import 'mixins-custom'
-@import 'styling-custom'
-@import 'animation-custom'
+@import 'custom-variables'
+@import 'custom-mixins'
+@import 'custom-styling'
+@import 'custom-animations'
+@import 'custom-buttons'
+@import 'custom-layouts'
 
 // outside plugin imports
 @import 'animatecss'
 @import 'monokai-sublime'
 @import 'md-modal'
 
-// directive styling imports
-@import 'sc-modal'
-
 // page styling imports
 @import 'home'
 @import 'nav'
 @import 'register'
+@import 'login'
 
 @import 'admin'
 @import 'admin-nav'
@@ -55,7 +55,7 @@ html
   height: 100%
 
 body
-  min-height: 100%
+  height: 100%
 
 body 
   font-family: 'Whitney SSm A', 'Whitney SSm B', sans-serif
@@ -78,6 +78,22 @@ label
 
 .form-control
   margin-bottom: 12px
+
+// Page animation control
+.index-container
+  position: relative
+
+.index
+  &.ng-enter
+    @extend .pt-scaleUp
+    position: absolute // necessary to make animation work properly 
+    left: 0
+    right: 0
+  &.ng-leave
+    @extend .pt-scaleDown
+    position: absolute // necessary to make animation work properly  
+    left: 0
+    right: 0
 
 /* Custom container */
 .container 

@@ -1,4 +1,8 @@
 <aside class="admin-sidebar" ng-controller="AdminSidebarCtrl">
+	<div class="admin-logo">
+		<img src="../images/logo-light.png" class="admin-logo-img">
+	</div>
+
 	<div class="dashboard"><a ui-sref="admin-dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;BACK TO COURSES</a></div>
 	
 	<a class="btn btn-teal btn-block btn-new-unit" ui-sref="admin.add-unit({courseId: adminSidebar.courseId})">+ Add a New Unit</a>

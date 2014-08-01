@@ -1,81 +1,16 @@
-// bootstrap container styling
-.container-md
-	+container-fixed()
-	@media (min-width: $screen-md-min)
-		width: $container-md
-
-// bootstrap form styling
-.form-control
-	display: block
-	width: 100%
-	height: 34px
-	padding: 6px 12px
-	font-size: 14px
-	line-height: 1.42857143
-	color: #555
-	background-color: #fff
-	background-image: none
-	border-top: 1px solid #d3d3d3
-	border-left: 1px solid #d3d3d3
-	border-right: 1px solid #f2f2f2
-	border-bottom: 1px solid #f2f2f2
-	+border-radius(0px)
-	+box-shadow(rgba(0, 0, 0, .14) 0 0 0)
-	+transition(border-color .15s ease-in-out, box-shadow .15s ease-in-out)
-	&:focus
-		border-color: #66afe9
-		outline: 0
-		+box-shadow(rgba(0,0,0,.075) 0 0 0)
-
-// custom layout
-.absolute-center
-	position: absolute
-	top: 0
-	left: 0
-	bottom: 0
-	right: 0
-	margin: auto	
-
-// bootstrap col styling - add it to col classes
-.col-v-center
-	float: none
-	display: inline-block
-	vertical-align: middle
-	margin-right: -4px
-.col-padding-right-30
-	padding-right: 30px
-.col-padding-left-30
-	padding-left: 30px
-.col-padding-top-40
-	padding-top: 40px
-.col-padding-bottom-40
-	padding-bottom: 40px
-.col-padding-sides-60
-	padding-left: 60px
-	padding-right: 60px
-.col-padding-sides-80
-	padding-left: 80px
-	padding-right: 80px
-.col-border-right
-	border-right: 1px solid $outline-color
-.col-border-left
-	border-left: 1px solid $outline-color
-.col-border-top
-	border-top: 1px solid $outline-color
-.col-border-bottom
-	border-bottom: 1px solid $outline-color
-
 // buttons
 .btn
 	padding: 9px 15px
 	border: 0
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1)
 	+box-shadow(rgba(0,0,0,0.15) 0 1px 0, rgba(255,255,255,0.05) 0 -1px 0)
+
 .btn-round
 	font-size: 1.2em
 	font-weight: 300
 	padding: 11px 14px
 	+border-radius(100px)
+
 .btn-outline-white
 	color: white
 	border: 1px solid #999
@@ -83,6 +18,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		border: 1px solid white
+
 .btn-outline-black 
 	color: black
 	border: 1px solid #bbb
@@ -90,6 +26,7 @@
 	&:hover, &:focus, &:active
 		color: black
 		border: 1px solid black
+
 .btn-primary // overwrites Bootstrap
 	background-color: #269de0
 	color: white
@@ -97,6 +34,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		background-color: #1789c9
+
 .btn-red
 	background-color: $red
 	color: white
@@ -104,6 +42,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-red
+
 .btn-yellow
 	background-color: $yellow
 	color: white
@@ -111,6 +50,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-yellow
+
 .btn-orange-yellow
 	background-color: $orange-yellow
 	color: white
@@ -118,6 +58,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-orange-yellow
+
 .btn-teal
 	background-color: $teal
 	color: white
@@ -125,6 +66,7 @@
 	&:hover, &:focus, &:active
 		color: white
 		background-color: $dark-teal
+
 .btn-dark-grey
 	background-color: $dark-grey
 	color: white
@@ -184,6 +126,12 @@
 	> .fa
 		font-size: 1.2em
 
+.btn-bg-success
+	background-color: #51c000 !important
+
+.btn-bg-error
+	background-color: #cb362e !important
+
 .btn-login
 	position: relative
 	overflow: hidden
@@ -209,24 +157,3 @@
 .loading-btn-text
 	position: relative
 	display: block
-
-// custom icons
-.icon-loading // loading icon
-	display: block
-	height: 20px
-	width: 20px
-	border-radius: 50px
-	border: 2px solid #fff
-	border-left-color: #fff
-	border-top-color: rgba(0,0,0,0.08)
-	border-bottom-color: rgba(0,0,0,0.08)
-	border-right-color: #fff
-	@extend .rotate-circle
-
-.loading-btn-icon
-	height: 20px
-	width: 20px
-
-// custom file input button
-.file-input-custom
-	padding-bottom: 15px

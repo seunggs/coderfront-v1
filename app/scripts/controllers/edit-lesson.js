@@ -28,13 +28,14 @@ angular.module('coderfrontApp')
 		var formReset = function() {
 			$scope.formData = {};
 			$scope.formData.lesson = $scope.editLesson.lesson;
+			$scope.formData.lesson.bodyHTML = '';
 		};
 		formReset();
 
 		// Update lesson
 		$scope.editLesson.updateLesson = function() {
 			$scope.btn.loading = true; // button control
-
+			console.log($scope.formData.lesson.bodyHTML);
 			Lesson.update($scope.editLesson.unitId, $scope.editLesson.lesson.$id, $scope.formData.lesson)
 				.then(function() {
 					// Success callback

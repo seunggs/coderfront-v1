@@ -3,7 +3,7 @@
 angular.module('coderfrontApp')
   .directive('scLoadingBtn', function ($timeout) {
     return {
-			// Requires: Font Awesome, _animation-custom.sass, _sc-loading-btn.sass
+			// Requires: Font Awesome, _animation-custom.sass, _custom-buttons.sass (.btn-bg-sucess, .btn-bg-error)
       // Other requirements: Element type must be 'submit'
 			// Attr options:
       // success (required): a variable
@@ -14,7 +14,7 @@ angular.module('coderfrontApp')
 			scope: {
         loading: '=',
         success: '=',
-        btnType: '@',
+        btnType: '=?',
         btnClass: '@'
       },
       restrict: 'E',
@@ -26,7 +26,6 @@ angular.module('coderfrontApp')
         angular.element(elem[0].firstChild).addClass(scope.btnClass);
 
         // Set default for button type
-        console.log(scope.btnType);
         scope.btnType = scope.btnType !== undefined ? scope.btnType : 'solid';
 
         var translateYMixin = function(y) {
@@ -47,10 +46,10 @@ angular.module('coderfrontApp')
             angular.element('.btn-partial-loading').css('top', '-100%');
             angular.element('.btn-partial-error').css('top', '-100%');
             angular.element('.loading-btn-text').css(translateYMixin(0));
-            angular.element('.btn-bg').css('background-color', 'transparent');
+            angular.element(elem[0].firstChild).removeClass('btn-bg-success');
+            angular.element(elem[0].firstChild).removeClass('btn-bg-error');
             angular.element(elem[0].firstChild).removeClass('animated shake-fast');
             angular.element(elem[0].firstChild).blur();
-            console.log('button styling reset ok');
           }, delay);
         };
 
@@ -64,12 +63,11 @@ angular.module('coderfrontApp')
 
         // Fire up success/error icon
         scope.$watch('success', function(value) {
-          console.log(scope.success);
           if (value === true) {
             angular.element('.btn-partial-loading').css('top', '-100%');
             angular.element('.btn-partial-success').css('top', '0');
             if (scope.btnType === 'solid') {
-              angular.element('.btn-bg').css('background-color', '#51c000');
+              angular.element(elem[0].firstChild).addClass('btn-bg-success');
             }
             resetButton(1000);
           } else if (value === false) {
@@ -77,11 +75,11 @@ angular.module('coderfrontApp')
             angular.element('.btn-partial-loading').css('top', '-100%');
             angular.element('.btn-partial-error').css('top', '0');
             if (scope.btnType === 'solid') {
-              angular.element('.btn-bg').css('background-color', '#cb362e');
+              angular.element(elem[0].firstChild).addClass('btn-bg-error');
             }
             resetButton(1000);
           }
-        });
+        }, true);
 
       },
       templateUrl: '../views/sc-loading-btn.html'

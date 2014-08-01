@@ -12,16 +12,29 @@ angular.module('coderfrontApp')
 		var btnReset = function(delay) {
 			$timeout(function() {
 				$scope.btn = {};
-				console.log('button variable reset ok');
 			}, delay);
 		};
 
-    // Show steps
+		// Initialize focus
+		$scope.register.focus = {
+			step1: true
+		};
+
+    // Step control
+    $scope.register.totalSteps = 2;
     $scope.register.step = 1;
 
     $scope.register.showStep = function(step) {
 			$scope.register.step = step;
+	
+	    // Set top progressbar width
+			$scope.register.progressWidth = ($scope.register.step-1) / $scope.register.totalSteps;
+
+			// Set focus 
+			$scope.register.focus.step1 = false;
+			$scope.register.focus.step2 = true;
     };
+
 
 		// Check if password = confirmPassword
 		$scope.register.checkConfirmPassword = function() {

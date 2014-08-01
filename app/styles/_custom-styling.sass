@@ -1,0 +1,43 @@
+// bootstrap form styling
+.form-control
+	display: block
+	width: 100%
+	height: 34px
+	padding: 6px 12px
+	font-size: 14px
+	line-height: 1.42857143
+	color: #555
+	background-color: #fff
+	background-image: none
+	border-top: 1px solid #d3d3d3
+	border-left: 1px solid #d3d3d3
+	border-right: 1px solid #f2f2f2
+	border-bottom: 1px solid #f2f2f2
+	+border-radius(0px)
+	+box-shadow(rgba(0, 0, 0, .14) 0 0 0)
+	+transition(border-color .15s ease-in-out, box-shadow .15s ease-in-out)
+	&:focus
+		border-color: #66afe9
+		outline: 0
+		+box-shadow(rgba(0,0,0,.075) 0 0 0)
+
+// custom icons
+.icon-loading // loading icon
+	display: block
+	height: 20px
+	width: 20px
+	border-radius: 50px
+	border: 2px solid #fff
+	border-left-color: #fff
+	border-top-color: rgba(0,0,0,0.08)
+	border-bottom-color: rgba(0,0,0,0.08)
+	border-right-color: #fff
+	@extend .rotate-circle
+
+.loading-btn-icon
+	height: 20px
+	width: 20px
+
+// custom file input button
+.file-input-custom
+	padding-bottom: 15px

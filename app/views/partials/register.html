@@ -1,17 +1,17 @@
 <div class="container-fluid register-wrapper">
 
-	<section class="register-progress" ng-class=""></section>
+	<sc-progressbar-top progress-width="register.progressWidth"></sc-progressbar-top>
 
 	<section class="logo">
-		<img class="logo-img" src="../images/logo-light.png" class="logo-img">
+		<a ui-sref="home"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
 	</section>
 
 	<!-- register step 1-->
 	<article class="register-bg register-bg-color1" ng-if="register.step === 1">
-		<section class="register-container register-step-1">
+		<section class="register-container absolute-center register-step-1">
 			<form class="register-form-container" ng-submit="register.showStep(2)">
 				<label for="fullname">First, what's your full name and email?</label>
-				<input class="login-form register-name" type="text" name="fullname" placeholder="Full Name" ng-model="formData.fullname" autofocus required>
+				<input class="login-form register-name" type="text" name="fullname" placeholder="Full Name" ng-model="formData.fullname" sc-setfocus setfocus="register.focus.step1" required>
 				<input class="login-form register-email" type="email" name="email" placeholder="Email" ng-model="formData.email" required>
 				<button type="submit" class="btn-login btn">Next&nbsp;<i class="fa fa-angle-right"></i></button>
 			</form>
@@ -20,10 +20,10 @@
 
 	<!-- register step 2-->
 	<article class="register-bg register-bg-color2" ng-if="register.step === 2">
-		<section class="register-container register-step-2">
+		<section class="register-container absolute-center register-step-2">
 			<form class="register-form-container" ng-submit="register.checkConfirmPassword()">
 				<label for="password">Now please pick your password and confirm.</label>
-				<input class="login-form register-password" type="password" name="password" placeholder="Password" ng-model="formData.password" autofocus required>
+				<input class="login-form register-password" type="password" name="password" placeholder="Password" ng-model="formData.password" sc-setfocus setfocus="register.focus.step2" required>
 				<input class="login-form register-confirm-password" type="password" name="confirmPassword" placeholder="Confirm Password" ng-model="formData.confirmPassword" required>
 				<sc-loading-btn btn-class="btn btn-login" btn-type="login" success="btn.success" loading="btn.loading">Done</sc-loading-btn>
 			</form>

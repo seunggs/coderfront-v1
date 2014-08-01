@@ -1,13 +1,11 @@
 $placeholder-color: rgba(0,0,0,0.2)
-$register-container-width: 720px
-$register-container-height: 200px
-$login-form-width: $register-container-width - $login-button-width
+$login-container-width: 720px
+$login-container-height: 200px
+$login-form-width: $login-container-width - $login-button-width
 $login-form-text-color: #fffbd8
-$register-bg-color1: #3d4b58
-$register-bg-color2: #453d58
-$register-bg-color3: #3d5843
+$login-bg-color1: #3d4b58
 
-.register-wrapper
+.login-wrapper
 	position: relative
 	padding: 0
 	margin: 0
@@ -19,7 +17,7 @@ $register-bg-color3: #3d5843
 		.logo-img
 			height: 22px
 
-.register-bg
+.login-bg
 	width: 100%
 	height: 100vh
 	min-height: 100%
@@ -32,33 +30,16 @@ $register-bg-color3: #3d5843
 		@extend .pt-moveToLeft
 		position: absolute // necessary to make animation work properly 
 
-.register-bg-color1
-	background-color: $register-bg-color1
+.login-bg-color1
+	background-color: $login-bg-color1
 	+transition(background-color 0.3s)
 
-.register-bg-color2
-	background-color: $register-bg-color2
-	+transition(background-color 0.3s)
-
-.register-bg-color3
-	background-color: $register-bg-color3
-	+transition(background-color 0.3s)
-
-.register-progress
+.login-container
 	position: fixed
-	top: 0
-	left: 0
-	width: 0
-	height: 6px
-	background-color: rgba(0,0,0,0.35)
-	+transition(width 0.3s)
+	height: $login-container-height
+	width: $login-container-width
 
-.register-container
-	position: fixed
-	height: $register-container-height
-	width: $register-container-width
-
-.register-form-container
+.login-form-container
 	label
 		font-size: 1.9em
 		font-weight: 300
@@ -87,33 +68,25 @@ $register-bg-color3: #3d5843
 	&:-ms-input-placeholder   
 		color: $placeholder-color
 
-.register-name
+.login-email
 	width: $login-form-width / 2.2
 	margin-right: 20px
 	&:-webkit-autofill
-		-webkit-box-shadow: 0 0 0 1000px $register-bg-color1 inset
+		-webkit-box-shadow: 0 0 0 1000px $login-bg-color1 inset
 		border-bottom: 2px solid #333c45
 		-webkit-text-fill-color: $login-form-text-color
 		&:focus
-			-webkit-box-shadow: 0 0 0 1000px $register-bg-color1 inset
+			-webkit-box-shadow: 0 0 0 1000px $login-bg-color1 inset
 			border-bottom: 2px solid #1d2124
 			-webkit-text-fill-color: $login-form-text-color
 
-.register-email
-	@extend .register-name
+.login-password
+	@extend .login-name
 	&:-webkit-autofill
-		-webkit-box-shadow: 0 0 0 1000px $register-bg-color1 inset
+		-webkit-box-shadow: 0 0 0 1000px $login-bg-color1 inset
 		border-bottom: 2px solid #333c45
 		-webkit-text-fill-color: $login-form-text-color
 		&:focus
-			-webkit-box-shadow: 0 0 0 1000px $register-bg-color1 inset
+			-webkit-box-shadow: 0 0 0 1000px $login-bg-color1 inset
 			border-bottom: 2px solid #1d2124
 			-webkit-text-fill-color: $login-form-text-color
-
-.register-password
-	@extend .register-name
-
-.register-confirm-password
-	@extend .register-name
-
-

@@ -12,37 +12,45 @@ $sidebar-bg: #47515a
 .menu-panel
 	padding-right: 0
 	background: $sidebar-bg
-	height: 100%
-	min-height: 100vh
+	min-height: 100%
 	width: $menu-panel-width
 	position: absolute
-	z-index: 1
 	top: 0
-	left: 0
+	left: -$menu-panel-width
+	visibility: hidden
+	z-index: 100
+	+transition(left 0.3s ease-in-out)
+	&::after
+		visibility: hidden
+		content: ""
+		background-color: $sidebar-bg
+		width: $menu-panel-width
+		position: fixed
+		top: 0
+		left: -$menu-panel-width
+		bottom: 0
+		z-index: -1000
+		+transition(left 0.3s ease-in-out)
 
-.menu-panel-bg
-	z-index: -1000
-	position: fixed
-	top: 0
-	bottom: 0
-	width: $menu-panel-width
-	background-color: $sidebar-bg
+.menu-show
+	visibility: visible
+	&::after
+		visibility: visible
 
 .admin-content
 	padding: 0
 	margin: 0
-	min-height: 100vh
 	width: 100%
 	height: 100%
 	position: relative
+	top: 0
 	left: 0
-	z-index: 9
-	+transition(transform 0.3s ease-in-out)
+	bottom: 0
+	+transition(left 0.3s ease-in-out)
 	
 .overlay
-	content: ""
-	display: none
-	position: absolute
+	visibility: hidden
+	position: fixed
 	top: 0
 	left: 0
 	height: 100%
@@ -50,7 +58,7 @@ $sidebar-bg: #47515a
 	z-index: 10
 	background-color: black
 	opacity: 0
-	+transition(opacity 0.3s ease-in-out)
+	+transition(all 0.3s ease-in-out)
 
 .menu-toggle
 	font-size: 2em
@@ -60,14 +68,24 @@ $sidebar-bg: #47515a
 	height: 50px
 	top: 20px
 	left: 40px
-	z-index: 100
 	cursor: pointer
+	z-index: 500
 
+// Because of webkit bug, position "fixed" doesn't work with transform
+// So I can't use .slide-right at the moment
 .slide-right
 	+transform(translateX($menu-panel-width))
 
+.menu-panel-slide-right
+	left: 0
+	&::after
+		left: 0
+
+.admin-content-slide-right
+	left: $menu-panel-width
+
 .slide-right-overlay
-	display: block
+	visibility: visible
 	opacity: 0.2
 
 // ui-view animation
@@ -75,7 +93,7 @@ $sidebar-bg: #47515a
 	position: relative
 
 .admin-view-animation
-	min-height: 100%
+	height: 100%
 	position: absolute
 	left: 0
 	right: 0

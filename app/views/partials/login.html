@@ -1,0 +1,17 @@
+<div class="container-fluid login-wrapper">
+
+	<section class="logo">
+		<a ui-sref="home"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
+	</section>
+
+	<article class="login-bg login-bg-color1">
+		<section class="login-container absolute-center">
+			<form class="login-form-container" ng-submit="">
+				<label for="fullname">First, what's your full name and email?</label>
+				<input class="login-form login-emil" type="email" name="email" placeholder="Email" ng-model="formData.email" autofocus required>
+				<input class="login-form login-password" type="password" name="password" placeholder="Password" ng-model="formData.password" required>
+				<button type="submit" class="btn-login btn">Sign In&nbsp;<i class="fa fa-angle-right"></i></button>
+			</form>
+		</section>
+	</article>
+</div>

@@ -11,7 +11,7 @@ angular.module('coderfrontApp')
     return {
       scope: {
         scFileread: '=',
-        filereadType: '@?'
+        filereadType: '=?'
       },
       link: function (scope, element) {
         scope.filereadType = scope.filereadType === undefined ? 'text' : scope.filereadType;

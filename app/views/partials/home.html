@@ -1,17 +1,19 @@
-<div class="container-fluid home">
+<div class="container-fluid home-wrapper">
 
 	<article class="feature">
 		<nav ng-include="'views/partials/nav.html'"></nav>
 		<section class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<h2 class="animated bounceInDown">Learn to Build a Web App in 3 Months.</h2>
-				<p class="subheading">
-					From setting up the dev environment on your computer to deploying your very first web app, we'll walk you through every step of turning your idea into a real app in 90 days or less.
-				</p>
-				<a class="btn btn-outline-white btn-lg btn-round btn-feature animated bounceInDown delay-05s" ui-sref="register">Sign Up to View Curriculum&nbsp;&nbsp;<i class="fa fa-angle-right bouncing-arrow"></i></a>
+				<div class="feature-text animated bounceInDown delay-500ms">
+					<h2>Learn to Build a Web App in 3 Months.</h2>
+					<p class="subheading">
+						From setting up the dev environment on your computer to deploying your very first web app, we'll walk you through every step of turning your idea into a real app in 90 days or less.
+					</p>
+				</div>
+				<a class="btn btn-outline-white btn-lg btn-round btn-feature animated bounceInDown delay-1000ms" ui-sref="register">Sign Up to View Curriculum&nbsp;&nbsp;<i class="fa fa-angle-right bouncing-arrow"></i></a>
 			</div>
 		</section>
-		<img ng-src="../images/feature-single.png" class="feature-image animated fadeInUp delay-1s">
+		<img ng-src="../images/feature-single.png" class="feature-image animated fadeInUp delay-1500ms">
 	</article>
 
 	<article class="benefits">
@@ -196,7 +198,7 @@
 					<h2>Join the next class on .</h2>
 					<p>Learn how to build a fully functional app in 3 months.<br>Sign up to check out the curriculum now.</p>
 					<div>
-						<a class="btn btn-primary btn-lg btn-round btn-pricing">Sign Up to View Curriculum&nbsp;&nbsp;<i class="fa fa-angle-right bouncing-arrow"></i></a>
+						<a class="btn btn-primary btn-lg btn-round btn-pricing" ui-sref="register">Sign Up to View Curriculum&nbsp;&nbsp;<i class="fa fa-angle-right bouncing-arrow"></i></a>
 					</div>
 				</div>
 			</section>

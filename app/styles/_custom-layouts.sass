@@ -1,0 +1,43 @@
+// bootstrap container styling
+.container-md
+	+container-fixed()
+	@media (min-width: $screen-md-min)
+		width: $container-md
+
+// custom layout
+.absolute-center
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+	margin: auto	
+
+// bootstrap col styling - add it to col classes
+.col-v-center
+	float: none
+	display: inline-block
+	vertical-align: middle
+	margin-right: -4px
+.col-padding-right-30
+	padding-right: 30px
+.col-padding-left-30
+	padding-left: 30px
+.col-padding-top-40
+	padding-top: 40px
+.col-padding-bottom-40
+	padding-bottom: 40px
+.col-padding-sides-60
+	padding-left: 60px
+	padding-right: 60px
+.col-padding-sides-80
+	padding-left: 80px
+	padding-right: 80px
+.col-border-right
+	border-right: 1px solid $outline-color
+.col-border-left
+	border-left: 1px solid $outline-color
+.col-border-top
+	border-top: 1px solid $outline-color
+.col-border-bottom
+	border-bottom: 1px solid $outline-color

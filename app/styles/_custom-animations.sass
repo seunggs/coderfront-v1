@@ -1,3 +1,15 @@
+// Animate.css customization
+.animated
+	&.delay-500ms
+		-webkit-animation-delay: 0.5s
+		animation-delay: 0.5s
+	&.delay-1000ms
+		-webkit-animation-delay: 1s
+		animation-delay: 1s
+	&.delay-1500ms
+		-webkit-animation-delay: 1.5s
+		animation-delay: 1.5s
+
 // Bouncing arrow animation
 .bouncing-arrow
 	-webkit-animation: bounce-arrow .85s linear infinite
@@ -122,6 +134,78 @@
 @keyframes moveToLeft
 	to
 		+transform(translateX(-100%))
+
+.pt-moveFromLeft
+	-webkit-animation: moveFromLeft .6s ease both
+	animation: moveFromLeft .6s ease both
+
+@-webkit-keyframes moveFromLeft
+	from
+		+transform(translateX(-100%))
+
+@keyframes moveFromLeft
+	from
+		+transform(translateX(-100%))
+
+.pt-moveToRight
+	-webkit-animation: moveToRight .6s ease both
+	animation: moveToRight .6s ease both
+
+@-webkit-keyframes moveToRight
+	to
+		+transform(translateX(100%))
+
+@keyframes moveToRight
+	to
+		+transform(translateX(100%))
+
+/* move to with different easing */
+
+.pt-moveToLeftEasing 
+	-webkit-animation: moveToLeft .7s ease-in-out both
+	animation: moveToLeft .7s ease-in-out both
+
+.pt-moveToRightEasing 
+	-webkit-animation: moveToRight .7s ease-in-out both
+	animation: moveToRight .7s ease-in-out both
+
+.pt-moveToTopEasing 
+	-webkit-animation: moveToTop .7s ease-in-out both
+	animation: moveToTop .7s ease-in-out both
+
+.pt-moveToBottomEasing 
+	-webkit-animation: moveToBottom .7s ease-in-out both
+	animation: moveToBottom .7s ease-in-out both
+
+// Scale down, scale up
+
+.pt-scaleDown 
+	-webkit-animation: scaleDown .7s ease both
+	animation: scaleDown .7s ease both
+
+.pt-scaleUp 
+	-webkit-animation: scaleUp .7s ease both
+	animation: scaleUp .7s ease both
+
+@-webkit-keyframes scaleDown 
+	to
+		opacity: 0 
+		+transform(scale(.8))
+
+@keyframes scaleDown 
+	to
+		opacity: 0
+		+transform(scale(.8))
+
+@-webkit-keyframes scaleUp 
+	from
+		opacity: 0
+		+transform(scale(.8))
+
+@keyframes scaleUp 
+	from
+		opacity: 0
+		+transform(scale(.8))
 
 // partial page transition animations
 .ppt-moveFromRight
