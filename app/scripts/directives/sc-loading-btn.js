@@ -9,7 +9,7 @@ angular.module('coderfrontApp')
       // success (required): a variable
       // loading (required): a variable
       // btnClass: i.e. btn-primary - default: btn-sc btn-loading btn-primary
-      // btnType: 1) login; 2) solid - default: solid
+      // btnType: 1) survey; 2) solid - default: solid
       // Ex usage: <sc-loading-btn success="addUnit.success" loading="addUnit.loading" btn-type="solid" btn-class="btn-sc btn-loading btn-primary">BUTTON TEXT</sc-loading-btn>
 			scope: {
         loading: '=',

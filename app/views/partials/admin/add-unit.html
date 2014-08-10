@@ -15,6 +15,9 @@
 				</div>
 			</form>
 
+			<!-- page loading modal -->
+			<sc-page-loading page-loading="addUnit.pageLoading"></sc-page-loading>
+
 			<!-- modal for confirming overwrite if the Unit Id already exists -->
 			<sc-modal sc-modal-open="addUnit.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-text="This Unit Number already exists. Are you sure you want to overwrite this Unit?" sc-modal-yes="addUnit.overwriteUnit();" sc-modal-first-no="addUnit.insertUnit()"></sc-modal>
 		</section>

@@ -1,11 +1,11 @@
 $placeholder-color: rgba(0,0,0,0.2)
-$login-container-width: 720px
-$login-container-height: 200px
-$login-form-width: $login-container-width - 140px
-$login-form-text-color: #fffbd8
-$login-bg-color1: #453c45
+$signup-container-width: 720px
+$signup-container-height: 200px
+$signup-form-width: $signup-container-width - 160px
+$signup-form-text-color: #fffbd8
+$signup-bg-color1: #3d4b58
 
-.login-wrapper
+.signup-wrapper
 	position: relative
 	padding: 0
 	margin: 0
@@ -17,7 +17,7 @@ $login-bg-color1: #453c45
 		.logo-img
 			height: 22px
 
-.login-bg
+.signup-bg
 	width: 100%
 	height: 100vh
 	min-height: 100%
@@ -30,33 +30,38 @@ $login-bg-color1: #453c45
 		@extend .pt-moveToLeft
 		position: absolute // necessary to make animation work properly 
 
-.login-bg-color1
-	background-color: $login-bg-color1
+.signup-bg-color1
+	background-color: $signup-bg-color1
 	+transition(background-color 0.3s)
 
-.login-container
+.signup-container
 	position: fixed
-	height: $login-container-height
-	width: $login-container-width
+	height: $signup-container-height
+	width: $signup-container-width
 
-.login-form-container
-	label
+.signup-form-container
+	%signup-heading
 		font-size: 1.9em
-		font-weight: 300
 		color: white
+		font-weight: 300
+	h4
+		@extend %signup-heading
+		margin-bottom: 10px
+	label
+		@extend %signup-heading
 		margin-bottom: 25px
 
-.login-form
+.signup-form
 	display: inline-block
 	vertical-align: middle
 	background-color: transparent
-	width: $login-form-width
+	width: $signup-form-width
 	outline: none
 	border: 0
 	border-bottom: 2px solid rgba(0,0,0,0.25)
 	padding: 5px 8px
 	font-size: 1.5em
-	color: $login-form-text-color
+	color: $signup-form-text-color
 	&:focus
 		border-color: rgba(0,0,0,0.7)
 	&::-webkit-input-placeholder 
@@ -68,11 +73,11 @@ $login-bg-color1: #453c45
 	&:-ms-input-placeholder   
 		color: $placeholder-color
 
-.login-email
-	width: $login-form-width / 2.2
+.signup-name
+	width: $signup-form-width / 2.2
 	margin-right: 20px
-	+webkit-autofill($login-bg-color1, 2px solid #383137, 2px solid #1d1b1d, $login-form-text-color)
+	+webkit-autofill($signup-bg-color1, 2px solid #333c45, 2px solid #1d2124, $signup-form-text-color)
 
-.login-password
-	@extend .login-email
-	+webkit-autofill($login-bg-color1, 2px solid #383137, 2px solid #1d1b1d, $login-form-text-color)
+.signup-email
+	@extend .signup-name
+	+webkit-autofill($signup-bg-color1, 2px solid #333c45, 2px solid #1d2124, $signup-form-text-color)

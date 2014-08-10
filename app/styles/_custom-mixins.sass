@@ -33,3 +33,14 @@
 	width: $size
 	height: $size
 	border: 2px solid $border-color
+
+// Webkit autocomplete hack
+=webkit-autofill($bg-color, $border, $border-focus, $form-text-color)
+	&:-webkit-autofill
+		-webkit-box-shadow: 0 0 0 1000px $bg-color inset
+		border-bottom: $border
+		-webkit-text-fill-color: $form-text-color
+		&:focus
+			-webkit-box-shadow: 0 0 0 1000px $bg-color inset
+			border-bottom: $border-focus
+			-webkit-text-fill-color: $form-text-color

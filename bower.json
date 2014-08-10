@@ -2,7 +2,7 @@
   "name": "coderfront",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "1.2.15",
+    "angular": "~1.2.21",
     "json3": "~3.2.6",
     "es5-shim": "~2.1.0",
     "jquery": "~1.11.0",
@@ -11,7 +11,7 @@
     "angular-cookies": "1.2.15",
     "angular-sanitize": "1.2.15",
     "angular-route": "1.2.15",
-    "angularfire": "~0.7.1",
+    "angularfire": "~0.8.0",
     "angular-bootstrap": "~0.11.0",
     "angular-ui-router": "~0.2.10",
     "angular-animate": "~1.2.20",
@@ -22,6 +22,6 @@
     "angular-scenario": "1.2.15"
   },
   "resolutions": {
-    "angular": "~1.2.0"
+    "angular": "1.2.21"
   }
 }

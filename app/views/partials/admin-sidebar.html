@@ -8,14 +8,14 @@
 	<a class="btn btn-teal btn-block btn-new-unit" ui-sref="admin.add-unit({courseId: adminSidebar.courseId})">+ Add a New Unit</a>
 
 	<ul class="units">
-		<li class="unit-item" ng-repeat="unit in adminSidebar.units | orderByPriority">
+		<li class="unit-item" ng-repeat="unit in adminSidebar.unitsArray | orderBy: 'unitNum'">
 			<a class="unit-menu" ng-click="adminSidebar.activeUnit = unit.unitNum; adminSidebar.activeLesson = null;" ng-class="{'active-unit': adminSidebar.activeUnit === unit.unitNum }" ui-sref="admin.view-unit({unitId: unit.$id})">Unit {{ unit.unitNum }} : {{ unit.title }}</a>&nbsp;&nbsp;
 			<a class="fa fa-edit" ng-click="adminSidebar.activeUnit = unit.unitNum;" ui-sref="admin.edit-unit({unitId: unit.$id})"></a>&nbsp;
 			<a class="fa fa-trash-o" sc-modal sc-modal-yes="adminSidebar.removeUnit(unit.$id, unit)" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete this Unit?"></a>
 			<hr>
-			<ul class="lessons" ng-init="adminSidebar.getLessons(unit.$id)">
+			<ul class="lessons">
 				<li><a class="add-lesson" ui-sref="admin.add-lesson({unitId: unit.$id})">+ Add a New Lesson</a></li>
-				<li class="lesson-item" ng-repeat="lesson in adminSidebar.lessons[$index]">
+				<li class="lesson-item" ng-repeat="lesson in unit.lessons | toArray | orderBy: 'lessonNum'">
 					<div class="lesson-title-container">
 						<a ng-click="adminSidebar.activeUnit = unit.unitNum; adminSidebar.activeLesson = lesson.lessonNum;" ng-class="{'active-lesson': adminSidebar.activeLesson === lesson.lessonNum && adminSidebar.activeUnit === unit.unitNum }" ui-sref="admin.view-lesson({unitId: unit.$id, lessonId: lesson.$id})">Lesson {{ lesson.lessonNum }} : {{ lesson.title }}</a>&nbsp;&nbsp;
 						<a class="fa fa-edit" ng-click="adminSidebar.activeLesson = lesson.lessonNum;" ui-sref="admin.edit-lesson({unitId: unit.$id, lessonId: lesson.$id})"></a>&nbsp;

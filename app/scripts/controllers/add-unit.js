@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout) {
+  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout, FIREBASE_URL, $firebase) {
 
 		// Wrapper objects
 		$scope.addUnit = {};
@@ -12,6 +12,25 @@ angular.module('coderfrontApp')
 			$scope.formData.unit = {};
 		};
 
+		// Find the right course
+		$scope.addUnit.courseId = $stateParams.courseId;
+		$scope.addUnit.course = Course.find($stateParams.courseId);
+
+		// Show page loading while Firebase loads
+		// And initiate Firebase related variables once it loads
+		$scope.addUnit.pageLoading = true;
+
+    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.addUnit.courseId + '/units');
+    var unitsArray = $firebase(unitsRef).$asArray();
+
+    unitsArray.$loaded()
+			.then(function() {
+				$scope.addUnit.pageLoading = false;
+
+				// Stores all units in an array
+				$scope.addUnit.unitsArray = unitsArray;
+			});
+
 		// Button object wrappers & functions
 		$scope.btn = {};
 		var btnReset = function(delay) {
@@ -21,13 +40,6 @@ angular.module('coderfrontApp')
 			}, delay);
 		};
 
-		// Find the right course
-		$scope.addUnit.courseId = $stateParams.courseId;
-		$scope.addUnit.course = Course.find($stateParams.courseId);
-
-		// Get all units
-		$scope.addUnit.units = Unit.all($scope.addUnit.courseId);
-
 		// Modal related variable
 		$scope.addUnit.overwriteModalOpen = false;
 
@@ -35,18 +47,12 @@ angular.module('coderfrontApp')
 		$scope.addUnit.createUnit = function() {
 			$scope.btn.loading = true;
 
-			Unit.create($scope.addUnit.courseId, $scope.formData.unit)
+			Unit.create($scope.formData.unit, $scope.addUnit.unitsArray)
 				.then(function(ref) {
 					// Success callback
 					
 					// Get this unit's UID
 					$scope.addUnit.unitId = ref.name();
-
-					// Add to counter
-					Unit.incrementCounter($scope.addUnit.courseId);
-
-					// Set priority
-					Unit.updatePriority($scope.addUnit.courseId);
 
 					// Button control
 					$scope.btn.loading = false;
@@ -56,10 +62,10 @@ angular.module('coderfrontApp')
 					// Form reset
 					formReset();
 
-					// Relocate to edit-unit after 1s
+					// Relocate to view-unit after 1.5s
 					$timeout(function() {
 						$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
-					}, 1000);
+					}, 1500);
 
 				}, function() {
 					// Error callback
@@ -77,15 +83,12 @@ angular.module('coderfrontApp')
 
 		// Add a new unit and overwrite the old
 		$scope.addUnit.overwriteUnit = function() {
-			Unit.overwrite($scope.addUnit.courseId, $scope.formData.unit, $scope.addUnit.unitIdToRemove)
+			Unit.overwrite($scope.formData.unit, $scope.addUnit.unitsArray, $scope.addUnit.unitIdToRemove)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this unit's UID
 					$scope.addUnit.unitId = ref.name();
-
-					// Set priority
-					Unit.updatePriority($scope.addUnit.courseId);
 
 					// Form reset
 					formReset();
@@ -103,18 +106,12 @@ angular.module('coderfrontApp')
 
 		// Insert a new unit and push down units below
 		$scope.addUnit.insertUnit = function() {
-			Unit.insert($scope.addUnit.courseId, $scope.formData.unit)
+			Unit.insert($scope.formData.unit, $scope.addUnit.unitsArray)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this unit's UID
 					$scope.addUnit.unitId = ref.name();
-
-					// Add to counter
-					Unit.incrementCounter($scope.addUnit.courseId);
-
-					// Set & update priority
-					Unit.updatePriority($scope.addUnit.courseId);
 
 					// Form reset
 					formReset();
@@ -133,7 +130,7 @@ angular.module('coderfrontApp')
 		// Check existing units for duplicates
 		$scope.addUnit.checkDuplicateUnit = function() {
 			// if unit already exists
-			var unitExists = Unit.alreadyExists($scope.addUnit.courseId, $scope.formData.unit);
+			var unitExists = Unit.alreadyExists($scope.formData.unit, $scope.addUnit.unitsArray);
 
 			if (unitExists === false) {
 				$scope.addUnit.createUnit();

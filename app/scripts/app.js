@@ -23,6 +23,11 @@ angular
         templateUrl: 'views/partials/home.html',
         controller: 'HomeCtrl'
       })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'views/partials/signup.html',
+        controller: 'SignupCtrl'
+      })
       .state('register', {
         url: '/register',
         templateUrl: 'views/partials/register.html',
@@ -32,6 +37,16 @@ angular
         url: '/login',
         templateUrl: 'views/partials/login.html',
         controller: 'LoginCtrl'
+      })
+      .state('resetpassword', {
+        url: '/resetpassword',
+        templateUrl: 'views/partials/resetpassword.html',
+        controller: 'ResetpasswordCtrl'
+      })
+      .state('changepassword', {
+        url: '/changepassword',
+        templateUrl: 'views/partials/changepassword.html',
+        controller: 'ChangepasswordCtrl'
       })
 
       // ADMIN STATES AND NESTED VIEWS

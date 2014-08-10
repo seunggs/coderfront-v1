@@ -10,44 +10,21 @@ angular.module('coderfrontApp')
 		$scope.adminSidebar.courseId = $stateParams.courseId;
 		$scope.adminSidebar.course = Course.find($stateParams.courseId);
 
-		// Stores all units
-		$scope.adminSidebar.units = Unit.all($scope.adminSidebar.courseId);
+		// Initiate Firebase related variables once Firebase loads
+    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.adminSidebar.courseId + '/units');
+    var unitsArray = $firebase(unitsRef).$asArray();
 
-		// Get lessons
-		$scope.adminSidebar.lessons = [];
-		$scope.adminSidebar.getLessons = function(unitId) {
-
-			var lessonsRef = new Firebase(FIREBASE_URL + 'units/' + unitId + '/lessons');
-			var lessons = $firebase(lessonsRef);
-
-			// Must wait until lesson data is loaded before assiging $ids and lessons
-			lessons.$on('loaded', function() {
-				if (lessons !== undefined) {
-					// First insert ids into each object with the key '$id'
-					var tempIds = [];
-					tempIds = lessons.$getIndex();
-
-					for (var i=0; i<tempIds.length; i++) {
-						var lessonObj = lessons[tempIds[i]];
-						lessonObj.$id = tempIds[i];
-					}
-					
-					// Create an array and save all the lessons in the order of their priorities
-					$scope.adminSidebar.lessons.push(lessons);
-				}
+    unitsArray.$loaded()
+			.then(function() {
+				$scope.adminSidebar.unitsArray = unitsArray;
 			});
-	
-		};
 
 		// Remove unit
 		$scope.adminSidebar.removeUnit = function(unitId, unit) {
-			Unit.remove($scope.adminSidebar.courseId, unitId, unit)
+			Unit.remove(unitId, unit, $scope.adminSidebar.unitsArray)
 				.then(function() {
-					Unit.decrementCounter($scope.adminSidebar.courseId);
-
-					// Update priority
-					Unit.updatePriority($scope.adminSidebar.courseId);
-
+					// Success callback
+					console.log('Successfully removed unit');
 				}, function() {
 					// Error callback
 					console.log('Error removing unit');
@@ -56,16 +33,22 @@ angular.module('coderfrontApp')
 
 		// Remove lesson
 		$scope.adminSidebar.removeLesson = function(unitId, lessonId, lesson) {
-			Lesson.remove(unitId, lessonId, lesson)
+	    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.adminSidebar.courseId + '/units/' + unitId + '/lessons');
+	    var lessonsArray = $firebase(lessonsRef).$asArray();
+
+	    lessonsArray.$loaded()
 				.then(function() {
-					Lesson.decrementCounter(unitId);
-
-					// Update priority
-					Lesson.updatePriority(unitId);
-
-				}, function() {
-					// Error callback
-					console.log('Error removing unit');
+					// Stores all lessons in an array
+					console.log(lessonId, lesson);
+					console.log(lessonsArray);
+					Lesson.remove(lessonId, lesson, lessonsArray)
+						.then(function() {
+							// Success callback
+							console.log('Successfully removed lesson');
+						}, function() {
+							// Error callback
+							console.log('Error removing lesson');
+						});
 				});
 		};
   });
