@@ -23,6 +23,21 @@ angular
         templateUrl: 'views/partials/home.html',
         controller: 'HomeCtrl'
       })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'views/partials/about.html',
+        controller: 'AboutCtrl'
+      })
+      .state('contact', {
+        url: '/contact',
+        templateUrl: 'views/partials/contact.html',
+        controller: 'ContactCtrl'
+      })
+      .state('myaccount', {
+        url: '/myaccount/:userUid',
+        templateUrl: 'views/partials/myaccount.html',
+        controller: 'MyaccountCtrl'
+      })
       .state('signup', {
         url: '/signup',
         templateUrl: 'views/partials/signup.html',

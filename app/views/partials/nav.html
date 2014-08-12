@@ -1,11 +1,21 @@
 <div class="header" ng-controller="NavCtrl">
-	<div class="logo">
-		<img src="../images/logo-light.png" class="logo-img">
-	</div>
+	<section class="logo">
+		<a ui-sref="home" tabindex="-1"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
+	</section>
+
+  <ul class="nav-custom nav-darkbg pull-right">
+    <!-- Decide whether to show sign-in or user's name on nav bar -->
+    <li ng-if="nav.userSignedIn"><a class="my-account" ui-sref="myaccount({userUid: nav.user.uid})" ng-click="nav.setActive(' ')">My Account</a></li>
+    <li ng-if="nav.userSignedIn"><a class="nav-logout" class="nav-logout" ng-click="nav.logout()">Log Out</a></li>
+    <li ng-if="!nav.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-register" ui-sref="register">Register</a></li>
+    <li ng-if="!nav.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-signin" ui-sref="login">Sign In</a></li>
+
+  </ul>
+
 	<ul class="nav-custom nav-darkbg pull-right">
-		<li>Home</li>
-		<li>Home</li>
-		<li>Home</li>
+		<li><a ng-class="{'nav-active': nav.active === 'home'}" ui-sref="home" ng-click="nav.setActive('home')">Home</a></li>
+		<li><a ng-class="{'nav-active': nav.active === 'about'}" ui-sref="about" ng-click="nav.setActive('about')">About</a></li>
+		<li><a ng-class="{'nav-active': nav.active === 'contact'}" ui-sref="contact" ng-click="nav.setActive('contact')">Contact</a></li>
 	</ul>
 	<div class="nav-bottom"></div>
 </div>

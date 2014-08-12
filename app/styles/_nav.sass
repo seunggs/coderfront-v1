@@ -18,17 +18,37 @@
     line-height: 1.7em
     padding: 12px
     > a
+      color: $nav-dark
       position: relative
       display: inline-block
-      padding: $nav-link-padding
-      &:hover,
-      &:focus
+      +transition(color, 0.3s)
+      &:hover, &:focus
+        color: white
         text-decoration: none
-        background-color: $nav-link-hover-bg
+        background-color: transparent
   &.nav-darkbg
     color: $nav-light
+  .nav-active
+    color: white
+  .nav-register
+    color: $coderfront-color
+    border-color: $coderfront-color
+    margin-right: -15px
+    &:hover, &:focus
+      color: $coderfront-color-lighter
+      border-color: $coderfront-color-lighter
+  .nav-signin
+    margin-right: 10px
+  .nav-logout
+    margin-right: 10px
 
 .nav-bottom
   height: 46px
   width: 100%
   border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+
+.btn-nav
+  font-size: 0.9em
+  font-weight: 400
+  padding: 4px 9px
+  margin-top: -3px

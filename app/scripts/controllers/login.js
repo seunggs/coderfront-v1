@@ -18,7 +18,7 @@ angular.module('coderfrontApp')
 		$scope.login.signIn = function() {
 			$scope.btn.loading = true;
 
-			Auth.login($scope.existingUser)
+			Auth.login($scope.formData.existingUser)
 				.then(function() {
 					// success callback
 					$scope.btn.loading = false;
@@ -29,8 +29,8 @@ angular.module('coderfrontApp')
 
 					// Relocate to home after short delay
 					$timeout(function() {
-						$location.path('/home');
-					}, 1500);
+						$location.path('/');
+					}, 2000);
 
 				}, function() {
 					// error callback

@@ -8,16 +8,13 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/7421652/806304/css/fonts.css" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -41,6 +38,10 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
+    
+    <!-- highlight.js -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -112,6 +113,9 @@
         <script src="scripts/services/mailchimp.js"></script>
         <script src="scripts/directives/sc-page-loading.js"></script>
         <script src="scripts/filters/toarray.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/services/subscriber.js"></script>
+        <script src="scripts/controllers/myaccount.js"></script>
         <!-- endbuild -->
 
 </body>

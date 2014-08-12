@@ -7,8 +7,8 @@ angular.module('coderfrontApp')
     var loginObj = $firebaseSimpleLogin(rootRef);
 
     var Auth = {
-      user: {
-        data: loginObj.user
+      getUser: function() {
+        return loginObj.user;
       },
       register: function(user) {
         return loginObj.$createUser(user.email, user.password);
@@ -35,20 +35,25 @@ angular.module('coderfrontApp')
     };
 
     $rootScope.$on('$firebaseSimpleLogin:login', function() {
-      Auth.user.data = loginObj.user;
+      Auth.getUser = function() {
+        return loginObj.user;
+      };
+
       Auth.signedIn = function() {
         return loginObj.user !== null;
       };
     });
 
     $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-      Auth.user.data = loginObj.user;
+      Auth.getUser = function() {
+        return loginObj.user;
+      };
+
       Auth.signedIn = function() {
         return loginObj.user !== null;
       };
     });
 
     return Auth;
-
 
   });

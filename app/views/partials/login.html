@@ -1,17 +1,18 @@
 <div class="container-fluid login-wrapper">
 
 	<section class="logo">
-		<a ui-sref="home"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
+		<a ui-sref="home" tabindex="-1"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
 	</section>
 
 	<article class="login-bg login-bg-color1">
 		<section class="login-container absolute-center">
 			<form class="login-form-container" ng-submit="login.signIn()">
-				<label for="fullname">Please enter your email and password.</label>
+				<label for="email">Please enter your email and password.</label>
 				<input class="login-form login-email" type="email" name="email" placeholder="Email" ng-model="formData.existingUser.email" autofocus required>
 				<input class="login-form login-password" type="password" name="password" placeholder="Password" ng-model="formData.existingUser.password" required>
 				<sc-loading-btn btn-class="btn btn-survey btn-survey-md" btn-type="survey" success="btn.success" loading="btn.loading">Sign In&nbsp;&nbsp;<i class="fa fa-angle-right"></i></sc-loading-btn>
 			</form>
+			<a class="forgot-password" ui-sref="resetpassword"><i class="fa fa-lock"></i>&nbsp;&nbsp;Forgot your password?</a>
 			<div class="survey-error-msg">{{ msg.error }}</div>
 			<div class="survey-success-msg">{{ msg.success }}</div>
 		</section>

@@ -44,16 +44,17 @@ angular.module('coderfrontApp')
 
 		// Create user
 		$scope.register.createUser = function() {
-			if (checkConfirmPassword() === true) {
+			if (checkConfirmPassword()) {
 				$scope.btn.loading = true;
 
 				Auth.register($scope.formData.user)
 					.then(function(user) {
 						// success callback
-
 						// Add other user data to users branch
 						$scope.formData.userData.email = $scope.formData.user.email;
-						User.create($scope.formData.userData, user.uid)
+						$scope.formData.userData.admin = false;
+
+						User.create(user.uid, $scope.formData.userData)
 							.then(function() {
 								console.log('Other user data saved successfully');
 							}, function() {
@@ -61,7 +62,7 @@ angular.module('coderfrontApp')
 							});
 
 						// Log the user in
-						Auth.login(user)
+						Auth.login($scope.formData.user)
 							.then(function() {
 								console.log('User logged in successfully. User Uid: ' + user.uid + ' User Email: ' + user.email);
 							}, function() {
@@ -79,22 +80,32 @@ angular.module('coderfrontApp')
 						// Relocate to home after short delay
 						$timeout(function() {
 							$location.path('/home');
-						}, 1500);
+						}, 2000);
 						
-					}, function() {
+					}, function(error) {
 						// error callback
 						$scope.btn.success = false;
 						$scope.btn.loading = false;
 						btnReset(1000);
 
-						$scope.msg.error = 'Something went wrong - please try again.';
+						switch (error.code) {
+							case 'EMAIL_TAKEN':
+								console.log(error.message);
+								$scope.msg.error = 'The specified email address already exists.';
+								break;
+							default:
+								console.log(error.message);
+								$scope.msg.error = 'Something went wrong - please try again.';
+								break;
+						}
 
 						// Send back to first step after short delay
 						$timeout(function() {
 							$scope.register.showStep(1);
-						}, 1500);
+							$scope.msg.error = '';
+						}, 2000);
 					});
-			} else if (checkConfirmPassword() === false) {
+			} else if (!checkConfirmPassword()) {
 				$scope.msg.error = 'Password and confirm password does not match. Please check again.';
 
 				// Erase the error message after short delay

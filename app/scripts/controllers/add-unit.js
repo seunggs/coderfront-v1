@@ -36,7 +36,6 @@ angular.module('coderfrontApp')
 		var btnReset = function(delay) {
 			$timeout(function() {
 				$scope.btn = {};
-				console.log('button variable reset ok');
 			}, delay);
 		};
 

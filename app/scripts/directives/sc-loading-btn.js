@@ -14,7 +14,7 @@ angular.module('coderfrontApp')
 			scope: {
         loading: '=',
         success: '=',
-        btnType: '=?',
+        btnType: '@?',
         btnClass: '@'
       },
       restrict: 'E',

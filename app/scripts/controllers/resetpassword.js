@@ -26,7 +26,7 @@ angular.module('coderfrontApp')
 					$scope.btn.success = true;
 					btnReset(1000);
 
-					$scope.msg.error = 'Great - now, go check your inbox!';
+					$scope.msg.success = 'Great - now, go check your inbox!';
 
 					// Relocate to home after short delay
 					$timeout(function() {
