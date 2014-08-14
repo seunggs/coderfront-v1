@@ -36,7 +36,6 @@ angular.module('coderfrontApp')
 			$scope.register.focus.step2 = true;
 		};
 
-
 		// Check if password = confirmPassword
 		var checkConfirmPassword = function() {
 			return $scope.formData.user.password === $scope.formData.confirmPassword ? true : false;

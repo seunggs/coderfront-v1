@@ -11,11 +11,10 @@ angular.module('coderfrontApp')
       create: function(userUid, userData) {
         return users.$set(userUid, userData);
       },
-      find: function(userUid) {
-        return users[userUid];
-      },
-      update: function(userUid, userData) {
-        return users[userUid].$update(userData);
+      update: function(usersObj, userUid, userData) {
+        console.log(usersObj[userUid]);
+        usersObj[userUid] = userData;
+        return usersObj.$save();
       },
       delete: function(userUid) {
         return users.$remove(userUid);

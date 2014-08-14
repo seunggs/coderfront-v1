@@ -1,0 +1,57 @@
+.myaccount-wrapper
+	padding: 0
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	+background(radial-gradient(circle farthest-side at 50% 130%,#f8cdda,#1d2b64 80%,#0e153a))
+
+.myaccount
+	font-weight: 400
+	line-height: 1.9em
+	text-align: center
+	height: 100%
+	margin-top: -46px
+	padding-top: 100px
+	h2	
+		font-weight: 300
+		color: white
+		margin: 15px 0
+	p
+		font-size: 1.2em
+		color: #ddd
+		margin: 5px auto 0 auto
+
+.myaccount-form
+	margin-top: 10px
+
+.myaccount-input
+	width: 50%
+	color: #fffbd0
+	font-size: 1.2em
+	margin-top: -10px
+
+.myaccount-avatar-container
+	width: 120px
+	height: 120px
+	margin: 25px auto
+	+border-radius(200px)
+	background-color: white
+
+.myaccount-avatar-default
+	padding-top: 35px
+	color: #ddd
+	margin: auto
+
+.myaccount-edit
+	font-size: 0.9em
+	color: #aaa
+	text-decoration: underline
+	+transition(color, 0.3s)
+	&:hover, &:focus, &:active
+		color: white
+		text-decoration: underline
+
+.myaccount-btn
+	margin-bottom: 10px

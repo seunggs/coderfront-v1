@@ -7,18 +7,18 @@
 			<div class="col-sm-6 col-md-4 col-lg-3">
 
 				<section class="add-course-box">
-					<img src="../images/course-thumb-ph.jpg">
-					<form ng-submit="addCourse.createCourse()">
+					<form class="add-course-form" ng-submit="addCourse.createCourse()">
 						<div class="form-group">
 							<label>Course Title</label>
 							<input class="form-control" type="text" ng-model="newCourse.title" required>
+							<div s3-upload bucket="coderfront" ng-model="newCourse.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
 							<button class="btn btn-primary btn-block" type="submit"><sc-btn-loading loading-toggle="btn.loading">Create Course</sc-btn-loading></button>
 						</div>
 					</form>
 				</section>
 
 			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(courseId, course) in courses">
+			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(courseId, course) in addCourse.courses">
 				<div ng-include="'views/partials/coursebox.html'"></div>
 			</div>
 		</div>

@@ -9,9 +9,15 @@ angular
     'firebase',
     'ui.bootstrap',
     'ui.router',
-    'ngAnimate'
+    'ngAnimate',
+    'ngS3upload'
   ])
   .constant('FIREBASE_URL', 'https://coderfront.firebaseio.com/')
+  .config(function($httpProvider) {
+    // enabling CORS
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  })
   .config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');

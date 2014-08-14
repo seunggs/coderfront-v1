@@ -39,7 +39,7 @@ angular.module('coderfrontApp')
 			}, delay);
 		};
 
-		// Modal related variable
+		// Modal control
 		$scope.addUnit.overwriteModalOpen = false;
 
 		// Add a new unit

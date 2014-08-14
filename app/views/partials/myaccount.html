@@ -1,1 +1,33 @@
-<p>This is the myaccount view.</p>
+<div class="container-fluid myaccount-wrapper">
+
+	<nav ng-include="'views/partials/nav.html'"></nav>
+
+	<article class="myaccount">
+		<div class="container-md">
+			<div class="row">
+				<section class="col-md-6 col-v-center">
+					<h2>My Account</h2>
+					<div ng-if="!myaccount.edit">
+						<p>{{ myaccount.userData.fullname }}&nbsp;&nbsp;<a class="myaccount-edit" ng-click="myaccount.edit = true">edit</a></p>
+					</div>
+					
+					<!-- only show on edit -->
+					<form class="myaccount-form" ng-submit="myaccount.updateFullname()" ng-if="myaccount.edit">
+						<input class="form-control-outline-light myaccount-input" type="text" name="fullname" ng-model="formData.user.fullname" placeholder="Your Full Name" autofocus required>&nbsp;&nbsp;
+						<button class="btn btn-yellow myaccount-btn" type="submit">Update</button>
+						<button class="btn btn-red myaccount-btn" ng-click="myaccount.edit = false">Cancel</button>
+					</form>
+					
+					<p>{{ myaccount.userData.email }}</p>
+					<div class="myaccount-avatar-container">
+						<div class="myaccount-avatar-default"><i class="fa fa-smile-o fa-4x"></i></div>
+						<img ng-src="">
+					</div>
+					<button class="btn btn-primary myaccount-btn">Update Your Picture</button><br>
+					<button class="btn btn-yellow myaccount-btn" ui-sref="changepassword">Change Password</button>
+				</section>
+			</div>
+		</div>
+	</article>
+
+</div>

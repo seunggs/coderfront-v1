@@ -17,15 +17,15 @@ angular.module('coderfrontApp')
 			Course.create($scope.newCourse)
 				.then(function() {
 					// Success callback
-					Course.incrementCounter();
+					console.log('Successfully created course');
 					$scope.btn.loading = false;
 				}, function() {
 					// Error callback
-					console.log('Error');
+					console.log('Error while trying to create course');
 					$scope.btn.loading = false;
 				});
 		};
 
-		$scope.courses = Course.all;
+		$scope.addCourse.courses = Course.all;
 
   });

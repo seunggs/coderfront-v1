@@ -15,7 +15,7 @@ angular.module('coderfrontApp')
         loading: '=',
         success: '=',
         btnType: '@?',
-        btnClass: '@'
+        btnClass: '@?'
       },
       restrict: 'E',
       transclude: true,
