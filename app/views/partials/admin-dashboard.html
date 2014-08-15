@@ -9,9 +9,9 @@
 				<section class="add-course-box">
 					<form class="add-course-form" ng-submit="addCourse.createCourse()">
 						<div class="form-group">
+							<div btn-class="btn btn-add-course btn-square btn-lightest-grey btn-block btn-progress" btn-text="Upload Thumb" s3-upload bucket="coderfront" ng-model="newCourse.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
 							<label>Course Title</label>
 							<input class="form-control" type="text" ng-model="newCourse.title" required>
-							<div s3-upload bucket="coderfront" ng-model="newCourse.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
 							<button class="btn btn-primary btn-block" type="submit"><sc-btn-loading loading-toggle="btn.loading">Create Course</sc-btn-loading></button>
 						</div>
 					</form>

@@ -1,10 +1,9 @@
 <div class="upload-wrap">
-	<button class="btn-sc btn-progress btn-green btn-block" type="button">
-		<span class="btn-progress-text" ng-class="{'btn-progress-text-hide': success}" ng-if="!filename">Upload Thumb</span>
-		<span ng-if="filename">Replace file</span>
-		<div class="btn-progress-check" ng-class="{'btn-progress-check-show': success}"><i class="fa fa-check absolute-center"></i></div>
-		<div class="btn-progress-bar" ng-class="{'btn-progress-bar-hide': success}" style="width: {{ progress }}%;" ng-if="uploading"></div>
+	<button class="{{ btnClass }}" type="button">
+		<span class="btn-progress-text" ng-class="{'btn-progress-text-hide': success}"><div>{{ btnText }}</div></span>
+		<div class="btn-progress-check" ng-class="{'btn-progress-check-show': success}"><i class="absolute-center-text fa fa-check"></i></div>
+		<div class="btn-progress-fail" ng-class="{'btn-progress-fail-show': error}"><i class="absolute-center-text fa fa-times"></i></div>
+		<div class="btn-progress-bar" ng-if="uploading" style="width: {{ progress }}%;"></div>
 	</button>
-	<a ng-href="{{ filename }}" target="_blank" ng-if="filename">Stored file</a>
 	<input type="file" style="display: none"/>
 </div>

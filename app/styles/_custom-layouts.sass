@@ -5,13 +5,20 @@
 		width: $container-md
 
 // custom layout
-.absolute-center
+
+// Absolute centering options
+.absolute-center // use it for elements with fixed height
+	margin: auto
 	position: absolute
 	top: 0
 	left: 0
 	bottom: 0
 	right: 0
-	margin: auto	
+
+.absolute-center-text // use it for text elements with no fixed height
+	position: relative
+	top: 50%
+	+transform(translateY(-50%))
 
 // bootstrap col styling - add it to col classes
 .col-v-center

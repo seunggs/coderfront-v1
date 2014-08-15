@@ -21,7 +21,7 @@ angular.module('coderfrontApp')
 
 			scope: {
 				'scModalYes': '&',
-				'scModalFirstNo': '&',
+				'scModalFirstNo': '&?',
 				'scModalOpen': '=?', // ? makes it optional
 				'scModalText': '@',
 				'scModalType': '@'

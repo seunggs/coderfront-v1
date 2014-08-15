@@ -12,6 +12,6 @@
 	</a>
 
 	<!-- modal for confirming delete course -->
-	<sc-modal sc-modal-open="courseBox.deleteModalOpen" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete this Course?" sc-modal-yes="courseBox.deteleCourse(courseId);"></sc-modal>
+	<sc-modal sc-modal-open="courseBox.deleteModalOpen" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete the '{{ course.title }}' Course?" sc-modal-yes="courseBox.deleteCourse(courseId);"></sc-modal>
 
 </div>

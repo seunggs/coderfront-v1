@@ -41,4 +41,18 @@ angular.module('coderfrontApp')
 				});
 		};
 
+		// Update avatar
+		$scope.myaccount.addAvatar = function() {
+			// Update user data with form input
+			$scope.myaccount.userData.avatarUrl = $scope.formData.user.avatarUrl;
+
+			User.update($scope.myaccount.usersObj, $stateParams.userUid, $scope.myaccount.userData)
+				.then(function() {
+					// success callback
+					console.log('successfully updated avatar URL');
+				}, function() {
+					// error callback
+					console.log('Something went wrong while updating fullname');
+				});
+		};
   });
