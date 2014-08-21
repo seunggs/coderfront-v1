@@ -1,3 +1,6 @@
+.nav-wrapper
+  z-index: 100
+
 .logo
   float: left
   .logo-img
@@ -11,6 +14,7 @@
   padding-left: 0 // Override default ul/ol
   list-style: none
   font-size: 0.9em
+  font-weight: 300
   +clearfix()
   > li
     position: relative
@@ -18,18 +22,18 @@
     line-height: 1.7em
     padding: 12px
     > a
-      color: $nav-dark
+      color: rgba(255,255,255,0.6)
       position: relative
       display: inline-block
       +transition(color, 0.3s)
       &:hover, &:focus, &:active
-        color: white
+        color: rgba(255,255,255,0.85)
         text-decoration: none
         background-color: transparent
   &.nav-darkbg
     color: $nav-light
   .nav-active
-    color: white
+    color: rgba(255,255,255,1)
   .nav-register
     color: $coderfront-color
     border-color: $coderfront-color
@@ -39,6 +43,8 @@
       border-color: $coderfront-color-lighter
   .nav-signin
     margin-right: 10px
+  .nav-dashboard
+    margin-right: -15px
   .nav-logout
     margin-right: 10px
 

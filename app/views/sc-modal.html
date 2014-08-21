@@ -1,11 +1,11 @@
 <div class="md-modal md-effect-3">
 	<div class="md-content">
-		<h4>Are you sure?</h4>
+		<h4>{{ scModalHeading }}</h4>
 		<div>
 			<p>{{ scModalText }}</p>
-			<button class="btn btn-red" ng-click="closeModal(); yesAction()">Yes.</button>
-			<button ng-if="scModalType === 'overwrite'" class="btn btn-red" ng-click="closeModal(); firstNoAction()">No, insert it.</button>
-			<button class="btn btn-red" ng-click="closeModal()">No, abort!</button>
+			<button class="btn btn-red btn-yes" ng-click="closeModal(); yesAction()">Yes.</button>
+			<button ng-if="scModalType === 'overwrite'" class="btn btn-red btn-first-no" ng-click="closeModal(); firstNoAction()">No, insert it.</button>
+			<button class="btn btn-red btn-no" ng-click="closeModal(); noAction()">No, abort!</button>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,43 @@
+<div class="container pricing-wrapper">
+	<div class="row">
+
+		<section class="pricing-heading col-md-12">
+			<h2>Launch Your First Web App<br>in Less than 3 Months from Today</h2>
+			<h4>14-day full money back guarantee</h4>
+		</section>
+
+		<section class="pricing-price col-md-4 col-md-offset-4">
+			<div class="pricing-price-text">$350</div><div class="pricing-price-caption">/mo</div><br>
+			<div class="pricing-price-caption">for 3 months</div>
+		</section>
+
+		<section class="pricing-list col-md-6 col-md-offset-3">
+			<ul class="pricing-ul">
+				<li>HTML5/CSS3 with Bootstrap framework</li>
+				<li>Javascript for front- and back-end</li>
+				<li>AngularJs with a thick frontend architecture</li>
+				<li>NodeJs + Express for RESTful API on the backend (i.e., Stripe payments)</li>
+				<li>Firebase for real-time database and user authentication</li>
+				<li>Yeoman/Grunt/Bower for app scaffolding</li>
+				<li>Firebase and Heroku for deployment</li>
+			</ul>
+		</section>
+
+		<section class="pricing-btn-block col-md-6 col-md-offset-3">
+			<!-- 2 types of btns here: 1) buy btn; 2) disabled btn -->
+			<form ng-submit="pricing.openCheckout()">
+				<sc-loading-btn success="btn.success" loading="btn.loading" btn-type="solid" btn-class="btn-sc btn-primary btn-loading btn-lg btn-pricing" ng-if="pricing.enableBuyBtn">Get Immediate Access</sc-loading-btn>
+			</form>
+			<button disabled class="btn btn-primary btn-lg btn-pricing" ng-if="!pricing.enableBuyBtn"><div class="icon-loading pricing-icon-loading"></div>Please wait...</button>
+			<p class="pricing-caption">14-day money back guarantee</p>
+		</section>
+
+		<section class="pricing-image col-md-10 col-md-offset-1">
+			<img ng-src="../images/complete-pic.png">
+		</section>
+
+		<!-- modal for finding out if we send them to login or register before enabling purchase -->
+		<sc-modal sc-modal-open="pricing.modalOpen" sc-modal-type="alert" sc-modal-heading="You must first sign in." sc-modal-text="Are you a new user?" sc-modal-yes="pricing.sendTo('register');" sc-modal-no="pricing.sendTo('login')"></sc-modal>
+
+	</div>
+</div>

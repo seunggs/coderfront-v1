@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('MyaccountCtrl', function ($scope, User, $stateParams, $timeout, FIREBASE_URL, $firebase) {
+  .controller('MyaccountCtrl', function ($scope, User, $stateParams) {
 		
 		// Wrapper object
 		$scope.myaccount = {};
@@ -14,24 +14,18 @@ angular.module('coderfrontApp')
 		$scope.myaccount.edit = false;
 
 		// Get user
-		var usersRef = new Firebase(FIREBASE_URL + 'users');
-		var usersObj = $firebase(usersRef).$asObject();
+		// Expose usersObj to scope
+		$scope.myaccount.usersObj = User.getAll();
 
-		usersObj.$loaded()
-			.then(function() {
-				// Expose usersObj to scope
-				$scope.myaccount.usersObj = usersObj;
-
-				// Get this specific user
-				$scope.myaccount.userData = usersObj[$stateParams.userUid];
-			});
+		// Get this specific user
+		$scope.myaccount.userData = User.find($stateParams.userUid);
 
 		// Update full name
 		$scope.myaccount.updateFullname = function() {
 			// Update user data with form input
 			$scope.myaccount.userData.fullname = $scope.formData.user.fullname;
 
-			User.update($scope.myaccount.usersObj, $stateParams.userUid, $scope.myaccount.userData)
+			User.update($stateParams.userUid, $scope.myaccount.userData)
 				.then(function() {
 					// success callback
 					$scope.myaccount.edit = false;
@@ -46,7 +40,7 @@ angular.module('coderfrontApp')
 			// Update user data with form input
 			$scope.myaccount.userData.avatarUrl = $scope.formData.user.avatarUrl;
 
-			User.update($scope.myaccount.usersObj, $stateParams.userUid, $scope.myaccount.userData)
+			User.update($stateParams.userUid, $scope.myaccount.userData)
 				.then(function() {
 					// success callback
 					console.log('successfully updated avatar URL');

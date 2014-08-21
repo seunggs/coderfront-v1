@@ -1,6 +1,6 @@
 <div class="upload-wrap">
 	<button class="{{ btnClass }}" type="button">
-		<span class="btn-progress-text" ng-class="{'btn-progress-text-hide': success}"><div>{{ btnText }}</div></span>
+		<span class="btn-progress-text" ng-class="{'btn-progress-text-hide': success}"><div ng-bind-html="btnText"></div></span>
 		<div class="btn-progress-check" ng-class="{'btn-progress-check-show': success}"><i class="absolute-center-text fa fa-check"></i></div>
 		<div class="btn-progress-fail" ng-class="{'btn-progress-fail-show': error}"><i class="absolute-center-text fa fa-times"></i></div>
 		<div class="btn-progress-bar" ng-if="uploading" style="width: {{ progress }}%;"></div>

@@ -13,7 +13,6 @@ angular.module('coderfrontApp')
 		var btnReset = function(delay) {
 			$timeout(function() {
 				$scope.btn = {};
-				console.log('button variable reset ok');
 			}, delay);
 		};
 
@@ -70,7 +69,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-lesson after 1.5s
 					$timeout(function() {
-						$location.path('/admin/' + $scope.editLesson.courseId + '/view-lesson/' + $scope.editLesson.unitId + '/' + $scope.editLesson.lessonId);
+						$location.path('/backend/' + $scope.editLesson.courseId + '/view-lesson/' + $scope.editLesson.unitId + '/' + $scope.editLesson.lessonId);
 					}, 1500);
 
 				}, function() {

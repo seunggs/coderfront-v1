@@ -1,7 +1,20 @@
+.admin-logo
+	display: block
+	width: 100%
+	height: 60px
+	background-color: rgba(0,0,0,0.3)
+	.admin-logo-img
+		margin-top: 19px
+		margin-left: 20px
+		width: auto
+		height: 22px
+
 .admin-sidebar
 	font-size: 0.85em
-	padding: 20px 25px
+	padding: 5px 25px 20px 25px
 	margin-right: 0
+	div
+		display: inline-block
 	a
 		color: #afafaf
 		&:hover, &:focus, &:active
@@ -14,20 +27,6 @@
 		padding-left: 0
 	li
 		list-style-type: none
-	.admin-logo
-		display: block
-		position: absolute
-		top: 0
-		left: 0
-		width: 100%
-		height: 60px
-		background-color: rgba(0,0,0,0.3)
-		.admin-logo-img
-			position: absolute
-			top: 19px
-			left: 20px
-			width: auto
-			height: 22px
 	.fa-trash-o
 		color: $red
 		&:hover, &:focus, &:active
@@ -37,29 +36,50 @@
 		float: right
 		margin-top: 3px
 		margin-right: 1px
-		color: $yellow
-		&:hover, &:focus, &:active
-			color: $dark-yellow
+		color: #00c4e5
 	.fa-circle-o
 		@extend .fa-circle
 	.fa-minus
 		@extend .fa-circle
 	.btn-new-unit
 		color: white
-		margin: 20px 0 20px 0
+		margin-top: 20px
 		&:hover, &:focus, &:active
 			color: white
 	.active-unit
 		color: white
-		&:hover, &:focus, &:active
-			color: white
 	.active-lesson
-		@extend .active-unit
+		color: #00c4e5
+		font-weight: 500
 	.dashboard
 		padding: 0
-		margin: 65px 0 0 0
+		margin: 20px 0 0 0
+	.courses-wrapper
+		padding: 0
+		margin: 20px 0 0 0
+		ul
+			margin: 10px 0
+		li
+			padding-left: 10px
+			a
+				color: #e9cc7c
+				&:hover, &:focus, &:active
+					color: #f0b412
+	.courses
+		&.ng-enter
+			opacity: 0
+			+transition(all 0.2s)
+			&.ng-enter-active
+				opacity: 1
+		&.ng-leave
+			opacity: 1
+			+transition(all 0.2s)
+			&.ng-leave-active
+				opacity: 0
+	.course-item
+		margin-bottom: 5px
 	.units
-		margin-bottom: 30px
+		margin: 20px 0 30px 0
 		hr
 			display: block
 			clear: both
@@ -75,8 +95,8 @@
 		li
 			padding: 3px 0
 			padding-left: 10px
-			&:first-child
-				padding-bottom: 7px
+		.add-lesson-li
+			padding-bottom: 7px
 	.add-lesson
 		font-size: 0.9em
 		border: 1px solid $teal
@@ -86,9 +106,14 @@
 			color: $dark-teal
 			border: 1px solid $dark-teal
 	.lesson-item
-		color: #eee
-		&:hover, &:focus, &:active
-			color: white
+		a
+			color: #8ec5ce
+			&:hover, &:focus, &:active
+				color: #00c4e5
+		.fa-trash-o
+			color: $red
+			&:hover, &:focus, &:active
+				color: $dark-red		
 	.lesson-title-container
 		display: inline-block
 		width: 90%

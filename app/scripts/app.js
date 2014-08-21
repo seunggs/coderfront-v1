@@ -39,6 +39,16 @@ angular
         templateUrl: 'views/partials/contact.html',
         controller: 'ContactCtrl'
       })
+      .state('pricing', {
+        url: '/pricing',
+        templateUrl: 'views/partials/pricing.html',
+        controller: 'PricingCtrl'
+      })
+      .state('thankyou', {
+        url: '/thankyou/:courseId',
+        templateUrl: 'views/partials/thankyou.html',
+        controller: 'ThankyouCtrl'
+      })
       .state('myaccount', {
         url: '/myaccount/:userUid',
         templateUrl: 'views/partials/myaccount.html',
@@ -70,58 +80,46 @@ angular
         controller: 'ChangepasswordCtrl'
       })
 
-      // ADMIN STATES AND NESTED VIEWS
-      .state('admin', {
-        url: '/admin/:courseId',
-        templateUrl: 'views/partials/admin.html',
-        controller: 'AdminCtrl'
-      })
-      .state('admin-dashboard', {
-        url: '/admin-dashboard',
-        templateUrl: 'views/partials/admin-dashboard.html',
-        controller: 'AdminDashboardCtrl'
-      })
-      .state('admin.add-unit', {
-        url: '/add-unit',
-        templateUrl: 'views/partials/admin/add-unit.html',
-        controller: 'AddUnitCtrl'
-      })
-      .state('admin.edit-unit', {
-        url: '/edit-unit/:unitId',
-        templateUrl: 'views/partials/admin/edit-unit.html',
-        controller: 'EditUnitCtrl'
-      })
-      .state('admin.view-unit', {
-        url: '/view-unit/:unitId',
-        templateUrl: 'views/partials/backend/view-unit.html',
-        controller: 'ViewUnitCtrl'
-      })
-      .state('admin.add-lesson', {
-        url: '/add-lesson/:unitId',
-        templateUrl: 'views/partials/admin/add-lesson.html',
-        controller: 'AddLessonCtrl'
-      })
-      .state('admin.edit-lesson', {
-        url: '/edit-lesson/:unitId/:lessonId',
-        templateUrl: 'views/partials/admin/edit-lesson.html',
-        controller: 'EditLessonCtrl'
-      })
-      .state('admin.view-lesson', {
-        url: '/view-lesson/:unitId/:lessonId',
-        templateUrl: 'views/partials/backend/view-lesson.html',
-        controller: 'ViewLessonCtrl'
-      })
-
       // BACKEND STATES AND NESTED VIEWS
       .state('backend', {
         url: '/backend/:courseId',
         templateUrl: 'views/partials/backend.html',
         controller: 'BackendCtrl'
       })
+      .state('admin-dashboard', {
+        url: '/admin-dashboard',
+        templateUrl: 'views/partials/admin-dashboard.html',
+        controller: 'AdminDashboardCtrl'
+      })
+      .state('backend.welcome', {
+        url: '/welcome',
+        templateUrl: 'views/partials/backend/welcome.html',
+        controller: 'WelcomeCtrl'
+      })
+      .state('backend.add-unit', {
+        url: '/add-unit',
+        templateUrl: 'views/partials/backend/add-unit.html',
+        controller: 'AddUnitCtrl'
+      })
+      .state('backend.edit-unit', {
+        url: '/edit-unit/:unitId',
+        templateUrl: 'views/partials/backend/edit-unit.html',
+        controller: 'EditUnitCtrl'
+      })
       .state('backend.view-unit', {
         url: '/view-unit/:unitId',
         templateUrl: 'views/partials/backend/view-unit.html',
         controller: 'ViewUnitCtrl'
+      })
+      .state('backend.add-lesson', {
+        url: '/add-lesson/:unitId',
+        templateUrl: 'views/partials/backend/add-lesson.html',
+        controller: 'AddLessonCtrl'
+      })
+      .state('backend.edit-lesson', {
+        url: '/edit-lesson/:unitId/:lessonId',
+        templateUrl: 'views/partials/backend/edit-lesson.html',
+        controller: 'EditLessonCtrl'
       })
       .state('backend.view-lesson', {
         url: '/view-lesson/:unitId/:lessonId',

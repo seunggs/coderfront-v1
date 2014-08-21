@@ -1,8 +1,10 @@
 <div class="course" ng-controller="CourseboxCtrl">
-	<section class="course-delete">
-		<button class="btn btn-red btn-xxs" ng-click="courseBox.deleteModalOpen = true"><i class="fa fa-times"></i>&nbsp;Delete</button>
+	<!-- admin only -->
+	<section class="course-delete" ng-if="courseBox.userDataObj.admin">
+		<button disabled class="btn btn-red btn-xxs" ng-click="courseBox.deleteModalOpen = true"><i class="fa fa-times"></i>&nbsp;Delete</button>
 	</section>
-	<a class="course-wrapper" ui-sref="admin.add-unit({courseId: courseId })">
+	<!-- end: admin only -->
+	<a class="course-wrapper" ui-sref="backend.add-unit({courseId: courseId})">
 		<section class="course-pic-container">
 			<img ng-src="{{ course.thumbUrl }}">
 		</section>

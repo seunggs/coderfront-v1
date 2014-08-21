@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AdminDashboardCtrl', function ($scope, Course) {
+  .controller('AdminDashboardCtrl', function ($scope, Course, Auth, User, $location) {
 
 		// Controls "Loading..." button
 		$scope.btn = {
@@ -9,10 +9,11 @@ angular.module('coderfrontApp')
 		};
 
 		// Object wrapper for add-course
-		$scope.addCourse = {};
+		$scope.wpr = {};
+		$scope.newCourse = {};
 
 		// Create course
-		$scope.addCourse.createCourse = function() {
+		$scope.wpr.createCourse = function() {
 			$scope.btn.loading = true;
 			Course.create($scope.newCourse)
 				.then(function() {
@@ -26,6 +27,14 @@ angular.module('coderfrontApp')
 				});
 		};
 
-		$scope.addCourse.courses = Course.all;
+		$scope.wpr.courses = Course.getAll();
 
+		// See if this user is an admin
+		Auth.getUser()
+			.then(function(authUser) {
+				$scope.wpr.userDataObj = User.find(authUser.uid);
+				if ($scope.wpr.userDataObj.admin === false) {
+					$location.path('/');
+				}
+			});
   });

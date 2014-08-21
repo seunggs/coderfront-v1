@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout, FIREBASE_URL, $firebase) {
+  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout) {
 
 		// Wrapper objects
-		$scope.addUnit = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.formData.unit = {};
 		var formReset = function() {
@@ -13,22 +13,19 @@ angular.module('coderfrontApp')
 		};
 
 		// Find the right course
-		$scope.addUnit.courseId = $stateParams.courseId;
-		$scope.addUnit.course = Course.find($stateParams.courseId);
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.course = Course.find($stateParams.courseId);
 
 		// Show page loading while Firebase loads
 		// And initiate Firebase related variables once it loads
-		$scope.addUnit.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.addUnit.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
-
-    unitsArray.$loaded()
-			.then(function() {
-				$scope.addUnit.pageLoading = false;
+		Unit.arrayLoaded($scope.wpr.courseId)
+			.then(function(unitsArray) {
+				$scope.wpr.pageLoading = false;
 
 				// Stores all units in an array
-				$scope.addUnit.unitsArray = unitsArray;
+				$scope.wpr.unitsArray = unitsArray;
 			});
 
 		// Button object wrappers & functions
@@ -40,18 +37,18 @@ angular.module('coderfrontApp')
 		};
 
 		// Modal control
-		$scope.addUnit.overwriteModalOpen = false;
+		$scope.wpr.overwriteModalOpen = false;
 
 		// Add a new unit
-		$scope.addUnit.createUnit = function() {
+		$scope.wpr.createUnit = function() {
 			$scope.btn.loading = true;
 
-			Unit.create($scope.formData.unit, $scope.addUnit.unitsArray)
+			Unit.create($scope.wpr.courseId, $scope.formData.unit)
 				.then(function(ref) {
 					// Success callback
 					
 					// Get this unit's UID
-					$scope.addUnit.unitId = ref.name();
+					$scope.wpr.unitId = ref.name();
 
 					// Button control
 					$scope.btn.loading = false;
@@ -63,7 +60,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-unit after 1.5s
 					$timeout(function() {
-						$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
+						$location.path('/backend/' + $scope.wpr.courseId + '/view-unit/' + $scope.wpr.unitId);
 					}, 1500);
 
 				}, function() {
@@ -81,19 +78,19 @@ angular.module('coderfrontApp')
 		};
 
 		// Add a new unit and overwrite the old
-		$scope.addUnit.overwriteUnit = function() {
-			Unit.overwrite($scope.formData.unit, $scope.addUnit.unitsArray, $scope.addUnit.unitIdToRemove)
+		$scope.wpr.overwriteUnit = function() {
+			Unit.overwrite($scope.wpr.courseId, $scope.formData.unit, $scope.wpr.unitIdToRemove)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this unit's UID
-					$scope.addUnit.unitId = ref.name();
+					$scope.wpr.unitId = ref.name();
 
 					// Form reset
 					formReset();
 
 					// Relocate to unit-edit
-					$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
+					$location.path('/backend/' + $scope.wpr.courseId + '/view-unit/' + $scope.wpr.unitId);
 				}, function() {
 					// Error callback
 					// Form reset
@@ -104,19 +101,19 @@ angular.module('coderfrontApp')
 		};
 
 		// Insert a new unit and push down units below
-		$scope.addUnit.insertUnit = function() {
-			Unit.insert($scope.formData.unit, $scope.addUnit.unitsArray)
+		$scope.wpr.insertUnit = function() {
+			Unit.insert($scope.wpr.courseId, $scope.formData.unit)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this unit's UID
-					$scope.addUnit.unitId = ref.name();
+					$scope.wpr.unitId = ref.name();
 
 					// Form reset
 					formReset();
 
 					// Relocate to unit-edit
-					$location.path('/admin/' + $scope.addUnit.courseId + '/view-unit/' + $scope.addUnit.unitId);
+					$location.path('/backend/' + $scope.wpr.courseId + '/view-unit/' + $scope.wpr.unitId);
 				}, function() {
 					//Error callback
 					// Form reset
@@ -127,18 +124,17 @@ angular.module('coderfrontApp')
 		};
 
 		// Check existing units for duplicates
-		$scope.addUnit.checkDuplicateUnit = function() {
+		$scope.wpr.checkDuplicateUnit = function() {
 			// if unit already exists
-			var unitExists = Unit.alreadyExists($scope.formData.unit, $scope.addUnit.unitsArray);
+			Unit.alreadyExists($scope.wpr.courseId, $scope.formData.unit)
+				.then(function(unitId) {
+					// open overwrite modal
+					$scope.wpr.overwriteModalOpen = true;
 
-			if (unitExists === false) {
-				$scope.addUnit.createUnit();
-			} else {
-				// open overwrite modal
-				$scope.addUnit.overwriteModalOpen = true;
-
-				$scope.addUnit.unitIdToRemove = unitExists;
-			}
+					$scope.wpr.unitIdToRemove = unitId;
+				}, function() {
+					$scope.wpr.createUnit();
+				});
 		};
 
   });

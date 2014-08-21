@@ -45,7 +45,7 @@ angular.module('coderfrontApp')
 		$scope.editUnit.updateUnit = function() {
 			$scope.btn.loading = true; // button control
 
-			Unit.update($scope.editUnit.unit.$id, $scope.formData.unit, $scope.editUnit.unitsArray)
+			Unit.update($scope.editUnit.courseId, $scope.editUnit.unit.$id, $scope.formData.unit)
 				.then(function() {
 					// Success callback
 
@@ -56,7 +56,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-unit after 1.5s
 					$timeout(function() {
-						$location.path('/admin/' + $scope.editUnit.courseId + '/view-unit/' + $scope.editUnit.unitId);
+						$location.path('/backend/' + $scope.editUnit.courseId + '/view-unit/' + $scope.editUnit.unitId);
 					}, 1500);
 
 				}, function() {

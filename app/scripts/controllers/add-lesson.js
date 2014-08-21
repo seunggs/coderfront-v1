@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, $location, $timeout, FIREBASE_URL, $firebase) {
+  .controller('AddLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, $location, $timeout) {
 
 		// Wrapper objects
-		$scope.addLesson = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.formData.lesson = {};
 		var formReset = function() {
@@ -21,50 +21,40 @@ angular.module('coderfrontApp')
 		};
 
 		// Find the right course
-		$scope.addLesson.courseId = $stateParams.courseId;
-		$scope.addLesson.course = Course.find($stateParams.courseId);
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.course = Course.find($stateParams.courseId);
 
 		// Find the right unit
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.addLesson.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
-
-		$scope.addLesson.unitId = $stateParams.unitId;
+		$scope.wpr.unitId = $stateParams.unitId;
     
-    unitsArray.$loaded()
-			.then(function() {
-				// Stores all units in an array
-				$scope.addLesson.unitsArray = unitsArray;
-				$scope.addLesson.unit = Unit.find($stateParams.unitId, $scope.addLesson.unitsArray);
-			});
+		$scope.wpr.unitsArray = Unit.array($scope.wpr.courseId);
+		$scope.wpr.unit = Unit.find($scope.wpr.courseId, $stateParams.unitId);
 
 		// Show page loading while Firebase loads
 		// And initiate Firebase related variables once it loads
-		$scope.addLesson.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.addLesson.courseId + '/units/' + $scope.addLesson.unitId + '/lessons');
-    var lessonsArray = $firebase(lessonsRef).$asArray();
-
-    lessonsArray.$loaded()
-			.then(function() {
-				$scope.addLesson.pageLoading = false;
+    Lesson.arrayLoaded($scope.wpr.courseId, $scope.wpr.unitId)
+			.then(function(lessonsArray) {
+				$scope.wpr.pageLoading = false;
 
 				// Stores all units in an array
-				$scope.addLesson.lessonsArray = lessonsArray;
+				$scope.wpr.lessonsArray = lessonsArray;
 			});
 
 		// Modal related variable
-		$scope.addLesson.overwriteModalOpen = false;
+		$scope.wpr.overwriteModalOpen = false;
 
 		// Add a new lesson
-		$scope.addLesson.createLesson = function() {
+		$scope.wpr.createLesson = function() {
 			$scope.btn.loading = true;
 
-			Lesson.create($scope.formData.lesson, $scope.addLesson.lessonsArray)
+			Lesson.create($scope.wpr.courseId, $scope.wpr.unitId, $scope.formData.lesson)
 				.then(function(ref) {
 					// Success callback
 					
 					// Get this lesson's UID
-					$scope.addLesson.lessonId = ref.name();
+					$scope.wpr.lessonId = ref.name();
 
 					// Button control
 					$scope.btn.loading = false;
@@ -76,7 +66,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-lesson after 1s
 					$timeout(function() {
-						$location.path('/admin/' + $scope.addLesson.courseId + '/view-lesson/' + $scope.addLesson.unitId + '/' + $scope.addLesson.lessonId);
+						$location.path('/backend/' + $scope.wpr.courseId + '/view-lesson/' + $scope.wpr.unitId + '/' + $scope.wpr.lessonId);
 					}, 1000);
 
 				}, function() {
@@ -94,19 +84,19 @@ angular.module('coderfrontApp')
 		};
 
 		// Add a new lesson and overwrite the old
-		$scope.addLesson.overwriteLesson = function() {
-			Lesson.overwrite($scope.formData.lesson, $scope.addLesson.lessonsArray, $scope.addLesson.lessonIdToBeRemoved)
+		$scope.wpr.overwriteLesson = function() {
+			Lesson.overwrite($scope.wpr.courseId, $scope.wpr.unitId, $scope.formData.lesson, $scope.wpr.lessonIdToBeRemoved)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this lesson's UID
-					$scope.addLesson.lessonId = ref.name();
+					$scope.wpr.lessonId = ref.name();
 
 					// Form reset
 					formReset();
 
 					// Relocate to view-lesson
-					$location.path('/admin/' + $scope.addLesson.courseId + '/view-lesson/' + $scope.addLesson.unitId + '/' + $scope.addLesson.lessonId);
+					$location.path('/backend/' + $scope.wpr.courseId + '/view-lesson/' + $scope.wpr.unitId + '/' + $scope.wpr.lessonId);
 				}, function() {
 					// Error callback
 					// Form reset
@@ -117,19 +107,19 @@ angular.module('coderfrontApp')
 		};
 
 		// Insert a new lesson and push down lessons below
-		$scope.addLesson.insertLesson = function() {
-			Lesson.insert($scope.formData.lesson, $scope.addLesson.lessonsArray)
+		$scope.wpr.insertLesson = function() {
+			Lesson.insert($scope.wpr.courseId, $scope.wpr.unitId, $scope.formData.lesson)
 				.then(function(ref) {
 					// Success callback
 
 					// Get this lesson's UID
-					$scope.addLesson.lessonId = ref.name();
+					$scope.wpr.lessonId = ref.name();
 
 					// Form reset
 					formReset();
 
 					// Relocate to view-lesson
-					$location.path('/admin/' + $scope.addLesson.courseId + '/view-lesson/' + $scope.addLesson.unitId + '/' + $scope.addLesson.lessonId);
+					$location.path('/backend/' + $scope.wpr.courseId + '/view-lesson/' + $scope.wpr.unitId + '/' + $scope.wpr.lessonId);
 				}, function() {
 					//Error callback
 					// Form reset
@@ -140,18 +130,17 @@ angular.module('coderfrontApp')
 		};
 
 		// Check existing lessons for duplicates
-		$scope.addLesson.checkDuplicateLesson = function() {
+		$scope.wpr.checkDuplicateLesson = function() {
 			// if lesson already exists
-			var lessonExists = Lesson.alreadyExists($scope.formData.lesson, $scope.addLesson.lessonsArray);
-			
-			if (lessonExists === false) {
-				$scope.addLesson.createLesson();
-			} else {
-				// open overwrite modal
-				$scope.addLesson.overwriteModalOpen = true;
+			Lesson.alreadyExists($scope.wpr.courseId, $scope.wpr.unitId, $scope.formData.lesson)
+				.then(function(lessonIdToBeRemoved) {
+					// open overwrite modal
+					$scope.wpr.overwriteModalOpen = true;
 
-				$scope.addLesson.lessonIdToBeRemoved = lessonExists;
-			}
+					$scope.wpr.lessonIdToBeRemoved = lessonIdToBeRemoved;
+				}, function() {
+					$scope.wpr.createLesson();
+				});
 		};
 
   });

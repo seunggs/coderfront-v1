@@ -2,8 +2,8 @@
 	<div class="add-lesson-col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 		<section class="add-lesson">
-			<h3>Add a New Lesson in <a ui-sref="admin.edit-unit({unitId: addLesson.unit.$id})">Unit {{ addLesson.unit.unitNum }}</a></h3>
-			<form ng-submit="addLesson.checkDuplicateLesson()">
+			<h3>Add a New Lesson in <a ui-sref="admin.edit-unit({unitId: wpr.unit.$id})">Unit {{ wpr.unit.unitNum }}</a></h3>
+			<form ng-submit="wpr.checkDuplicateLesson()">
 				<div class="form-group">
 					<label>Lesson Number*</label>
 					<input class="form-control" type="number" ng-model="formData.lesson.lessonNum" required>
@@ -21,9 +21,10 @@
 				</div>
 			</form>
 
-			<!-- modal for confirming overwrite if the Lesson Id already exists -->
-			<sc-modal sc-modal-open="addLesson.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-text="This Lesson Number already exists. Are you sure you want to overwrite this Lesson?" sc-modal-yes="addLesson.overwriteLesson();" sc-modal-first-no="addLesson.insertLesson()"></sc-modal>
 		</section>
+
+		<!-- modal for confirming overwrite if the Lesson Id already exists -->
+		<sc-modal sc-modal-open="wpr.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-heading="Are you sure?" sc-modal-text="This Lesson Number already exists. Are you sure you want to overwrite this Lesson?" sc-modal-yes="wpr.overwriteLesson();" sc-modal-first-no="wpr.insertLesson()"></sc-modal>
 
 	</div>
 </div>

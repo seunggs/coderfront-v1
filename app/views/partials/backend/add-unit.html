@@ -3,7 +3,7 @@
 
 		<section class="add-unit">
 			<h3>Add a New Unit</h3>
-			<form ng-submit="addUnit.checkDuplicateUnit()">
+			<form ng-submit="wpr.checkDuplicateUnit()">
 				<div class="form-group">
 					<label>Unit Number*</label>
 					<input class="form-control" type="number" ng-model="formData.unit.unitNum" required>
@@ -16,11 +16,12 @@
 			</form>
 
 			<!-- page loading modal -->
-			<sc-page-loading page-loading="addUnit.pageLoading"></sc-page-loading>
+			<sc-page-loading page-loading="wpr.pageLoading"></sc-page-loading>
 
-			<!-- modal for confirming overwrite if the Unit Id already exists -->
-			<sc-modal sc-modal-open="addUnit.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-text="This Unit Number already exists. Are you sure you want to overwrite this Unit?" sc-modal-yes="addUnit.overwriteUnit();" sc-modal-first-no="addUnit.insertUnit()"></sc-modal>
 		</section>
+
+		<!-- modal for confirming overwrite if the Unit Id already exists -->
+		<sc-modal sc-modal-open="wpr.overwriteModalOpen" sc-modal-type="overwrite" sc-modal-heading="Are you sure?" sc-modal-text="This Unit Number already exists. Are you sure you want to overwrite this Unit?" sc-modal-yes="wpr.overwriteUnit();" sc-modal-first-no="wpr.insertUnit()"></sc-modal>
 
 	</div>
 </div>

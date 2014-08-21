@@ -17,31 +17,33 @@ angular.module('coderfrontApp')
 			// sc-modal-text: 
 			// sc-modal-yes: insert a function to be executed if the user clicks 'yes'
 			// sc-modal-first-no: insert a function to be executed if the user clicks first 'no'
-			// sc-modal-type: delete; warning; overwrite; login - default is delete
+			// sc-modal-type: delete; overwrite; alert - default is delete
 
 			scope: {
 				'scModalYes': '&',
+				'scModalNo': '&?',
 				'scModalFirstNo': '&?',
 				'scModalOpen': '=?', // ? makes it optional
-				'scModalText': '@',
-				'scModalType': '@'
+				'scModalType': '='
 			},
 			restrict: 'AE',
 			transclude: false,
-			link: function(scope, elem) {
+			link: function(scope, elem, attr) {
 				// If no type is given, set it at delete
-				scope.scModalType = scope.scModalType === undefined ? 'delete' : scope.scModalType;
 
-				// change styling depending on scModalType (default is delete)
-				if (scope.scModalType === 'delete') {
-					angular.element('.md-content button:first').text('Yes, delete.');
-				} else if (scope.scModalType === 'warning') {
-					angular.element('.md-content').css('background-color', '#efa440');
-					angular.element('.md-overlay').css('background-color', 'rgba(145,108,32,0.8)');
-					angular.element('.md-content button').removeClass('btn-red').addClass('btn-orange-yellow');
-				} else if (scope.scModalType === 'overwrite') {
-					angular.element('.md-content button:first').text('Yes, overwrite.');
-				}
+				scope.updateModalType = function(type) {
+					// change styling depending on scModalType (default is delete)
+					if (type === 'delete') {
+						angular.element('.md-content .btn-yes').text('Yes, delete.');
+					} else if (type === 'alert') {
+						angular.element('.md-content .btn-no').text('No.');
+					} else if (type === 'overwrite') {
+						angular.element('.md-content .btn-yes').text('Yes, overwrite.');
+					}
+				};
+				
+				scope.scModalText = attr.scModalText;
+				scope.scModalHeading = attr.scModalHeading;
 
 				// Two ways to open Modal window: with click...
 				elem.on('click', function(e) {
@@ -59,6 +61,11 @@ angular.module('coderfrontApp')
 				scope.$watch('scModalOpen', function(value) {
 					if (value === true) {
 						scope.mdModalShow = true;
+
+						// update the modal type
+						scope.scModalType = attr.scModalType;
+						console.log(scope.scModalType);
+						scope.updateModalType(scope.scModalType);
 					}
 				});
 
@@ -81,6 +88,11 @@ angular.module('coderfrontApp')
 				// attr sc-modal-yes runs when user clicks 'yes'
 				scope.yesAction = function() {
 					scope.scModalYes();
+				};
+
+				// attr sc-modal-yes runs when user clicks 'yes'
+				scope.noAction = function() {
+					scope.scModalNo();
 				};
 
 				// attr sc-modal-insert runs when user clicks 'yes'

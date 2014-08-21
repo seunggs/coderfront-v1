@@ -5,16 +5,24 @@
 	</section>
 
 	<article class="login-bg login-bg-color1">
-		<section class="login-container absolute-center">
+		
+		<div class="login-container absolute-center">
+
 			<form class="login-form-container" ng-submit="login.signIn()">
-				<label for="email">Please enter your email and password.</label>
+				<label for="email">Sign in: Please enter your email and password.</label>
 				<input class="login-form login-email" type="email" name="email" placeholder="Email" ng-model="formData.existingUser.email" autofocus required>
 				<input class="login-form login-password" type="password" name="password" placeholder="Password" ng-model="formData.existingUser.password" required>
 				<sc-loading-btn btn-class="btn btn-survey btn-survey-md" btn-type="survey" success="btn.success" loading="btn.loading">Sign In&nbsp;&nbsp;<i class="fa fa-angle-right"></i></sc-loading-btn>
 			</form>
-			<a class="forgot-password" ui-sref="resetpassword"><i class="fa fa-lock"></i>&nbsp;&nbsp;Forgot your password?</a>
-			<div class="survey-error-msg">{{ msg.error }}</div>
-			<div class="survey-success-msg">{{ msg.success }}</div>
-		</section>
+
+			<section class="login-footer">
+				<a class="login-register" ui-sref="register"><i class="fa fa-male"></i>&nbsp;&nbsp;I'm a new user&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+				<a class="forgot-password" ui-sref="resetpassword"><i class="fa fa-lock"></i>&nbsp;&nbsp;Forgot your password?</a>
+				<div class="survey-error-msg">{{ msg.error }}</div>
+				<div class="survey-success-msg">{{ msg.success }}</div>
+			</section>
+
+		</div>
+
 	</article>
 </div>

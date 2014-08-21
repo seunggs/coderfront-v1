@@ -10,23 +10,23 @@ angular.module('coderfrontApp')
       // loading (required): a variable
       // btnClass: i.e. btn-primary - default: btn-sc btn-loading btn-primary
       // btnType: 1) survey; 2) solid - default: solid
-      // Ex usage: <sc-loading-btn success="addUnit.success" loading="addUnit.loading" btn-type="solid" btn-class="btn-sc btn-loading btn-primary">BUTTON TEXT</sc-loading-btn>
+      // Ex usage: <sc-loading-btn success="btn.success" loading="btn.loading" btn-type="solid" btn-class="btn-sc btn-loading btn-primary">BUTTON TEXT</sc-loading-btn>
 			scope: {
         loading: '=',
         success: '=',
-        btnType: '@?',
+        btnType: '=?',
         btnClass: '@?'
       },
       restrict: 'E',
       transclude: true,
-      link: function(scope, elem) {
+      link: function(scope, elem, attr) {
         // Set default for button class
         scope.btnClass = scope.btnClass !== undefined ? scope.btnClass : 'btn-sc btn-loading btn-primary';
 
         angular.element(elem[0].firstChild).addClass(scope.btnClass);
 
         // Set default for button type
-        scope.btnType = scope.btnType !== undefined ? scope.btnType : 'solid';
+        scope.btnType = scope.btnType !== undefined ? attr.btnType : 'solid';
 
         var translateYMixin = function(y) {
           return {
@@ -56,8 +56,14 @@ angular.module('coderfrontApp')
         // Fire up loading message
         scope.$watch('loading', function(value) {
           if (value === true) {
+            // Update btn type
+            scope.btnType = attr.btnType;
+
+            // Loading action
             angular.element('.btn-partial-loading').css('top', '0');
             angular.element('.loading-btn-text').css(translateYMixin(300));
+          } else if (value === false) {
+            resetButton(1300);
           }
         });
 

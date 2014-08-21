@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('LoginCtrl', function ($scope, $timeout, $location, Auth) {
+  .controller('LoginCtrl', function ($scope, $timeout, Auth, $window) {
 		// Wrapper object
 		$scope.login = {};
 		$scope.formData = {};
@@ -15,6 +15,7 @@ angular.module('coderfrontApp')
 			}, delay);
 		};
 
+		// Sign in function
 		$scope.login.signIn = function() {
 			$scope.btn.loading = true;
 
@@ -27,9 +28,9 @@ angular.module('coderfrontApp')
 
 					$scope.msg.success = 'Success! You are now signed in - happy learning! :)';
 
-					// Relocate to home after short delay
+					// Relocate to previous page after short delay
 					$timeout(function() {
-						$location.path('/');
+						$window.history.go(-1);
 					}, 2000);
 
 				}, function() {

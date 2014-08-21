@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('RegisterCtrl', function ($scope, $timeout, $location, Auth, User) {
+  .controller('RegisterCtrl', function ($scope, $timeout, $window, Auth, User) {
 
 		// Wrapper object
 		$scope.register = {};
@@ -76,9 +76,9 @@ angular.module('coderfrontApp')
 
 						$scope.msg.success = 'Awesome - registration was successful! :)';
 
-						// Relocate to home after short delay
+						// Relocate to previous page after short delay
 						$timeout(function() {
-							$location.path('/home');
+							$window.history.go(-1);
 						}, 2000);
 						
 					}, function(error) {

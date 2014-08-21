@@ -1,1 +1,30 @@
-<p>This is the backend view.</p>
+<div class="container-fluid admin">
+	
+	<!-- modal for deleting a unit -->
+	<sc-modal sc-modal-open="backend.deleteUnitModalOpen" sc-modal-yes="backend.removeUnit(backend.unitData.$id, backend.unitData)" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete this Unit?" sc-modal-heading="Are you sure?"></sc-modal>
+
+	<!-- modal for deleting a lesson -->
+	<sc-modal sc-modal-open="backend.deleteLessonModalOpen" sc-modal-yes="backend.removeLesson(backend.lessonData.$id, backend.lessonData)" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete this Lesson?" sc-modal-heading="Are you sure?"></sc-modal>
+
+	<div class="admin-row row">
+
+		<!-- left side bar -->
+		<nav class="menu-panel" ng-class="{'slide-right': menuToggle, 'menu-show': initMenuToggle}" ng-include="'views/partials/admin-sidebar.html'"></nav>
+
+		<!-- main content section -->
+
+		<article class="admin-content" ng-class="{'slide-right': menuToggle}">
+			
+			<div class="overlay" ng-class="{'slide-right-overlay': menuToggle}" ng-click="menuToggle = !menuToggle"></div>
+
+			<div class="menu-toggle" ng-click="menuToggle = !menuToggle; initMenuToggle = true"><i class="fa fa-bars"></i></div>
+
+			<div class="admin-view-animation-container">
+				<div ui-view class="admin-view-animation"></div>
+			</div>
+
+		</article>
+
+	</div>
+
+</div>
