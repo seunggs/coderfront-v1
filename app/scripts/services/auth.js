@@ -11,7 +11,11 @@ angular.module('coderfrontApp')
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
-          .then(deferred.resolve(loginObj.user), deferred.reject(null));
+          .then(function() {
+            deferred.resolve(loginObj.user);
+          }, function() {
+            deferred.reject(null);
+          });
 
         return deferred.promise;
       },
@@ -99,7 +103,11 @@ angular.module('coderfrontApp')
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
-          .then(deferred.resolve(loginObj.user), deferred.reject(null));
+          .then(function() {
+            deferred.resolve(loginObj.user);
+          }, function() {
+            deferred.reject(null);
+          });
 
         return deferred.promise;
       };
@@ -126,7 +134,11 @@ angular.module('coderfrontApp')
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
-          .then(deferred.resolve(loginObj.user), deferred.reject(null));
+          .then(function() {
+            deferred.resolve(loginObj.user);
+          }, function() {
+            deferred.reject(null);
+          });
 
         return deferred.promise;
       };

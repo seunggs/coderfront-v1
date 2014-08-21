@@ -12,6 +12,18 @@ angular.module('coderfrontApp')
 		$scope.wpr = {};
 		$scope.newCourse = {};
 
+		// Show page loading while Firebase loads
+		// And initiate Firebase related variables once it loads
+		$scope.wpr.pageLoading = true;
+
+    Course.arrayLoaded($scope.wpr.courseId, $scope.wpr.unitId)
+			.then(function(lessonsArray) {
+				$scope.wpr.pageLoading = false;
+
+				// Stores all units in an array
+				$scope.wpr.lessonsArray = lessonsArray;
+			});
+
 		// Create course
 		$scope.wpr.createCourse = function() {
 			$scope.btn.loading = true;
@@ -27,14 +39,19 @@ angular.module('coderfrontApp')
 				});
 		};
 
-		$scope.wpr.courses = Course.getAll();
+		Course.getAll()
+			.then(function(courses) {
+				$scope.wpr.courses = courses;
+			});
 
 		// See if this user is an admin
-		Auth.getUser()
-			.then(function(authUser) {
-				$scope.wpr.userDataObj = User.find(authUser.uid);
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
 				if ($scope.wpr.userDataObj.admin === false) {
+					// If the user is not admin, kick them out to home
 					$location.path('/');
 				}
 			});
+
   });

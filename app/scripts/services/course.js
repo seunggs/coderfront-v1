@@ -18,6 +18,14 @@ angular.module('coderfrontApp')
 
         return deferred.promise;
       },
+      arrayLoaded: function() {
+        var deferred = $q.defer();
+
+        coursesObj.$loaded()
+          .then(deferred.resolve, deferred.reject);
+
+        return deferred.promise;
+      },
       create: function(course) {
         var deferred = $q.defer();
 

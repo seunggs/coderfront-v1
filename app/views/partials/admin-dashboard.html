@@ -24,6 +24,10 @@
 			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(courseId, course) in wpr.courses">
 				<div ng-include="'views/partials/coursebox.html'"></div>
 			</div>
+
+			<!-- page loading modal -->
+			<sc-page-loading page-loading="wpr.pageLoading"></sc-page-loading>
+
 		</div>
 	</div>
 

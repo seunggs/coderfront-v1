@@ -6,42 +6,42 @@
 	<div class="admin-sidebar">
 
 		<!-- admin only -->
-		<div ng-if="adminSidebar.userData.admin" class="dashboard"><a ui-sref="admin-dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;BACK TO COURSES</a></div>
-		<a ng-if="adminSidebar.userData.admin" class="btn btn-teal btn-block btn-new-unit" ui-sref="backend.add-unit({courseId: adminSidebar.courseId})" ng-click="adminSidebar.closeSidebar = true">+ Add a New Unit</a>
+		<div ng-if="wpr.userData.admin" class="dashboard"><a ui-sref="admin-dashboard"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;BACK TO COURSES</a></div>
+		<a ng-if="wpr.userData.admin" class="btn btn-teal btn-block btn-new-unit" ui-sref="backend.add-unit({courseId: wpr.courseId})" ng-click="wpr.closeSidebar = true">+ Add a New Unit</a>
 		<!-- end: admin only -->
 
 		<div class="courses-wrapper">
-			<a ng-click="adminSidebar.courseToggle = !adminSidebar.courseToggle">SHOW YOUR COURSES&nbsp;&nbsp;<i class="fa fa-caret-down" ng-if="!adminSidebar.courseToggle"></i><i class="fa fa-caret-up" ng-if="adminSidebar.courseToggle"></i></a>
-			<ul class="courses" ng-if="adminSidebar.courseToggle">
-				<li class="course-item" ng-repeat="(courseId, course) in adminSidebar.userCoursesObj"><a ui-sref="backend.welcome({courseId: courseId})">{{ course.title }}</a></li>
+			<a ng-click="wpr.courseToggle = !wpr.courseToggle">SHOW YOUR COURSES&nbsp;&nbsp;<i class="fa fa-caret-down" ng-if="!wpr.courseToggle"></i><i class="fa fa-caret-up" ng-if="wpr.courseToggle"></i></a>
+			<ul class="courses" ng-if="wpr.courseToggle">
+				<li class="course-item" ng-repeat="(courseId, course) in wpr.purchasedCoursesObj"><a ui-sref="backend.welcome({courseId: courseId})">{{ course.title }}</a></li>
 			</ul>
 		</div>
 
 		<ul class="units">
-			<li class="unit-item" ng-repeat="unit in adminSidebar.unitsArray | orderBy: 'unitNum'">
-				<a class="unit-menu" ng-click="adminSidebar.activeUnit = unit.unitNum; adminSidebar.activeLesson = null;" ng-class="{'active-unit': adminSidebar.activeUnit === unit.unitNum }" ui-sref="backend.view-unit({unitId: unit.$id})">Unit {{ unit.unitNum }} : {{ unit.title }}</a>&nbsp;&nbsp;
+			<li class="unit-item" ng-repeat="unit in wpr.unitsArray | orderBy: 'unitNum'">
+				<a class="unit-menu" ng-click="wpr.activeUnit = unit.unitNum; wpr.activeLesson = null;" ng-class="{'active-unit': wpr.activeUnit === unit.unitNum }" ui-sref="backend.view-unit({unitId: unit.$id})">Unit {{ unit.unitNum }} : {{ unit.title }}</a>&nbsp;&nbsp;
 				<!-- admin only -->
-				<div ng-if="adminSidebar.userData.admin">
-					<a class="fa fa-edit" ng-click="adminSidebar.activeUnit = unit.unitNum;" ui-sref="backend.edit-unit({unitId: unit.$id})"></a>&nbsp;
-					<a class="fa fa-trash-o" ng-click="adminSidebar.deleteUnitModalOpen = true; adminSidebar.unitData = unit"></a>
+				<div ng-if="wpr.userData.admin">
+					<a class="fa fa-edit" ng-click="wpr.activeUnit = unit.unitNum;" ui-sref="backend.edit-unit({unitId: unit.$id})"></a>&nbsp;
+					<a class="fa fa-trash-o" ng-click="wpr.deleteUnitModalOpen = true; wpr.unitData = unit"></a>
 				</div>
 				<!-- end: admin only -->
 				<hr>
 				<ul class="lessons">
 					<!-- admin only -->
-					<li ng-if="adminSidebar.userData.admin" class="add-lesson-li"><a class="add-lesson" ui-sref="backend.add-lesson({unitId: unit.$id})" ng-click="adminSidebar.closeSidebar = true">+ Add a New Lesson</a></li>
+					<li ng-if="wpr.userData.admin" class="add-lesson-li"><a class="add-lesson" ui-sref="backend.add-lesson({unitId: unit.$id})" ng-click="wpr.closeSidebar = true">+ Add a New Lesson</a></li>
 					<!-- end: admin only -->
 					<li class="lesson-item" ng-repeat="lesson in unit.lessons | toArray | orderBy: 'lessonNum'">
 						<div class="lesson-title-container">
-							<a ng-click="adminSidebar.activeUnit = unit.unitNum; adminSidebar.activeLesson = lesson.lessonNum;" ng-class="{'active-lesson': adminSidebar.activeLesson === lesson.lessonNum && adminSidebar.activeUnit === unit.unitNum }" ui-sref="backend.view-lesson({unitId: unit.$id, lessonId: lesson.$id})">Lesson {{ lesson.lessonNum }} : {{ lesson.title }}</a>&nbsp;&nbsp;
+							<a ng-click="wpr.activeUnit = unit.unitNum; wpr.activeLesson = lesson.lessonNum;" ng-class="{'active-lesson': wpr.activeLesson === lesson.lessonNum && wpr.activeUnit === unit.unitNum }" ui-sref="backend.view-lesson({unitId: unit.$id, lessonId: lesson.$id})">Lesson {{ lesson.lessonNum }} : {{ lesson.title }}</a>&nbsp;&nbsp;
 							<!-- admin only -->
-							<div ng-if="adminSidebar.userData.admin">
-								<a class="fa fa-edit" ng-click="adminSidebar.activeLesson = lesson.lessonNum;" ui-sref="backend.edit-lesson({unitId: unit.$id, lessonId: lesson.$id})"></a>&nbsp;
-								<a class="fa fa-trash-o" ng-click="adminSidebar.deleteLessonModalOpen = true; adminSidebar.unitId = unit.$id; adminSidebar.lessonData = lesson;"></a>
+							<div ng-if="wpr.userData.admin">
+								<a class="fa fa-edit" ng-click="wpr.activeLesson = lesson.lessonNum;" ui-sref="backend.edit-lesson({unitId: unit.$id, lessonId: lesson.$id})"></a>&nbsp;
+								<a class="fa fa-trash-o" ng-click="wpr.deleteLessonModalOpen = true; wpr.unitId = unit.$id; wpr.lessonData = lesson;"></a>
 							</div>
 							<!-- end: admin only -->
 						</div>
-						<a class="fa fa-minus" ng-if="adminSidebar.activeLesson === lesson.lessonNum && adminSidebar.activeUnit === unit.unitNum"></a>
+						<a class="fa fa-minus" ng-if="wpr.activeLesson === lesson.lessonNum && wpr.activeUnit === unit.unitNum"></a>
 					</li>
 				</ul>
 			</li>

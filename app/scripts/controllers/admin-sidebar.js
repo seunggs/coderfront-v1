@@ -1,111 +1,78 @@
-/*jshint loopfunc: true */
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AdminSidebarCtrl', function ($scope, $stateParams, Course, Unit, Lesson, $firebase, FIREBASE_URL, $firebaseSimpleLogin, $rootScope) {
+  .controller('AdminSidebarCtrl', function ($scope, $stateParams, Course, Unit, Lesson, User, Purchase, $rootScope) {
 
 		// Wrapper object for this controller for dot notation
-		$scope.adminSidebar = {};
+		$scope.wpr = {};
 
 		// Get this course
-		$scope.adminSidebar.courseId = $stateParams.courseId;
+		$scope.wpr.courseId = $stateParams.courseId;
 
 		// Modal control
-		$scope.adminSidebar.deleteUnitModalOpen = false;
-		$scope.adminSidebar.deleteLessonModalOpen = false;
+		$scope.wpr.deleteUnitModalOpen = false;
+		$scope.wpr.deleteLessonModalOpen = false;
 
-		$scope.adminSidebar.unitData = {}; // Temp object for modal unit data
+		$scope.wpr.unitData = {}; // Temp object for modal unit data
 
-		$scope.$watch('adminSidebar.deleteUnitModalOpen', function(newVal) {
+		$scope.$watch('wpr.deleteUnitModalOpen', function(newVal) {
 			if (newVal) {
 				$rootScope.$broadcast('openModal:deleteUnit', {
-					courseId: $scope.adminSidebar.courseId,
-					unitData: $scope.adminSidebar.unitData
+					courseId: $scope.wpr.courseId,
+					unitData: $scope.wpr.unitData
 				});
 
 				// Reset
-				$scope.adminSidebar.deleteUnitModalOpen = false;
+				$scope.wpr.deleteUnitModalOpen = false;
 			}
 		});
 
-		$scope.adminSidebar.unitId = ''; // Temp object for modal lesson data
-		$scope.adminSidebar.lessonData = {}; // Temp object for modal lesson data
+		$scope.wpr.unitId = ''; // Temp object for modal lesson data
+		$scope.wpr.lessonData = {}; // Temp object for modal lesson data
 
-		$scope.$watch('adminSidebar.deleteLessonModalOpen', function(newVal) {
+		$scope.$watch('wpr.deleteLessonModalOpen', function(newVal) {
 			if (newVal) {
 				$rootScope.$broadcast('openModal:deleteLesson', {
-					courseId: $scope.adminSidebar.courseId,
-					unitId: $scope.adminSidebar.unitId,
-					lessonData: $scope.adminSidebar.lessonData
+					courseId: $scope.wpr.courseId,
+					unitId: $scope.wpr.unitId,
+					lessonData: $scope.wpr.lessonData
 				});
 
 				// Reset
-				$scope.adminSidebar.deleteUnitModalOpen = false;
+				$scope.wpr.deleteUnitModalOpen = false;
 			}
 		});
 
 		// Sidebar control
-		$scope.adminSidebar.closeSidebar = false;
-		$scope.$watch('adminSidebar.closeSidebar', function(newVal) {
+		$scope.wpr.closeSidebar = false;
+		$scope.$watch('wpr.closeSidebar', function(newVal) {
 			if (newVal) {
-				$rootScope.$broadcast('adminSidebar:close');
+				$rootScope.$broadcast('wpr:close');
 
 				// Reset
-				$scope.adminSidebar.closeSidebar = false;
+				$scope.wpr.closeSidebar = false;
 			}
 		});
 
+		// Get the user data obj
+		User.thisUser()
+			.then(function(thisUser) {
+				$scope.wpr.userData = thisUser;
+			});
+
 		// Get all courses the user has purchased
-		// First, get user uid
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
-
-    loginObj.$getCurrentUser()
-			.then(function(user) {
-				if (user === null) {
-					return;
-				}
-				
-		    // Then get userData
-				var userDataRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
-				var userData = $firebase(userDataRef);
-				var userDataObj = userData.$asObject();
-
-				userDataObj.$loaded()
-					.then(function() {
-						// Now get the user
-						$scope.adminSidebar.userData = userDataObj;
-					});
-
-				// Get all courses the user has purchased
-				var purchasedCoursesRef = new Firebase(FIREBASE_URL + 'users/' + user.uid + '/courses');
-				var purchasedCourses = $firebase(purchasedCoursesRef);
-				var purchasedCoursesArray = purchasedCourses.$asArray();
-
-				purchasedCoursesArray.$loaded()
-					.then(function() {
-						$scope.adminSidebar.userCoursesObj = {};
-						
-						for (var i=0; i<purchasedCoursesArray.length; i++) {
-							var userCourseRef = new Firebase(FIREBASE_URL + 'courses/' + purchasedCoursesArray[i].$id);
-							var userCourse = $firebase(userCourseRef);
-							var userCourseObj = userCourse.$asObject();
-
-							$scope.adminSidebar.userCoursesObj[userCourseObj.$id] = userCourseObj;
-						}
-					});
+		Purchase.courses()
+			.then(function(purchasedCourses) {
+				$scope.wpr.purchasedCoursesObj = purchasedCourses;
 			});
 
 		// Course toggle control
-		$scope.adminSidebar.courseToggle = false;
+		$scope.wpr.courseToggle = false;
 
 		// Get the units for this course
-		var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.adminSidebar.courseId + '/units');
-		var unitsArray = $firebase(unitsRef).$asArray();
-
-		unitsArray.$loaded()
-			.then(function() {
-				$scope.adminSidebar.unitsArray = unitsArray;
+		Unit.array($scope.wpr.courseId)
+			.then(function(unitsArray) {
+				$scope.wpr.unitsArray = unitsArray;
 			});
 
   });

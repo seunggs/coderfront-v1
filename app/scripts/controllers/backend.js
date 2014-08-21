@@ -4,7 +4,7 @@ angular.module('coderfrontApp')
   .controller('BackendCtrl', function ($scope, $firebase, FIREBASE_URL, $firebaseSimpleLogin, $location, Unit, Lesson) {
 		
 		// Wrapper object
-		$scope.backend = {};
+		$scope.wpr = {};
 
 		$scope.menuToggle = false;
 
@@ -15,47 +15,47 @@ angular.module('coderfrontApp')
 
 		// Modal control for deleting units or lessons
 		$scope.$on('openModal:deleteUnit', function(event, data) {
-			$scope.backend.courseId = data.courseId;
-			$scope.backend.unitData = data.unitData;
-			$scope.backend.deleteUnitModalOpen = true;
+			$scope.wpr.courseId = data.courseId;
+			$scope.wpr.unitData = data.unitData;
+			$scope.wpr.deleteUnitModalOpen = true;
 			console.log('modal event received for unit');
 
 			// Get the units for this course
-			var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.backend.courseId + '/units');
+			var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.wpr.courseId + '/units');
 			var unitsArray = $firebase(unitsRef).$asArray();
 
 			unitsArray.$loaded()
 				.then(function() {
-					$scope.backend.unitsArray = unitsArray;
+					$scope.wpr.unitsArray = unitsArray;
 				});
 
 		});
 
 		$scope.$on('openModal:deleteLesson', function(event, data) {
-			$scope.backend.courseId = data.courseId;
-			$scope.backend.unitId = data.unitId;
-			$scope.backend.lessonData = data.lessonData;
-			$scope.backend.deleteLessonModalOpen = true;
+			$scope.wpr.courseId = data.courseId;
+			$scope.wpr.unitId = data.unitId;
+			$scope.wpr.lessonData = data.lessonData;
+			$scope.wpr.deleteLessonModalOpen = true;
 			console.log('modal event received for lesson');
 
-			console.log($scope.backend.courseId);
-			console.log($scope.backend.unitId);
+			console.log($scope.wpr.courseId);
+			console.log($scope.wpr.unitId);
 
 			// Get the lessons for this course
-	    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.backend.courseId + '/units/' + $scope.backend.unitId + '/lessons');
+	    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.wpr.courseId + '/units/' + $scope.wpr.unitId + '/lessons');
 	    var lessonsArray = $firebase(lessonsRef).$asArray();
 
 	    lessonsArray.$loaded()
 				.then(function() {
 					console.log(lessonsArray);
-					$scope.backend.lessonsArray = lessonsArray;
+					$scope.wpr.lessonsArray = lessonsArray;
 				});
 
 		});
 
 		// Remove unit
-		$scope.backend.removeUnit = function(unitId, unit) {
-			Unit.remove(unitId, unit, $scope.backend.unitsArray)
+		$scope.wpr.removeUnit = function(unitId, unit) {
+			Unit.remove(unitId, unit, $scope.wpr.unitsArray)
 				.then(function() {
 					// Success callback
 					console.log('Successfully removed unit');
@@ -66,8 +66,8 @@ angular.module('coderfrontApp')
 		};
 
 		// Remove lesson
-		$scope.backend.removeLesson = function(lessonId, lesson) {
-			Lesson.remove(lessonId, lesson, $scope.backend.lessonsArray)
+		$scope.wpr.removeLesson = function(lessonId, lesson) {
+			Lesson.remove(lessonId, lesson, $scope.wpr.lessonsArray)
 				.then(function() {
 					// Success callback
 					console.log('Successfully removed lesson');

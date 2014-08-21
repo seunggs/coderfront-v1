@@ -20,28 +20,17 @@ angular.module('coderfrontApp')
               deferred.reject();
             } else {
               usersObj.$loaded()
-                .then(deferred.resolve(usersObj), deferred.reject());
+                .then(function() {
+                  deferred.resolve(usersObj);
+                }, function() {
+                  deferred.reject();
+                });
             }
           });
 
         return deferred.promise;
       },
-      find: function(userUid) {
-        var deferred = $q.defer();
-
-        loginObj.$getCurrentUser()
-          .then(function(authUser) {
-            if (authUser === null) {
-              deferred.reject();
-            } else {
-              usersObj.$loaded()
-                .then(deferred.resolve(usersObj[userUid]), deferred.reject());
-            }
-          });
-
-        return deferred.promise;
-      },
-      create: function(userUid, userData) {
+      thisUser: function() {
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
@@ -51,7 +40,26 @@ angular.module('coderfrontApp')
             } else {
               usersObj.$loaded()
                 .then(function() {
-                  users.$set(userUid, userData)
+                  deferred.resolve(usersObj[authUser.uid]);
+                }, function() {
+                  deferred.reject();
+                });
+            }
+          });
+
+        return deferred.promise;
+      },
+      create: function(userData) {
+        var deferred = $q.defer();
+
+        loginObj.$getCurrentUser()
+          .then(function(authUser) {
+            if (authUser === null) {
+              deferred.reject();
+            } else {
+              usersObj.$loaded()
+                .then(function() {
+                  users.$set(authUser.uid, userData)
                     .then(deferred.resolve, deferred.reject);
                 }, function() {
                   deferred.reject();
@@ -61,7 +69,7 @@ angular.module('coderfrontApp')
 
         return deferred.promise;
       },
-      update: function(userUid, userData) {
+      update: function(userData) {
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
@@ -71,7 +79,7 @@ angular.module('coderfrontApp')
             } else {
               usersObj.$loaded()
                 .then(function() {
-                  usersObj[userUid] = userData;
+                  usersObj[authUser.uid] = userData;
                   usersObj.$save()
                     .then(deferred.resolve, deferred.reject);
                 }, function() {
@@ -83,7 +91,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
 
       },
-      delete: function(userUid) {
+      delete: function() {
         var deferred = $q.defer();
 
         loginObj.$getCurrentUser()
@@ -93,7 +101,7 @@ angular.module('coderfrontApp')
             } else {
               usersObj.$loaded()
                 .then(function() {
-                  users.$remove(userUid)
+                  users.$remove(authUser.uid)
                     .then(deferred.resolve, deferred.reject);
                 }, function() {
                   deferred.reject();

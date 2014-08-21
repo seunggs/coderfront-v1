@@ -125,7 +125,9 @@ angular.module('coderfrontApp')
         var deferred = $q.defer();
 
         lessonsArray.$loaded()
-          .then(deferred.resolve(lessonsArray));
+          .then(function() {
+            deferred.resolve(lessonsArray);
+          });
 
         return deferred.promise;
       },

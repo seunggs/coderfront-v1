@@ -14,7 +14,10 @@ angular.module('coderfrontApp')
 
 		// Find the right course
 		$scope.wpr.courseId = $stateParams.courseId;
-		$scope.wpr.course = Course.find($stateParams.courseId);
+		Course.find($stateParams.courseId)
+			.then(function(course) {
+				$scope.wpr.course = course;
+			});
 
 		// Show page loading while Firebase loads
 		// And initiate Firebase related variables once it loads
