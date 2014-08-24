@@ -1,38 +1,23 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('CourseboxCtrl', function ($scope, Course, FIREBASE_URL, $firebase, $firebaseSimpleLogin) {
+  .controller('CourseboxCtrl', function ($scope, Course, User) {
 
 		// Wrapper object
-		$scope.courseBox = {};
+		$scope.wpr = {};
 
-    $scope.courseBox.courses = Course.all;
+    $scope.wpr.courses = Course.all;
 
-    // See if the user is admin
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
-
-    loginObj.$getCurrentUser()
-      .then(function(user) {
-        if (user === null) {
-          return;
-        }
-        
-        // Then get userData
-        var userDataRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
-        var userData = $firebase(userDataRef);
-        var userDataObj = userData.$asObject();
-
-        userDataObj.$loaded()
-          .then(function() {
-            $scope.courseBox.userDataObj = userDataObj;
-          });
+    // Get userData
+    User.thisUser()
+      .then(function(userDataObj) {
+        $scope.wpr.userDataObj = userDataObj;
       });
 
     // Modal control
-    $scope.courseBox.deleteModalOpen = false;
+    $scope.wpr.deleteModalOpen = false;
 
-    $scope.courseBox.deleteCourse = function(courseId) {
+    $scope.wpr.deleteCourse = function(courseId) {
 			Course.remove(courseId);
     };
   });

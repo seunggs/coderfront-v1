@@ -1,59 +1,42 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('ViewUnitCtrl', function ($scope, $stateParams, Course, Unit, FIREBASE_URL, $firebase, $firebaseSimpleLogin) {
+  .controller('ViewUnitCtrl', function ($scope, $stateParams, Course, Unit, User) {
 		// Wrapper objects
-		$scope.viewUnit = {};
+		$scope.wpr = {};
 
 		// Find the right course and unitId
-		$scope.viewUnit.courseId = $stateParams.courseId;
-		$scope.viewUnit.course = Course.find($stateParams.courseId);
-		$scope.viewUnit.unitId = $stateParams.unitId;
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.unitId = $stateParams.unitId;
 
 		// Show page loading while Firebase loads
-		// And initiate Firebase related variables once Firebase loads
-		$scope.viewUnit.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.viewUnit.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
+		// Get this unit
+		Unit.find($scope.wpr.courseId, $scope.wpr.unitId)
+			.then(function(unitObj) {
+				// Once unit loads, turn off page loading
+				$scope.wpr.pageLoading = false;
 
-    unitsArray.$loaded()
-			.then(function() {
-				$scope.viewUnit.pageLoading = false;
-				
-				// Stores all units in an array
-				$scope.viewUnit.unitsArray = unitsArray;
-				// Get this specific unit
-				$scope.viewUnit.unit = Unit.find($scope.viewUnit.unitId, $scope.viewUnit.unitsArray);
+				$scope.wpr.unit = unitObj;
 			});
 
 		// Save this unit as the last viewed unit
-		// First, get user uid
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
 
-    loginObj.$getCurrentUser()
-			.then(function(user) {
-		    // Then get userData
-				var userDataRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
-				var userData = $firebase(userDataRef);
-				var userDataObj = userData.$asObject();
+				$scope.wpr.userDataObj.lastViewed = {
+					courseId: $stateParams.courseId,
+					unitId: $stateParams.unitId,
+					lessonId: 'NA'
+				};
 
-				userDataObj.$loaded()
+				User.update($scope.wpr.userDataObj)
 					.then(function() {
-						// Save this lesson as the last viewed lesson
-						$scope.viewUnit.lastViewed = {
-							courseId: $stateParams.courseId,
-							unitId: $stateParams.unitId,
-							lessonId: 'NA'
-						};
-						
-						userData.$update({lastViewed: $scope.viewUnit.lastViewed})
-							.then(function() {
-								console.log('successfully updated last viewed course, unit and lesson');
-							}, function() {
-								console.log('failed to updated last viewed course, unit and lesson');
-							});
+						console.log('successfully updated last viewed unit');
+					}, function() {
+						console.log('failed to updated last viewed unit');
 					});
 			});
 

@@ -25,7 +25,7 @@ angular.module('coderfrontApp')
         loginObj.$getCurrentUser()
           .then(function(authUser) {
             if (authUser === null) {
-              deferred.reject();
+              deferred.reject(false);
             } else {
               deferred.resolve(true);
             }

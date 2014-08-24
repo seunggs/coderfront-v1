@@ -1,10 +1,10 @@
 <div class="course" ng-controller="CourseboxCtrl">
 	<!-- admin only -->
-	<section class="course-delete" ng-if="courseBox.userDataObj.admin">
-		<button disabled class="btn btn-red btn-xxs" ng-click="courseBox.deleteModalOpen = true"><i class="fa fa-times"></i>&nbsp;Delete</button>
+	<section class="course-delete" ng-if="wpr.userDataObj.admin">
+		<button disabled class="btn btn-red btn-xxs" ng-click="wpr.deleteModalOpen = true"><i class="fa fa-times"></i>&nbsp;Delete</button>
 	</section>
 	<!-- end: admin only -->
-	<a class="course-wrapper" ui-sref="backend.add-unit({courseId: courseId})">
+	<a class="course-wrapper" ui-sref="backend.welcome({courseId: courseId})">
 		<section class="course-pic-container">
 			<img ng-src="{{ course.thumbUrl }}">
 		</section>
@@ -14,6 +14,6 @@
 	</a>
 
 	<!-- modal for confirming delete course -->
-	<sc-modal sc-modal-open="courseBox.deleteModalOpen" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete the '{{ course.title }}' Course?" sc-modal-yes="courseBox.deleteCourse(courseId);"></sc-modal>
+	<sc-modal sc-modal-open="wpr.deleteModalOpen" sc-modal-type="delete" sc-modal-text="Are you sure you want to delete the '{{ course.title }}' Course?" sc-modal-yes="wpr.deleteCourse(courseId);"></sc-modal>
 
 </div>

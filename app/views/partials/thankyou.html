@@ -5,8 +5,8 @@
 			<h2>Thank you and welcome to Coderfront!</h2>
 			<p>Now it's time to grab a cup of coffee, get comfortable and start learning! :)</p>
 			<p>Click the link below to go to your course:</p>
-			<p class="thankyou-course-loading" ng-if="!thankyou.courseLoaded">Loading...</p>
-			<a ng-if="thankyou.courseLoaded" class="thankyou-course-access" ui-sref="backend.welcome({courseId: thankyou.courseId})">Go to Your Course</a>
+			<p class="thankyou-course-loading" ng-if="!wpr.courseLoaded">Loading...</p>
+			<a ng-if="wpr.courseLoaded" class="thankyou-course-access" ui-sref="backend.welcome({courseId: wpr.courseId})">Go to Your Course</a>
 			<p>Going forward, you can simply login to Coderfront and go to dashboard to access all your courses.</p>
 			<p>If you have any questions or concerns, feel free to email me at seung@coderfront.com!</p>
 		</section>

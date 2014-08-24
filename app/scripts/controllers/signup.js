@@ -4,7 +4,7 @@ angular.module('coderfrontApp')
   .controller('SignupCtrl', function ($scope, Mailchimp, $timeout, $location) {
 
 		// Wrapper objects
-		$scope.signup = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.msg = {};
 
@@ -19,7 +19,7 @@ angular.module('coderfrontApp')
 		// Add the subscriber to Mailchimp
 		var listId = 'b674b6a90f'; // Mailing list
 
-		$scope.addToMailchimp = function() {
+		$scope.wpr.addToMailchimp = function() {
 			$scope.btn.loading = true;
 
 			Mailchimp.subscribe(listId, $scope.formData.subscriber)

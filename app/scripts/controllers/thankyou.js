@@ -1,33 +1,26 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('ThankyouCtrl', function ($scope, $stateParams, FIREBASE_URL, $firebase, $firebaseSimpleLogin, $location) {
+  .controller('ThankyouCtrl', function ($scope, $stateParams, Course, Auth, $location) {
     
 		// Wrapper object
-		$scope.thankyou = {};
+		$scope.wpr = {};
 
 		// Get the courseId
-		$scope.thankyou.courseId = $stateParams.courseId;
+		$scope.wpr.courseId = $stateParams.courseId;
 
 		// Get the course
-		var courseRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.thankyou.courseId);
-		var course = $firebase(courseRef);
-		var courseObj = course.$asObject();
-
-		courseObj.$loaded()
-			.then(function() {
-				$scope.thankyou.courseObj = courseObj;
-				$scope.thankyou.courseLoaded = true;
+		Course.find($scope.wpr.courseId)
+			.then(function(courseObj) {
+				$scope.wpr.courseObj = courseObj;
+				$scope.wpr.courseLoaded = true;
 			});
 
 		// Make sure the user is logged in
 		// If not, send them back to home
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
-
-    loginObj.$getCurrentUser()
-			.then(function(user) {
-				if (user === null) {
+		Auth.signedIn()
+			.then(function(result) {
+				if (result === false) {
 					$location.path('/');
 				}
 			});

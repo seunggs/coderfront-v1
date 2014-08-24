@@ -10,11 +10,11 @@
 					<form class="add-course-form" ng-submit="wpr.createCourse()">
 						<div class="form-group">
 							<h3>Add Course</h3>
-							<div btn-class="btn btn-add-course btn-square btn-lightest-grey btn-block btn-progress" btn-text="<i class='fa fa-cloud-upload'></i>&nbsp;Upload Thumb" s3-upload bucket="coderfront" ng-model="newCourse.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
+							<div btn-class="btn btn-add-course btn-square btn-lightest-grey btn-block btn-progress" btn-text="<i class='fa fa-cloud-upload'></i>&nbsp;Upload Thumb" s3-upload bucket="coderfront" ng-model="formData.thumbUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'thumbs/'}"></div>
 							<label>Course Title</label>
-							<input class="form-control" type="text" ng-model="newCourse.title" required>
+							<input class="form-control" type="text" ng-model="formData.title" required>
 							<label>Course Intro</label>
-							<textarea class="form-control" ng-model="newCourse.intro" rows="10" required></textarea>
+							<textarea class="form-control" ng-model="formData.intro" rows="10" required></textarea>
 							<button class="btn btn-primary btn-block" type="submit"><sc-btn-loading loading-toggle="btn.loading">Create Course</sc-btn-loading></button>
 						</div>
 					</form>

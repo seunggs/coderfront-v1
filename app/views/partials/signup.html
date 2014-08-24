@@ -1,7 +1,5 @@
 <div class="container-fluid signup-wrapper">
 
-	<sc-progressbar-top progress-width="signup.progressWidth"></sc-progressbar-top>
-
 	<section class="logo">
 		<a ui-sref="home" tabindex="-1"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
 	</section>
@@ -9,7 +7,7 @@
 	<!-- signup step 1-->
 	<article class="signup-bg signup-bg-color1">
 		<section class="signup-container absolute-center">
-			<form class="signup-form-container" ng-submit="addToMailchimp()">
+			<form class="signup-form-container" ng-submit="wpr.addToMailchimp()">
 				<label for="fullname">Sign up now to be notified when the course is ready.</label>
 				<input class="signup-form signup-name" type="text" name="fullname" placeholder="Full Name" ng-model="formData.subscriber.fullname" autofocus required>
 				<input class="signup-form signup-email" type="email" name="email" placeholder="Email" ng-model="formData.subscriber.email" required>

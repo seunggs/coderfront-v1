@@ -2,11 +2,11 @@
 	<div class="view-unit-col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 		<section class="view-unit">
-			<h3>{{ viewUnit.unit.title }}</h3>
-			<p>{{ viewUnit.unit.intro }}</p>
+			<h3>{{ wpr.unit.title }}</h3>
+			<div ng-bind-html="wpr.unit.intro"></div>
 
 			<!-- page loading modal -->
-			<sc-page-loading page-loading="viewUnit.pageLoading"></sc-page-loading>
+			<sc-page-loading page-loading="wpr.pageLoading"></sc-page-loading>
 		</section>
 
 	</div>

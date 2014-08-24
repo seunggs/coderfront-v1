@@ -1,76 +1,45 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('ViewLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, FIREBASE_URL, $firebase, $firebaseSimpleLogin) {
+  .controller('ViewLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, User) {
 		// Wrapper objects
-		$scope.viewLesson = {};
+		$scope.wpr = {};
 
-		// Find the right unit & course
-		$scope.viewLesson.courseId = $stateParams.courseId;
-		$scope.viewLesson.unitId = $stateParams.unitId;
+		// Get the ids
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.unitId = $stateParams.unitId;
+		$scope.wpr.lessonId = $stateParams.lessonId;
 
 		// Show page loading while Firebase loads
-		// And initiate Firebase related variables once it loads
-		$scope.viewLesson.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.viewLesson.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
+		// Get this lesson
+		Lesson.find($scope.wpr.courseId, $scope.wpr.unitId, $scope.wpr.lessonId)
+			.then(function(lessonObj) {
+				// Once the lesson is loaded, turn off page loading
+				$scope.wpr.pageLoading = false;
 
-    unitsArray.$loaded()
-			.then(function() {
-				// Stores all units in an array
-				$scope.viewLesson.unitsArray = unitsArray;
-				
-				// Get this specific unit
-				$scope.viewLesson.unit = Unit.find($scope.viewLesson.unitId, $scope.viewLesson.unitsArray);
-			});
-
-		// Find the right lesson
-		$scope.viewLesson.lessonId = $stateParams.lessonId;
-
-    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.viewLesson.courseId + '/units/' + $scope.viewLesson.unitId + '/lessons');
-    var lessonsArray = $firebase(lessonsRef).$asArray();
-
-    lessonsArray.$loaded()
-			.then(function() {
-				$scope.viewLesson.pageLoading = false;
-				
-				// Stores all lessons in an array
-				$scope.viewLesson.lessonsArray = lessonsArray;
-				
-				// Get this specific lesson
-				$scope.viewLesson.lesson = Lesson.find($stateParams.lessonId, $scope.viewLesson.lessonsArray);
+				$scope.wpr.lesson = lessonObj;
 			});
 
 		// Save this lesson as the last viewed lesson
-		// First, get user uid
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
 
-    loginObj.$getCurrentUser()
-			.then(function(user) {
-		    // Then get userData
-				var userDataRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
-				var userData = $firebase(userDataRef);
-				var userDataObj = userData.$asObject();
+				$scope.wpr.userDataObj.lastViewed = {
+					courseId: $stateParams.courseId,
+					unitId: $stateParams.unitId,
+					lessonId: $stateParams.lessonId
+				};
 
-				userDataObj.$loaded()
+				User.update($scope.wpr.userDataObj)
 					.then(function() {
-						// Save this lesson as the last viewed lesson
-						$scope.viewLesson.lastViewed = {
-							courseId: $stateParams.courseId,
-							unitId: $stateParams.unitId,
-							lessonId: $stateParams.lessonId
-						};
-						
-						userData.$update({lastViewed: $scope.viewLesson.lastViewed})
-							.then(function() {
-								console.log('successfully updated last viewed course, unit and lesson');
-							}, function() {
-								console.log('failed to updated last viewed course, unit and lesson');
-							});
+						console.log('successfully updated last viewed lesson');
+					}, function() {
+						console.log('failed to updated last viewed lesson');
 					});
-			});
 
+			});
 
   });

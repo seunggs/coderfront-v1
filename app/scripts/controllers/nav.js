@@ -1,86 +1,95 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('NavCtrl', function ($scope, Auth, $location, $rootScope, FIREBASE_URL, $firebase, $firebaseSimpleLogin) {
+  .controller('NavCtrl', function ($scope, Auth, $location, $rootScope, User, NavActive) {
 		// Wrapper object
-		$scope.nav = {};
+		$scope.wpr = {};
 
 		// Expose user to scope
-		$scope.nav.user = Auth.getUser();
-		$scope.nav.userSignedIn = Auth.signedIn();
+		Auth.getUser()
+			.then(function(authUser) {
+				$scope.wpr.user = authUser;
+			});
 
-		// Expose user to scope when login event is fired
+		Auth.signedIn()
+			.then(function(result) {
+				$scope.wpr.userSignedIn = result;
+			}, function(result) {
+				$scope.wpr.userSignedIn = result;
+			});
+
+		// Expose user to scope again when login event is fired
 		$rootScope.$on('$firebaseSimpleLogin:login', function() {
-			$scope.nav.user = Auth.getUser();
-			$scope.nav.userSignedIn = Auth.signedIn();
+			Auth.getUser()
+				.then(function(authUser) {
+					$scope.wpr.user = authUser;
+				});
+
+			Auth.signedIn()
+				.then(function(result) {
+					$scope.wpr.userSignedIn = result;
+				}, function(result) {
+					$scope.wpr.userSignedIn = result;
+				});
 		});
 
-		// Expose user to scope when logout event is fired
+		// Expose user to scope again when logout event is fired
 		$rootScope.$on('$firebaseSimpleLogin:logout', function() {
-			$scope.nav.user = Auth.getUser();
-			$scope.nav.userSignedIn = Auth.signedIn();
+			Auth.getUser()
+				.then(function(authUser) {
+					$scope.wpr.user = authUser;
+				});
+
+			Auth.signedIn()
+				.then(function(result) {
+					$scope.wpr.userSignedIn = result;
+				}, function(result) {
+					$scope.wpr.userSignedIn = result;
+				});
 		});
 
 		// Initiate 'hasCourse' (to determine whether the user bought any courses)
 		// Dashboard button is only shown if they bought a course
-		$scope.nav.hasCourses = false;
+		$scope.wpr.hasCourses = false;
 
 		// See if this user bought any courses
-		// First, get user uid
-    var rootRef = new Firebase(FIREBASE_URL);
-    var loginObj = $firebaseSimpleLogin(rootRef);
+    User.thisUser()
+			.then(function(userDataObj) {
+				// Now see if this user bought any courses
+				$scope.wpr.hasCourses = userDataObj.courses !== undefined ? true : false;
 
-    loginObj.$getCurrentUser()
-			.then(function(user) {
-				if (user === null) {
-					return;
-				}
-				
-		    // Then get userData
-				var userDataRef = new Firebase(FIREBASE_URL + 'users/' + user.uid);
-				var userData = $firebase(userDataRef);
-				var userDataObj = userData.$asObject();
+				// Get last viewed unit or lesson for dashboard ui-sref
+				if(userDataObj.lastViewed !== undefined) {
+					$scope.wpr.lastViewedCourseId = userDataObj.lastViewed.courseId;
+					$scope.wpr.lastViewedUnitId = userDataObj.lastViewed.unitId;
+					$scope.wpr.lastViewedLessonId = userDataObj.lastViewed.lessonId;
 
-				userDataObj.$loaded()
-					.then(function() {
-						// Now see if this user bought any courses
-						if(userDataObj.courses !== undefined) {
-							$scope.nav.hasCourses = true;
+					// See if lessonId is null
+					// If so, the last thing the user viewed is a unit
+					if($scope.wpr.lastViewedUnitId === 'NA') {
+						// then show welcome page
+						$scope.wpr.lastViewed = 'course';
+					} else {
+						// if unitId is not NA, then check to see if lessonId is NA
+						if($scope.wpr.lastViewedLessonId === 'NA') {
+							$scope.wpr.lastViewed = 'unit';
 						} else {
-							$scope.nav.hasCourses = false;
+							$scope.wpr.lastViewed = 'lesson';
 						}
-
-						// Get last viewed unit or lesson for dashboard ui-sref
-						if(userDataObj.lastViewed !== undefined) {
-							$scope.nav.lastViewedCourseId = userDataObj.lastViewed.courseId;
-							$scope.nav.lastViewedUnitId = userDataObj.lastViewed.unitId;
-							$scope.nav.lastViewedLessonId = userDataObj.lastViewed.lessonId;
-
-							// See if lessonId is null
-							// If so, the last thing the user viewed is a unit
-							if($scope.nav.lastViewedUnitId === 'NA') {
-								// then show welcome page
-								$scope.nav.lastViewed = 'course';
-							} else {
-								// if unitId is not NA, then check to see if lessonId is NA
-								if($scope.nav.lastViewedLessonId === 'NA') {
-									$scope.nav.lastViewed = 'unit';
-								} else {
-									$scope.nav.lastViewed = 'lesson';
-								}
-							}
-						}
-
-					});
+					}
+				}
 			});
 
-		// Set active navItem
-		$scope.nav.setActive = function(navItem) {
-			$scope.nav.active = navItem;
+		// Get active item
+		$scope.wpr.active = NavActive.getActive();
+		
+		// Set active item
+		$scope.wpr.setActive = function(navItem) {
+			NavActive.setActive(navItem);
 		};
 
 		// Handle logout
-		$scope.nav.logout = function() {
+		$scope.wpr.logout = function() {
 			Auth.logout();
 			$location.path('/');
 		};

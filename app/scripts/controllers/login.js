@@ -3,7 +3,7 @@
 angular.module('coderfrontApp')
   .controller('LoginCtrl', function ($scope, $timeout, Auth, $window) {
 		// Wrapper object
-		$scope.login = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.msg = {};
 
@@ -16,7 +16,7 @@ angular.module('coderfrontApp')
 		};
 
 		// Sign in function
-		$scope.login.signIn = function() {
+		$scope.wpr.signIn = function() {
 			$scope.btn.loading = true;
 
 			Auth.login($scope.formData.existingUser)

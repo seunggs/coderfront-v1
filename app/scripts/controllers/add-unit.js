@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout) {
+  .controller('AddUnitCtrl', function ($scope, $stateParams, Course, Unit, $location, $timeout, User, TextEditor) {
 
 		// Wrapper objects
 		$scope.wpr = {};
@@ -45,6 +45,9 @@ angular.module('coderfrontApp')
 		// Add a new unit
 		$scope.wpr.createUnit = function() {
 			$scope.btn.loading = true;
+
+			// Add paragraph tags to a body of text 
+			$scope.formData.unit.intro = TextEditor.addParagraphTags($scope.formData.unit.intro);
 
 			Unit.create($scope.wpr.courseId, $scope.formData.unit)
 				.then(function(ref) {
@@ -139,5 +142,15 @@ angular.module('coderfrontApp')
 					$scope.wpr.createUnit();
 				});
 		};
+
+		// See if this user is an admin and kick them out to home if not
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
+				if ($scope.wpr.userDataObj.admin === false) {
+					// If the user is not admin, kick them out to home
+					$location.path('/');
+				}
+			});
 
   });

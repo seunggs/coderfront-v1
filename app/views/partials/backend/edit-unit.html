@@ -2,8 +2,8 @@
 	<div class="edit-unit-col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 		<section class="edit-unit">
-			<h3>Edit Unit {{ editUnit.unit.unitNum }}</h3>
-			<form ng-submit="editUnit.updateUnit()">
+			<h3>Edit Unit {{ wpr.unit.unitNum }}</h3>
+			<form ng-submit="wpr.updateUnit()">
 				<div class="form-group">
 					<label>Unit Title</label>
 					<input class="form-control" type="text" ng-model="formData.unit.title" required>
@@ -14,7 +14,7 @@
 			</form>
 
 			<!-- page loading modal -->
-			<sc-page-loading page-loading="editUnit.pageLoading"></sc-page-loading>
+			<sc-page-loading page-loading="wpr.pageLoading"></sc-page-loading>
 
 		</section>
 

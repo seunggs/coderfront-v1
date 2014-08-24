@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('EditUnitCtrl', function ($scope, $stateParams, Unit, $location, $timeout, FIREBASE_URL, $firebase) {
+  .controller('EditUnitCtrl', function ($scope, $stateParams, Unit, $location, $timeout, User) {
 
 		// Wrapper objects
-		$scope.editUnit = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.formData.unit = {};
 
@@ -17,35 +17,31 @@ angular.module('coderfrontApp')
 			}, delay);
 		};
 
-		// Find the right course and unit
-		$scope.editUnit.courseId = $stateParams.courseId;
-		$scope.editUnit.unitId = $stateParams.unitId;
+		// Get the ids
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.unitId = $stateParams.unitId;
 
 		// Show page loading while Firebase loads
-		// And initiate Firebase related variables once Firebase loads
-		$scope.editUnit.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.editUnit.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
+		// Get this unit
+		Unit.find($scope.wpr.courseId, $scope.wpr.unitId)
+			.then(function(unitObj) {
+				// Once units array loads, turn off page loading
+				$scope.wpr.pageLoading = false;
 
-    unitsArray.$loaded()
-			.then(function() {
-				$scope.editUnit.pageLoading = false;
-
-				// Stores all units in an array
-				$scope.editUnit.unitsArray = unitsArray;
 				// Get this specific unit
-				$scope.editUnit.unit = Unit.find($scope.editUnit.unitId, $scope.editUnit.unitsArray);
+				$scope.wpr.unit = unitObj;
 
 				// Initialize formData with this unit obj
-				$scope.formData.unit = $scope.editUnit.unit;
+				$scope.formData.unit = $scope.wpr.unit;
 			});
 
 		// Update unit
-		$scope.editUnit.updateUnit = function() {
+		$scope.wpr.updateUnit = function() {
 			$scope.btn.loading = true; // button control
 
-			Unit.update($scope.editUnit.courseId, $scope.editUnit.unit.$id, $scope.formData.unit)
+			Unit.update($scope.wpr.courseId, $scope.wpr.unitId, $scope.formData.unit)
 				.then(function() {
 					// Success callback
 
@@ -56,7 +52,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-unit after 1.5s
 					$timeout(function() {
-						$location.path('/backend/' + $scope.editUnit.courseId + '/view-unit/' + $scope.editUnit.unitId);
+						$location.path('/backend/' + $scope.wpr.courseId + '/view-unit/' + $scope.wpr.unitId);
 					}, 1500);
 
 				}, function() {
@@ -69,5 +65,15 @@ angular.module('coderfrontApp')
 					console.log('Error');
 				});
 		};
+
+		// See if this user is an admin and kick them out to home if not
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
+				if ($scope.wpr.userDataObj.admin === false) {
+					// If the user is not admin, kick them out to home
+					$location.path('/');
+				}
+			});
 
   });

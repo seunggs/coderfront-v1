@@ -1,34 +1,37 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('MyaccountCtrl', function ($scope, User, $stateParams) {
+  .controller('MyaccountCtrl', function ($scope, User) {
 		
 		// Wrapper object
-		$scope.myaccount = {};
-		$scope.myaccount.userData = {};
+		$scope.wpr = {};
+		$scope.wpr.userData = {};
 		$scope.formData = {};
 		$scope.formData.user = {};
 		$scope.msg = {};
 
 		// Edit control
-		$scope.myaccount.edit = false;
+		$scope.wpr.edit = false;
 
 		// Get user
 		// Expose usersObj to scope
-		$scope.myaccount.usersObj = User.getAll();
+		$scope.wpr.usersObj = User.getAll();
 
 		// Get this specific user
-		$scope.myaccount.userData = User.find($stateParams.userUid);
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userData = userDataObj;
+			});
 
 		// Update full name
-		$scope.myaccount.updateFullname = function() {
+		$scope.wpr.updateFullname = function() {
 			// Update user data with form input
-			$scope.myaccount.userData.fullname = $scope.formData.user.fullname;
+			$scope.wpr.userData.fullname = $scope.formData.user.fullname;
 
-			User.update($stateParams.userUid, $scope.myaccount.userData)
+			User.update($scope.wpr.userData)
 				.then(function() {
 					// success callback
-					$scope.myaccount.edit = false;
+					$scope.wpr.edit = false;
 				}, function() {
 					// error callback
 					console.log('Something went wrong while updating fullname');
@@ -36,11 +39,11 @@ angular.module('coderfrontApp')
 		};
 
 		// Update avatar
-		$scope.myaccount.addAvatar = function() {
+		$scope.wpr.addAvatar = function() {
 			// Update user data with form input
-			$scope.myaccount.userData.avatarUrl = $scope.formData.user.avatarUrl;
+			$scope.wpr.userData.avatarUrl = $scope.formData.user.avatarUrl;
 
-			User.update($stateParams.userUid, $scope.myaccount.userData)
+			User.update($scope.wpr.userData)
 				.then(function() {
 					// success callback
 					console.log('successfully updated avatar URL');

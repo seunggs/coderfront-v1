@@ -3,7 +3,7 @@
 angular.module('coderfrontApp')
   .controller('ChangepasswordCtrl', function ($scope, $timeout, $location, Auth) {
 		// Wrapper object
-		$scope.changepassword = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.msg = {};
 
@@ -16,23 +16,23 @@ angular.module('coderfrontApp')
 		};
 
 		// Initialize focus
-		$scope.changepassword.focus = {
+		$scope.wpr.focus = {
 			step1: true
 		};
 
     // Step control
-    $scope.changepassword.totalSteps = 2;
-    $scope.changepassword.step = 1;
+    $scope.wpr.totalSteps = 2;
+    $scope.wpr.step = 1;
 
-    $scope.changepassword.showStep = function(step) {
-			$scope.changepassword.step = step;
+    $scope.wpr.showStep = function(step) {
+			$scope.wpr.step = step;
 	
 	    // Set top progressbar width
-			$scope.changepassword.progressWidth = ($scope.changepassword.step-1) / $scope.changepassword.totalSteps;
+			$scope.wpr.progressWidth = ($scope.wpr.step-1) / $scope.wpr.totalSteps;
 
 			// Set focus 
-			$scope.changepassword.focus.step1 = false;
-			$scope.changepassword.focus.step2 = true;
+			$scope.wpr.focus.step1 = false;
+			$scope.wpr.focus.step2 = true;
     };
 
 		// Get parameter from URL
@@ -46,7 +46,7 @@ angular.module('coderfrontApp')
 		};
 
 		// Change password
-		$scope.changepassword.changePassword = function() {
+		$scope.wpr.changePassword = function() {
 			if (checkConfirmPassword()) {
 				$scope.btn.loading = true;
 
@@ -57,7 +57,7 @@ angular.module('coderfrontApp')
 						$scope.btn.success = true;
 						btnReset(1000);
 
-						$scope.changepassword.progressWidth = 1;
+						$scope.wpr.progressWidth = 1;
 
 						$scope.msg.success= 'Success! Your password was successfully updated.';
 
@@ -85,7 +85,7 @@ angular.module('coderfrontApp')
 
 						// Send back to first step after short delay
 						$timeout(function() {
-							$scope.changepassword.showStep(1);
+							$scope.wpr.showStep(1);
 							$scope.msg.error = '';
 						}, 1500);
 

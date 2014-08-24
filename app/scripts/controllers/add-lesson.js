@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AddLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, $location, $timeout) {
+  .controller('AddLessonCtrl', function ($scope, $stateParams, Course, Unit, Lesson, $location, $timeout, User) {
 
 		// Wrapper objects
 		$scope.wpr = {};
@@ -148,5 +148,15 @@ angular.module('coderfrontApp')
 					$scope.wpr.createLesson();
 				});
 		};
+
+		// See if this user is an admin and kick them out to home if not
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
+				if ($scope.wpr.userDataObj.admin === false) {
+					// If the user is not admin, kick them out to home
+					$location.path('/');
+				}
+			});
 
   });

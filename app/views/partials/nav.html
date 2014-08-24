@@ -4,22 +4,21 @@
 	</section>
 
   <ul class="nav-custom nav-darkbg pull-right">
-    <!-- Decide whether to show sign-in or user's name on nav bar -->
-    <li ng-if="nav.userSignedIn"><a class="my-account" ui-sref="myaccount({userUid: nav.user.uid})" ng-click="nav.setActive(' ')">My Account</a></li>
-    <li ng-if="nav.userSignedIn && nav.hasCourses">
+    <!-- Decide whether to show sign-in or not -->
+    <li ng-if="wpr.userSignedIn"><a class="my-account" ng-class="{'nav-active': wpr.active === 'myaccount'}" ui-sref="myaccount({userUid: wpr.user.uid})" ng-click="wpr.setActive('myaccount')">My Account</a></li>
+    <li ng-if="wpr.userSignedIn && wpr.hasCourses">
     	<!-- determine whether the last viewed thing is a course, unit or lesson -->
-        <a ng-if="nav.lastViewed === 'course'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.welcome({courseId: nav.lastViewedCourseId})">Open Dashboard</a>
-    	<a ng-if="nav.lastViewed === 'unit'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-unit({courseId: nav.lastViewedCourseId, unitId: nav.lastViewedUnitId})">Open Dashboard</a>
-    	<a ng-if="nav.lastViewed === 'lesson'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-lesson({courseId: nav.lastViewedCourseId, unitId: nav.lastViewedUnitId, lessonId: nav.lastViewedLessonId})">Open Dashboard</a>
+      <a ng-if="wpr.lastViewed === 'course'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.welcome({courseId: wpr.lastViewedCourseId})">Open Dashboard</a>
+    	<a ng-if="wpr.lastViewed === 'unit'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-unit({courseId: wpr.lastViewedCourseId, unitId: wpr.lastViewedUnitId})">Open Dashboard</a>
+    	<a ng-if="wpr.lastViewed === 'lesson'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-lesson({courseId: wpr.lastViewedCourseId, unitId: wpr.lastViewedUnitId, lessonId: wpr.lastViewedLessonId})">Open Dashboard</a>
     </li>
-    <li ng-if="nav.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-logout" class="nav-logout" ng-click="nav.logout()">Log Out</a></li>
-    <li ng-if="!nav.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-signin" ui-sref="login">Sign In</a></li>
+    <li ng-if="wpr.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-logout" class="nav-logout" ng-click="wpr.logout()">Log Out</a></li>
+    <li ng-if="!wpr.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-signin" ui-sref="login">Sign In</a></li>
   </ul>
 
-	<ul class="nav-custom nav-darkbg pull-right">
-		<li><a ng-class="{'nav-active': nav.active === 'home'}" ui-sref="home" ng-click="nav.setActive('home')">Home</a></li>
-		<li><a ng-class="{'nav-active': nav.active === 'about'}" ui-sref="about" ng-click="nav.setActive('about')">About</a></li>
-		<li><a ng-class="{'nav-active': nav.active === 'contact'}" ui-sref="contact" ng-click="nav.setActive('contact')">Contact</a></li>
-	</ul>
-	<div class="nav-bottom"></div>
+  <ul class="nav-custom nav-darkbg pull-right">
+  	<li><a ng-class="{'nav-active': wpr.active === 'home'}" ui-sref="home" ng-click="wpr.setActive('home')">Home</a></li>
+  	<li><a ng-class="{'nav-active': wpr.active === 'about'}" ui-sref="about" ng-click="wpr.setActive('about')">About</a></li>
+  	<li><a ng-class="{'nav-active': wpr.active === 'contact'}" ui-sref="contact" ng-click="wpr.setActive('contact')">Contact</a></li>
+  </ul>
 </div>

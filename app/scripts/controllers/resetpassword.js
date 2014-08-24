@@ -3,7 +3,7 @@
 angular.module('coderfrontApp')
   .controller('ResetpasswordCtrl', function ($scope, $timeout, Auth, $location) {
 		// Wrapper object
-		$scope.resetpassword = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.msg = {};
 
@@ -16,7 +16,7 @@ angular.module('coderfrontApp')
 		};
 
     // Send password reset email
-    $scope.resetpassword.sendPasswordResetEmail = function() {
+    $scope.wpr.sendPasswordResetEmail = function() {
 			$scope.btn.loading = true;
 
 			Auth.sendPasswordResetEmail($scope.formData.user.email)

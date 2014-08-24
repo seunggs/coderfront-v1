@@ -5,7 +5,7 @@ angular.module('coderfrontApp')
 
     var Lesson = {
       alreadyExists: function(courseId, unitId, lesson) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -32,7 +32,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       arrayLoaded: function(courseId, unitId) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -44,7 +44,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       create: function(courseId, unitId, lesson) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -59,7 +59,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       overwrite: function(courseId, unitId, lesson, lessonIdToRemove) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -78,7 +78,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       insert: function(courseId, unitId, lesson) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -100,7 +100,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       update: function(courseId, unitId, oldLessonId, newLesson) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -118,7 +118,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       array: function(courseId, unitId) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -132,7 +132,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       find: function(courseId, unitId, lessonId) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 
@@ -143,7 +143,7 @@ angular.module('coderfrontApp')
             var index = lessonsArray.$indexFor(lessonId);
 
             if (index === -1) {
-              deferred.reject(-1);
+              deferred.reject();
             } else {
               deferred.resolve(lessonsArray[index]);
             }
@@ -152,7 +152,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       remove: function(courseId, unitId, lessonId, lesson) {
-        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + 'units' + unitId + '/lessons');
+        var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + courseId + '/units/' + unitId + '/lessons');
         var lessons = $firebase(lessonsRef);
         var lessonsArray = lessons.$asArray();
 

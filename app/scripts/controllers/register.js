@@ -4,7 +4,7 @@ angular.module('coderfrontApp')
   .controller('RegisterCtrl', function ($scope, $timeout, $window, Auth, User) {
 
 		// Wrapper object
-		$scope.register = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.msg = {};
 
@@ -17,23 +17,23 @@ angular.module('coderfrontApp')
 		};
 
 		// Initialize focus
-		$scope.register.focus = {
+		$scope.wpr.focus = {
 			step1: true
 		};
 
     // Step control
-    $scope.register.totalSteps = 2;
-    $scope.register.step = 1; // initialize first step
+    $scope.wpr.totalSteps = 2;
+    $scope.wpr.step = 1; // initialize first step
 
-    $scope.register.showStep = function(step) {
-			$scope.register.step = step;
+    $scope.wpr.showStep = function(step) {
+			$scope.wpr.step = step;
 	
 	    // Set top progressbar width
-			$scope.register.progressWidth = ($scope.register.step-1) / $scope.register.totalSteps;
+			$scope.wpr.progressWidth = ($scope.wpr.step-1) / $scope.wpr.totalSteps;
 
 			// Set focus 
-			$scope.register.focus.step1 = false;
-			$scope.register.focus.step2 = true;
+			$scope.wpr.focus.step1 = false;
+			$scope.wpr.focus.step2 = true;
 		};
 
 		// Check if password = confirmPassword
@@ -42,7 +42,7 @@ angular.module('coderfrontApp')
 		};
 
 		// Create user
-		$scope.register.createUser = function() {
+		$scope.wpr.createUser = function() {
 			if (checkConfirmPassword()) {
 				$scope.btn.loading = true;
 
@@ -53,7 +53,7 @@ angular.module('coderfrontApp')
 						$scope.formData.userData.email = $scope.formData.user.email;
 						$scope.formData.userData.admin = false;
 
-						User.create(user.uid, $scope.formData.userData)
+						User.create($scope.formData.userData)
 							.then(function() {
 								console.log('Other user data saved successfully');
 							}, function() {
@@ -72,7 +72,7 @@ angular.module('coderfrontApp')
 						$scope.btn.loading = false;
 						btnReset(1000);
 
-						$scope.register.progressWidth = 1;
+						$scope.wpr.progressWidth = 1;
 
 						$scope.msg.success = 'Awesome - registration was successful! :)';
 
@@ -100,7 +100,7 @@ angular.module('coderfrontApp')
 
 						// Send back to first step after short delay
 						$timeout(function() {
-							$scope.register.showStep(1);
+							$scope.wpr.showStep(1);
 							$scope.msg.error = '';
 						}, 2000);
 					});

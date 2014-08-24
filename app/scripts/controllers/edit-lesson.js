@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('EditLessonCtrl', function ($scope, $stateParams, Unit, Lesson, $location, $timeout, FIREBASE_URL, $firebase) {
+  .controller('EditLessonCtrl', function ($scope, $stateParams, Unit, Lesson, $location, $timeout, User) {
 
 		// Wrapper objects
-		$scope.editLesson = {};
+		$scope.wpr = {};
 		$scope.formData = {};
 		$scope.formData.lesson = {};
 
@@ -16,49 +16,36 @@ angular.module('coderfrontApp')
 			}, delay);
 		};
 
-		// Find the right unit and lesson
-		$scope.editLesson.courseId = $stateParams.courseId;
-		$scope.editLesson.unitId = $stateParams.unitId;
-		$scope.editLesson.lessonId = $stateParams.lessonId;
+		// Get all ids
+		$scope.wpr.courseId = $stateParams.courseId;
+		$scope.wpr.unitId = $stateParams.unitId;
+		$scope.wpr.lessonId = $stateParams.lessonId;
 
 		// Show page loading while Firebase loads
-		// And initiate Firebase related variables once Firebase loads
-		$scope.editLesson.pageLoading = true;
+		$scope.wpr.pageLoading = true;
 
-    var unitsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.editLesson.courseId + '/units');
-    var unitsArray = $firebase(unitsRef).$asArray();
-
-    unitsArray.$loaded()
-			.then(function() {
-				// Stores all units in an array
-				$scope.editLesson.unitsArray = unitsArray;
-				// Get this specific unit
-				$scope.editLesson.unit = Unit.find($scope.editLesson.unitId, $scope.editLesson.unitsArray);
-
+		// Find this unit
+		Unit.find($scope.wpr.courseId, $scope.wpr.unitId)
+			.then(function(unitObj) {
+				$scope.wpr.unit = unitObj;
 			});
 
-    var lessonsRef = new Firebase(FIREBASE_URL + 'courses/' + $scope.editLesson.courseId + '/units/' + $scope.editLesson.unitId + '/lessons');
-    var lessonsArray = $firebase(lessonsRef).$asArray();
+		// Find this lesson
+		Lesson.find($scope.wpr.courseId, $scope.wpr.unitId, $scope.wpr.lessonId)
+			.then(function(lessonObj) {
+				// Once lesson is loaded, turn of page loading
+				$scope.wpr.pageLoading = false;
 
-    lessonsArray.$loaded()
-			.then(function() {
-				$scope.editLesson.pageLoading = false;
-
-				// Stores all lessons in an array
-				$scope.editLesson.lessonsArray = lessonsArray;
-
-				// Find this specific lsson
-				$scope.editLesson.lesson = Lesson.find($stateParams.lessonId, $scope.editLesson.lessonsArray);
-
+				$scope.wpr.lesson = lessonObj;
 				// Initialize formData with this lesson obj
-				$scope.formData.lesson = $scope.editLesson.lesson;
+				$scope.formData.lesson = $scope.wpr.lesson;
 				$scope.formData.lesson.bodyHTML = '';
 			});
 
 		// Update lesson
-		$scope.editLesson.updateLesson = function() {
+		$scope.wpr.updateLesson = function() {
 			$scope.btn.loading = true; // button control
-			Lesson.update($scope.editLesson.lesson.$id, $scope.formData.lesson, $scope.editLesson.lessonsArray)
+			Lesson.update($scope.wpr.courseId, $scope.wpr.unitId, $scope.wpr.lesson.$id, $scope.formData.lesson)
 				.then(function() {
 					// Success callback
 
@@ -69,7 +56,7 @@ angular.module('coderfrontApp')
 
 					// Relocate to view-lesson after 1.5s
 					$timeout(function() {
-						$location.path('/backend/' + $scope.editLesson.courseId + '/view-lesson/' + $scope.editLesson.unitId + '/' + $scope.editLesson.lessonId);
+						$location.path('/backend/' + $scope.wpr.courseId + '/view-lesson/' + $scope.wpr.unitId + '/' + $scope.wpr.lessonId);
 					}, 1500);
 
 				}, function() {
@@ -82,5 +69,15 @@ angular.module('coderfrontApp')
 					console.log('Error');
 				});
 		};
+
+		// See if this user is an admin and kick them out to home if not
+		User.thisUser()
+			.then(function(userDataObj) {
+				$scope.wpr.userDataObj = userDataObj;
+				if ($scope.wpr.userDataObj.admin === false) {
+					// If the user is not admin, kick them out to home
+					$location.path('/');
+				}
+			});
 
   });

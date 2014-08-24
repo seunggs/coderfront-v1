@@ -2,7 +2,7 @@
 
 angular.module('coderfrontApp')
   .directive('scPageLoading', function () {
-		// Requires 'page-loading', 'show-page-loading', 'icon-loading-lg' class
+		// Requires 'page-loading', 'show-page-loading', 'icon-loading-lg' class in _custom-styling.sass
 		// Attr: pageLoading -> show page loading when it's true
 		// Ex usage: <sc-page-loading page-loading="pageLoading"></sc-page-loading>
     return {

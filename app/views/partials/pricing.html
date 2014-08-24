@@ -25,10 +25,10 @@
 
 		<section class="pricing-btn-block col-md-6 col-md-offset-3">
 			<!-- 2 types of btns here: 1) buy btn; 2) disabled btn -->
-			<form ng-submit="pricing.openCheckout()">
-				<sc-loading-btn success="btn.success" loading="btn.loading" btn-type="solid" btn-class="btn-sc btn-primary btn-loading btn-lg btn-pricing" ng-if="pricing.enableBuyBtn">Get Immediate Access</sc-loading-btn>
+			<form ng-submit="wpr.openCheckout()">
+				<sc-loading-btn success="btn.success" loading="btn.loading" btn-type="solid" btn-class="btn-sc btn-primary btn-loading btn-lg btn-pricing" ng-if="wpr.enableBuyBtn">Get Immediate Access</sc-loading-btn>
 			</form>
-			<button disabled class="btn btn-primary btn-lg btn-pricing" ng-if="!pricing.enableBuyBtn"><div class="icon-loading pricing-icon-loading"></div>Please wait...</button>
+			<button disabled class="btn btn-primary btn-lg btn-pricing" ng-if="!wpr.enableBuyBtn"><div class="icon-loading pricing-icon-loading"></div>Please wait...</button>
 			<p class="pricing-caption">14-day money back guarantee</p>
 		</section>
 
@@ -37,7 +37,7 @@
 		</section>
 
 		<!-- modal for finding out if we send them to login or register before enabling purchase -->
-		<sc-modal sc-modal-open="pricing.modalOpen" sc-modal-type="alert" sc-modal-heading="You must first sign in." sc-modal-text="Are you a new user?" sc-modal-yes="pricing.sendTo('register');" sc-modal-no="pricing.sendTo('login')"></sc-modal>
+		<sc-modal sc-modal-open="wpr.modalOpen" sc-modal-type="alert" sc-modal-heading="You must first sign in." sc-modal-text="Are you a new user?" sc-modal-yes="wpr.sendTo('register');" sc-modal-no="wpr.sendTo('login')"></sc-modal>
 
 	</div>
 </div>

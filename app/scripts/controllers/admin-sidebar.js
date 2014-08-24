@@ -63,6 +63,7 @@ angular.module('coderfrontApp')
 		// Get all courses the user has purchased
 		Purchase.courses()
 			.then(function(purchasedCourses) {
+				console.log(purchasedCourses);
 				$scope.wpr.purchasedCoursesObj = purchasedCourses;
 			});
 

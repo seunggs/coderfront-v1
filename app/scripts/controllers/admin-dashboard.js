@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('AdminDashboardCtrl', function ($scope, Course, Auth, User, $location) {
+  .controller('AdminDashboardCtrl', function ($scope, Course, Auth, User, $location, TextEditor) {
 
 		// Controls "Loading..." button
 		$scope.btn = {
@@ -10,7 +10,7 @@ angular.module('coderfrontApp')
 
 		// Object wrapper for add-course
 		$scope.wpr = {};
-		$scope.newCourse = {};
+		$scope.formData = {};
 
 		// Show page loading while Firebase loads
 		// And initiate Firebase related variables once it loads
@@ -27,7 +27,11 @@ angular.module('coderfrontApp')
 		// Create course
 		$scope.wpr.createCourse = function() {
 			$scope.btn.loading = true;
-			Course.create($scope.newCourse)
+
+			// Add paragraph tags to a body of text 
+			$scope.formData.intro = TextEditor.addParagraphTags($scope.formData.intro);
+
+			Course.create($scope.formData)
 				.then(function() {
 					// Success callback
 					console.log('Successfully created course');
@@ -44,7 +48,7 @@ angular.module('coderfrontApp')
 				$scope.wpr.courses = courses;
 			});
 
-		// See if this user is an admin
+		// See if this user is an admin and kick them out to home if not
 		User.thisUser()
 			.then(function(userDataObj) {
 				$scope.wpr.userDataObj = userDataObj;

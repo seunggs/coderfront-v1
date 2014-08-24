@@ -2,30 +2,30 @@
 	<div class="view-lesson-col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
 		<section class="lesson-title">
-			<h2>{{ viewLesson.lesson.title }}</h2>
-			<h4>{{ viewLesson.lesson.subtext }}</h4>
+			<h2>{{ wpr.lesson.title }}</h2>
+			<h4>{{ wpr.lesson.subtext }}</h4>
 		</section>
 
 		<section class="lesson-details-container">
 			<div class="lesson-details-item">
 				<h5>Lesson Category</h5>
 				<hr>
-				<p>{{ viewLesson.lesson.category }}</p>
+				<p>{{ wpr.lesson.category }}</p>
 			</div>
 			<div class="lesson-details-item">
 				<h5>Est. Completion</h5>
 				<hr>
-				<p>{{ viewLesson.lesson.duration }} hours</p>
+				<p>{{ wpr.lesson.duration }} hours</p>
 			</div>
 		</section>
 
 		<section class="lesson-body">
-			<div ng-bind-html="viewLesson.lesson.bodyHTML[0]"></div>
+			<div ng-bind-html="wpr.lesson.bodyHTML[0]"></div>
 		</section>
 
 	</div>
 </div>
 
 <!-- page loading modal -->
-<sc-page-loading page-loading="viewLesson.pageLoading"></sc-page-loading>
+<sc-page-loading page-loading="wpr.pageLoading"></sc-page-loading>
 
