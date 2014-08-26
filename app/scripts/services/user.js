@@ -49,25 +49,8 @@ angular.module('coderfrontApp')
 
         return deferred.promise;
       },
-      create: function(userData) {
-        var deferred = $q.defer();
-
-        loginObj.$getCurrentUser()
-          .then(function(authUser) {
-            if (authUser === null) {
-              deferred.reject();
-            } else {
-              usersObj.$loaded()
-                .then(function() {
-                  users.$set(authUser.uid, userData)
-                    .then(deferred.resolve, deferred.reject);
-                }, function() {
-                  deferred.reject();
-                });
-            }
-          });
-
-        return deferred.promise;
+      create: function(userId, userData) {
+        return users.$set(userId, userData);
       },
       update: function(userData) {
         var deferred = $q.defer();

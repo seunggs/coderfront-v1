@@ -58,6 +58,7 @@ angular.module('coderfrontApp')
           if (value === true) {
             // Update btn type
             scope.btnType = attr.btnType;
+            console.log(scope.btnType);
 
             // Loading action
             angular.element('.btn-partial-loading').css('top', '0');

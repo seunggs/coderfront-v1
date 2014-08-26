@@ -53,7 +53,7 @@ angular.module('coderfrontApp')
 						$scope.formData.userData.email = $scope.formData.user.email;
 						$scope.formData.userData.admin = false;
 
-						User.create($scope.formData.userData)
+						User.create(user.uid, $scope.formData.userData)
 							.then(function() {
 								console.log('Other user data saved successfully');
 							}, function() {
@@ -86,6 +86,8 @@ angular.module('coderfrontApp')
 						$scope.btn.success = false;
 						$scope.btn.loading = false;
 						btnReset(1000);
+
+						console.log(error);
 
 						switch (error.code) {
 							case 'EMAIL_TAKEN':

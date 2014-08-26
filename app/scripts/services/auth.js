@@ -35,19 +35,7 @@ angular.module('coderfrontApp')
         return deferred.promise;
       },
       register: function(user) {
-        var deferred = $q.defer();
-
-        loginObj.$getCurrentUser()
-          .then(function(authUser) {
-            if (authUser === null) {
-              deferred.reject();
-            } else {
-              loginObj.$createUser(user.email, user.password)
-                .then(deferred.resolve, deferred.reject);
-            }
-          });
-
-        return deferred.promise;
+        return loginObj.$createUser(user.email, user.password);
       },
       changePassword: function(user) {
         var deferred = $q.defer();

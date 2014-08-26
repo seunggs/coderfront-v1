@@ -88,6 +88,12 @@ angular.module('coderfrontApp')
 			NavActive.setActive(navItem);
 		};
 
+    // Get userData to determine if this user is admin
+    User.thisUser()
+      .then(function(userDataObj) {
+        $scope.wpr.userDataObj = userDataObj;
+      });
+
 		// Handle logout
 		$scope.wpr.logout = function() {
 			Auth.logout();

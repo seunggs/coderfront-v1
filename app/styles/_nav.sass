@@ -9,7 +9,10 @@
   float: left
   .logo-img
     margin: 12px 0 0 15px
+    width: 136px
     height: 22px
+    +background(image-url("logo-light.png") no-repeat)
+    +background-size(100% auto)
 
 .nav-custom
   display: inline-block
@@ -38,15 +41,10 @@
     color: $nav-light
   .nav-active
     color: rgba(255,255,255,1)
-  .nav-register
-    color: $coderfront-color
-    border-color: $coderfront-color
-    margin-right: -15px
-    &:hover, &:focus
-      color: $coderfront-color-lighter
-      border-color: $coderfront-color-lighter
   .nav-signin
     margin-right: 10px
+  .nav-admin
+    margin-right: -15px
   .nav-dashboard
     margin-right: -15px
   .nav-logout

@@ -3,7 +3,7 @@
 
 	.feature
 		margin: 0
-		+background(image-url("starry-sky.jpg"))
+		+background(image-url("starry-sky-low.jpg"))
 		+background-size(cover)
 		height: 660px
 		line-height: 1.9em
@@ -30,6 +30,8 @@
 		margin-top: 25px
 		width: 750px
 		height: 400px
+		+background(image-url("feature-single.png") no-repeat)
+		+background-size(100% auto)
 
 	.benefits
 		padding: 50px 0 60px 0
@@ -71,14 +73,25 @@
 					color: white
 					background-color: transparent
 		.technology-stack
-			width: 95%
-			margin-top: 10px
+			width: 100%
+			height: image-height("technology-stack.png") / 2
+			margin: 10px
+			+background(image-url("technology-stack.png") no-repeat)
+			+background-size(100% auto)
 		.complete-pic
+			display:block
 			width: 95%
-			margin: 25px 0 40px 0
+			height: image-height("complete-pic.png") / 2
+			margin: 25px auto 20px auto
+			+background(image-url("complete-pic.png") no-repeat)
+			+background-size(100% auto)
 		.complete-pic2
+			display:block
 			width: 48%
-			margin: 20px 0 10px 0
+			height: image-height("complete-pic2.png") / 2
+			margin: 25px auto 0 auto
+			+background(image-url("complete-pic2.png") no-repeat)
+			+background-size(100% auto)
 		.instructor-letter
 			i
 				text-align: center

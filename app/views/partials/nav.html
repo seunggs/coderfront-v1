@@ -1,17 +1,18 @@
 <div class="header nav-wrapper" ng-controller="NavCtrl">
 	<section class="logo">
-		<a ui-sref="home" tabindex="-1"><img class="logo-img" src="../images/logo-light.png" class="logo-img"></a>
+		<a ui-sref="home" tabindex="-1"><div class="logo-img"></div></a>
 	</section>
 
   <ul class="nav-custom nav-darkbg pull-right">
     <!-- Decide whether to show sign-in or not -->
     <li ng-if="wpr.userSignedIn"><a class="my-account" ng-class="{'nav-active': wpr.active === 'myaccount'}" ui-sref="myaccount({userUid: wpr.user.uid})" ng-click="wpr.setActive('myaccount')">My Account</a></li>
-    <li ng-if="wpr.userSignedIn && wpr.hasCourses">
+    <li ng-if="wpr.userSignedIn && wpr.hasCourses && !wpr.userDataObj.admin">
     	<!-- determine whether the last viewed thing is a course, unit or lesson -->
       <a ng-if="wpr.lastViewed === 'course'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.welcome({courseId: wpr.lastViewedCourseId})">Open Dashboard</a>
     	<a ng-if="wpr.lastViewed === 'unit'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-unit({courseId: wpr.lastViewedCourseId, unitId: wpr.lastViewedUnitId})">Open Dashboard</a>
     	<a ng-if="wpr.lastViewed === 'lesson'" class="btn btn-outline-white btn-round btn-nav nav-dashboard" ui-sref="backend.view-lesson({courseId: wpr.lastViewedCourseId, unitId: wpr.lastViewedUnitId, lessonId: wpr.lastViewedLessonId})">Open Dashboard</a>
     </li>
+    <li ng-if="wpr.userSignedIn && wpr.userDataObj.admin"><a class="btn btn-outline-white btn-round btn-nav nav-admin" ui-sref="admin-dashboard">Admin Dashboard</a></li>
     <li ng-if="wpr.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-logout" class="nav-logout" ng-click="wpr.logout()">Log Out</a></li>
     <li ng-if="!wpr.userSignedIn"><a class="btn btn-outline-white btn-round btn-nav nav-signin" ui-sref="login">Sign In</a></li>
   </ul>
