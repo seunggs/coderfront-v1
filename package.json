@@ -7,7 +7,8 @@
     "express": "~4.4.3",
     "moment": "^2.7.0",
     "morgan": "~1.0.0",
-    "stripe": "^2.8.0"
+    "stripe": "^2.8.0",
+    "mailchimp": "~2.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

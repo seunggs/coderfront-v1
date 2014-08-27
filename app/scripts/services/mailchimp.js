@@ -2,8 +2,7 @@
 
 angular.module('coderfrontApp')
   .factory('Mailchimp', function ($http, $q) {
-    var MAILCHIMP_API_KEY = '2ec660bd237953b4e690e5752e61f40c-us8';
-    var MAILCHIMP_ENDPOINT = 'us8.api.mailchimp.com/2.0/';
+    var ENDPOINT = 'http://localhost:8000';
 
     var Mailchimp = {
       subscribe: function(listId, subscriber) {
@@ -11,16 +10,19 @@ angular.module('coderfrontApp')
         
         $http({
           method: 'post',
-          url: MAILCHIMP_ENDPOINT,
+          url: ENDPOINT + '/mailchimp',
           data: {
-            'apikey': MAILCHIMP_API_KEY,
-            'id': listId,
-            'email': subscriber.email,
-            'merge_vars': {
-              fullname: subscriber.fullname,
-            }
+            'listId': listId,
+            'subscriber': subscriber
           }
-        }).then(deferred.resolve, deferred.reject);
+        })
+          .then(function(res) {
+            console.log(res);
+            deferred.resolve(res);
+          }, function(res) {
+            console.log(res.data.error);
+            deferred.reject(res.data.error);
+          });
 
         return deferred.promise;
       }

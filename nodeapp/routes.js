@@ -5,10 +5,18 @@ var stripe = require('stripe')('sk_test_BiXbus56OIaKgkp3B7ftheQp'); // update it
 var crypto = require('crypto'); // for AWS S3
 var moment = require('moment');
 var AWS_BUCKET = 'coderfront';
-var S3_KEY = 'AKIAJWHILS4ITZBM27NQ';
-var S3_SECRET = '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';
-// var S3_KEY = process.env.S3_KEY;
-// var S3_SECRET = process.env.S3_SECRET;
+var S3_KEY = process.env.S3_KEY;
+var S3_SECRET = process.env.S3_SECRET;
+
+var mcApi = require('mailchimp').MailChimpAPI;
+var MC_API_KEY = '2ec660bd237953b4e690e5752e61f40c-us8';
+var MC_ENDPOINT = 'https://us8.api.mailchimp.com/2.0/';
+
+try { 
+    var api = new mcApi(MC_API_KEY, { version : '2.0' });
+} catch (error) {
+    console.log(error.message);
+}
 
 module.exports = function(app) {
 	// stripe charge
@@ -59,6 +67,35 @@ module.exports = function(app) {
 			policy: base64Policy,
 			signature: signature,
 			key: S3_KEY
+		});
+
+	});
+
+	// MailChimp API
+	app.post('/mailchimp', function(req, res) {
+		var listId = req.body.listId;
+		var email = req.body.subscriber.email;
+		var mergeVars = {
+			EMAIL: req.body.subscriber.email,
+			FNAME: req.body.subscriber.firstname,
+			LNAME: req.body.subscriber.lastname
+		};
+		
+		var mcParams = {
+			apikey: MC_API_KEY, 
+			id: listId, 
+			email: { email: email }, 
+			merge_vars: mergeVars
+		};
+
+		api.call('lists', 'subscribe', mcParams, function (error, data) {
+			if(error) {
+				console.log(error);
+				res.status(500).send({ error: error });
+			} else {
+				console.log(data);
+				res.status(204).send({ data: data });
+			}
 		});
 
 	});

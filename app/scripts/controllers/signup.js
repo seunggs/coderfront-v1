@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coderfrontApp')
-  .controller('SignupCtrl', function ($scope, Mailchimp, $timeout, $location) {
+  .controller('SignupCtrl', function ($scope, Mailchimp, $timeout, $location, TextEditor) {
 
 		// Wrapper objects
 		$scope.wpr = {};
@@ -21,6 +21,14 @@ angular.module('coderfrontApp')
 
 		$scope.wpr.addToMailchimp = function() {
 			$scope.btn.loading = true;
+
+			// Split the full name into first and last name
+			var nameArray = TextEditor.splitName($scope.formData.subscriber.fullname);
+			$scope.formData.subscriber.firstname = nameArray[0];
+			$scope.formData.subscriber.lastname = nameArray[nameArray.length-1];
+
+			console.log($scope.formData.subscriber.firstname);
+			console.log($scope.formData.subscriber.lastname);
 
 			Mailchimp.subscribe(listId, $scope.formData.subscriber)
 				.then(function() {
