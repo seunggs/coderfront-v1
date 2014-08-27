@@ -41,7 +41,7 @@ angular.module('coderfrontApp')
 
 					// Send to curriculum preview after a short delay
 					$timeout(function() {
-						$location.path('/preview-curriculum');
+						$location.path('/thankyou-subscriber');
 					}, 1500);
 				}, function() {
 					// error callback
@@ -53,7 +53,7 @@ angular.module('coderfrontApp')
 
 					// Send to home after a short delay
 					$timeout(function() {
-						$location.path('/preview-curriculum');
+						$location.path('/');
 					}, 1500);
 				});
 		};

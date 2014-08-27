@@ -49,6 +49,11 @@ angular
         templateUrl: 'views/partials/thankyou.html',
         controller: 'ThankyouCtrl'
       })
+      .state('thankyou-subscriber', {
+        url: '/thankyou-subscriber',
+        templateUrl: 'views/partials/thankyou-subscriber.html',
+        controller: 'ThankyouSubscriberCtrl'
+      })
       .state('myaccount', {
         url: '/myaccount/:userUid',
         templateUrl: 'views/partials/myaccount.html',
