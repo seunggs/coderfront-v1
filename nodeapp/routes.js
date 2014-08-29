@@ -9,7 +9,7 @@ var S3_KEY = process.env.S3_KEY;
 var S3_SECRET = process.env.S3_SECRET;
 
 var mcApi = require('mailchimp').MailChimpAPI;
-var MC_API_KEY = '2ec660bd237953b4e690e5752e61f40c-us8';
+var MC_API_KEY = process.env.MC_API_KEY;
 var MC_ENDPOINT = 'https://us8.api.mailchimp.com/2.0/';
 
 module.exports = function(app) {
