@@ -2,7 +2,7 @@
 
 angular.module('coderfrontApp')
   .factory('Mailchimp', function ($http, $q) {
-    var ENDPOINT = 'https://coderfront.herokuapp.com/';
+    var ENDPOINT = 'https://coderfront.herokuapp.com';
 
     var Mailchimp = {
       subscribe: function(listId, subscriber) {

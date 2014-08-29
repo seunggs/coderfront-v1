@@ -1,7 +1,8 @@
 /* jshint unused:false */
 'use strict';
 
-var stripe = require('stripe')('sk_test_BiXbus56OIaKgkp3B7ftheQp'); // update it with real one on production
+var stripe = require('stripe')(process.env.STRIPE_SECRET); // update it with real one on production
+
 var crypto = require('crypto'); // for AWS S3
 var moment = require('moment');
 var AWS_BUCKET = 'coderfront';

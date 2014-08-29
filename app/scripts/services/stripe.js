@@ -4,7 +4,7 @@
 angular.module('coderfrontApp')
   .factory('Stripe', function ($q, $http, $rootScope) {
 
-    var CHARGE_ENDPOINT = 'https://coderfront.herokuapp.com/';
+    var CHARGE_ENDPOINT = 'https://coderfront.herokuapp.com';
     var STRIPE_API = 'pk_test_iTfgLvUHP4hUc9IDg9QAlD5o';
     // var ON_HST = 0.13;
 
