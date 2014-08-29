@@ -92,10 +92,10 @@ module.exports = function(app) {
 		api.call('lists', 'subscribe', mcParams, function (error, data) {
 			if(error) {
 				console.log(error);
-				res.status(500).send({ error: error });
+				res.status(500).send({ error: error.message });
 			} else {
 				console.log(data);
-				res.status(204).send({ data: data });
+				res.status(204).send({ data: JSON.stringify(data) });
 			}
 		});
 

@@ -17,11 +17,11 @@ angular.module('coderfrontApp')
           }
         })
           .then(function(res) {
-            console.log(res);
-            deferred.resolve(res);
+            console.log(res.error);
+            deferred.resolve(res.error);
           }, function(res) {
-            console.log(res.data.error);
-            deferred.reject(res.data.error);
+            console.log(res.data);
+            deferred.reject(res.data);
           });
 
         return deferred.promise;

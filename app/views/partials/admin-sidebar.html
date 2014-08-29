@@ -10,7 +10,7 @@
 		<a ng-if="wpr.userData.admin" class="btn btn-teal btn-block btn-new-unit" ui-sref="backend.add-unit({courseId: wpr.courseId})" ng-click="wpr.closeSidebar = true">+ Add a New Unit</a>
 		<!-- end: admin only -->
 
-		<div class="courses-wrapper">
+		<div class="courses-wrapper" ng-if="!wpr.userData.admin">
 			<a ng-click="wpr.courseToggle = !wpr.courseToggle">SHOW YOUR COURSES&nbsp;&nbsp;<i class="fa fa-caret-down" ng-if="!wpr.courseToggle"></i><i class="fa fa-caret-up" ng-if="wpr.courseToggle"></i></a>
 			<ul class="courses" ng-if="wpr.courseToggle">
 				<li class="course-item" ng-repeat="(courseId, course) in wpr.purchasedCoursesObj"><a ui-sref="backend.welcome({courseId: courseId})">{{ course.title }}</a></li>
