@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "~1.0.0",
-    "express": "~4.4.3",
-    "moment": "^2.7.0",
-    "morgan": "~1.0.0",
-    "stripe": "^2.8.0",
-    "mailchimp": "~2.0.0"
+    "body-parser": "^1.0.2",
+    "express": "^4.4.5",
+    "mailchimp": "^1.1.0",
+    "moment": "^2.8.2",
+    "morgan": "^1.0.1",
+    "stripe": "^2.8.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

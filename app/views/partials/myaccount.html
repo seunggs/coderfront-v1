@@ -31,7 +31,7 @@
 					</section>
 
 					<section class="myaccount-btn-block animated fadeInUp delay-1000ms">
-						<div btn-class="btn btn-primary btn-progress myaccount-btn" btn-text="Upload Your Picture" s3-upload bucket="coderfront" ng-model="formData.user.avatarUrl" s3-upload-options="{getOptionsUri: 'http://localhost:8000/s3credentials', folder: 'avatars/'}" success-callback="wpr.addAvatar()"></div>
+						<div btn-class="btn btn-primary btn-progress myaccount-btn" btn-text="Upload Your Picture" s3-upload bucket="coderfront" ng-model="formData.user.avatarUrl" s3-upload-options="{getOptionsUri: 'https://www.coderfront.com/s3credentials', folder: 'avatars/'}" success-callback="wpr.addAvatar()"></div>
 						<button class="btn btn-yellow myaccount-btn" ui-sref="changepassword">Change Password</button>
 					</section>
 

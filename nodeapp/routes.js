@@ -12,12 +12,6 @@ var mcApi = require('mailchimp').MailChimpAPI;
 var MC_API_KEY = '2ec660bd237953b4e690e5752e61f40c-us8';
 var MC_ENDPOINT = 'https://us8.api.mailchimp.com/2.0/';
 
-try { 
-    var api = new mcApi(MC_API_KEY, { version : '2.0' });
-} catch (error) {
-    console.log(error.message);
-}
-
 module.exports = function(app) {
 	// stripe charge
 	app.post('/charge', function(req, res) {
@@ -73,6 +67,12 @@ module.exports = function(app) {
 
 	// MailChimp API
 	app.post('/mailchimp', function(req, res) {
+		try { 
+		    var api = new mcApi(MC_API_KEY, { version : '2.0' });
+		} catch (error) {
+		    console.log(error.message);
+		}
+
 		var listId = req.body.listId;
 		var email = req.body.subscriber.email;
 		var mergeVars = {
