@@ -10,7 +10,7 @@
 					<form class="add-course-form" ng-submit="wpr.createCourse()">
 						<div class="form-group">
 							<h3>Add Course</h3>
-							<div btn-class="btn btn-add-course btn-square btn-lightest-grey btn-block btn-progress" btn-text="<i class='fa fa-cloud-upload'></i>&nbsp;Upload Thumb" s3-upload bucket="coderfront" ng-model="formData.thumbUrl" s3-upload-options="{getOptionsUri: 'https://www.coderfront.com/s3credentials', folder: 'thumbs/'}"></div>
+							<div btn-class="btn btn-add-course btn-square btn-lightest-grey btn-block btn-progress" btn-text="<i class='fa fa-cloud-upload'></i>&nbsp;Upload Thumb" s3-upload bucket="coderfront" ng-model="formData.thumbUrl" s3-upload-options="{getOptionsUri: 'https://coderfront.herokuapp.com/s3credentials', folder: 'thumbs/'}"></div>
 							<label>Course Title</label>
 							<input class="form-control" type="text" ng-model="formData.title" required>
 							<label>Course Intro</label>
